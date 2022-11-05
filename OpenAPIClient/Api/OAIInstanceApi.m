@@ -1,8 +1,8 @@
 #import "OAIInstanceApi.h"
 #import "OAIQueryParamCollection.h"
 #import "OAIApiClient.h"
-#import "OAIMainAPIResponse.h"
-#import "OAIStructsWebhookPayload.h"
+#import "OAIAPIResponse.h"
+#import "OAIWebhookPayload.h"
 
 
 @interface OAIInstanceApi ()
@@ -55,10 +55,10 @@ NSInteger kOAIInstanceApiMissingParamErrorCode = 234513;
 /// This endpoint is used to create a new WhatsApp Web instance.
 ///  @param instanceKey Insert instance key if you want to provide custom key (optional)
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesCreateGetWithInstanceKey: (NSString*) instanceKey
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/create"];
 
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
@@ -99,10 +99,10 @@ NSInteger kOAIInstanceApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -112,10 +112,10 @@ NSInteger kOAIInstanceApiMissingParamErrorCode = 234513;
 /// Fetches the list of contacts in the instance.
 ///  @param instanceKey Instance key 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyContactsGetWithInstanceKey: (NSString*) instanceKey
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -167,10 +167,10 @@ NSInteger kOAIInstanceApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -180,10 +180,10 @@ NSInteger kOAIInstanceApiMissingParamErrorCode = 234513;
 /// Deletes the instance with the provided key.
 ///  @param instanceKey Instance key 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyDeleteDeleteWithInstanceKey: (NSString*) instanceKey
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -235,10 +235,10 @@ NSInteger kOAIInstanceApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -248,10 +248,10 @@ NSInteger kOAIInstanceApiMissingParamErrorCode = 234513;
 /// Returns the instance data of single instance with connection status.
 ///  @param instanceKey Instance key 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyGetWithInstanceKey: (NSString*) instanceKey
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -303,10 +303,10 @@ NSInteger kOAIInstanceApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -316,10 +316,10 @@ NSInteger kOAIInstanceApiMissingParamErrorCode = 234513;
 /// Logouts of the instance with the provided key.
 ///  @param instanceKey Instance key 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyLogoutDeleteWithInstanceKey: (NSString*) instanceKey
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -371,10 +371,10 @@ NSInteger kOAIInstanceApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -384,10 +384,10 @@ NSInteger kOAIInstanceApiMissingParamErrorCode = 234513;
 /// Returns the qrcode in the base64 format.
 ///  @param instanceKey Instance key 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyQrcodeGetWithInstanceKey: (NSString*) instanceKey
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -439,10 +439,10 @@ NSInteger kOAIInstanceApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -454,11 +454,11 @@ NSInteger kOAIInstanceApiMissingParamErrorCode = 234513;
 ///
 ///  @param data Message data 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyWebhookPutWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsWebhookPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    data: (OAIWebhookPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -522,10 +522,10 @@ NSInteger kOAIInstanceApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -533,10 +533,10 @@ NSInteger kOAIInstanceApiMissingParamErrorCode = 234513;
 ///
 /// Get all instances.
 /// Fetches the list of all Instances with login status.
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesListGetWithCompletionHandler: 
-    (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/list"];
 
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
@@ -574,10 +574,10 @@ NSInteger kOAIInstanceApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }

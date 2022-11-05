@@ -1,8 +1,8 @@
 #import "OAIMiscellaneousApi.h"
 #import "OAIQueryParamCollection.h"
 #import "OAIApiClient.h"
-#import "OAIMainAPIResponse.h"
-#import "OAIStructsUserInfoPayload.h"
+#import "OAIAPIResponse.h"
+#import "OAIUserInfoPayload.h"
 
 
 @interface OAIMiscellaneousApi ()
@@ -57,11 +57,11 @@ NSInteger kOAIMiscellaneousApiMissingParamErrorCode = 234513;
 ///
 ///  @param jid JID 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyMiscProfilePicGetWithInstanceKey: (NSString*) instanceKey
     jid: (NSString*) jid
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -127,10 +127,10 @@ NSInteger kOAIMiscellaneousApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -142,11 +142,11 @@ NSInteger kOAIMiscellaneousApiMissingParamErrorCode = 234513;
 ///
 ///  @param data Data 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyMiscUserInfoPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsUserInfoPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    data: (OAIUserInfoPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -210,10 +210,10 @@ NSInteger kOAIMiscellaneousApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }

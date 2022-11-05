@@ -41,37 +41,38 @@ Import the following:
 #import <OpenAPIClient/OAIApiClient.h>
 #import <OpenAPIClient/OAIDefaultConfiguration.h>
 // load models
+#import <OpenAPIClient/OAIAPIResponse.h>
+#import <OpenAPIClient/OAIButtonMessagePayload.h>
+#import <OpenAPIClient/OAIButtonMessageWithMediaPayload.h>
+#import <OpenAPIClient/OAIContactMessagePayload.h>
+#import <OpenAPIClient/OAIContactMessagePayloadVcard.h>
+#import <OpenAPIClient/OAIFileUpload.h>
+#import <OpenAPIClient/OAIGroupCreatePayload.h>
+#import <OpenAPIClient/OAIGroupUpdateDescriptionPayload.h>
+#import <OpenAPIClient/OAIGroupUpdateNamePayload.h>
+#import <OpenAPIClient/OAIGroupUpdateParticipantsPayload.h>
 #import <OpenAPIClient/OAIInstancesInstanceKeyGroupsGroupIdProfilePicPutRequest.h>
 #import <OpenAPIClient/OAIInstancesInstanceKeySendAudioPostRequest.h>
 #import <OpenAPIClient/OAIInstancesInstanceKeySendDocumentPostRequest.h>
 #import <OpenAPIClient/OAIInstancesInstanceKeySendImagePostRequest.h>
 #import <OpenAPIClient/OAIInstancesInstanceKeySendUploadPostRequest.h>
 #import <OpenAPIClient/OAIInstancesInstanceKeySendVideoPostRequest.h>
-#import <OpenAPIClient/OAIMainAPIResponse.h>
-#import <OpenAPIClient/OAIStructsButtonMessagePayload.h>
-#import <OpenAPIClient/OAIStructsButtonMessageWithMediaPayload.h>
-#import <OpenAPIClient/OAIStructsContactMessagePayload.h>
-#import <OpenAPIClient/OAIStructsContactMessagePayloadVcard.h>
-#import <OpenAPIClient/OAIStructsFileUpload.h>
-#import <OpenAPIClient/OAIStructsGroupCreatePayload.h>
-#import <OpenAPIClient/OAIStructsGroupUpdateDescriptionPayload.h>
-#import <OpenAPIClient/OAIStructsGroupUpdateNamePayload.h>
-#import <OpenAPIClient/OAIStructsGroupUpdateParticipantsPayload.h>
-#import <OpenAPIClient/OAIStructsListItem.h>
-#import <OpenAPIClient/OAIStructsListMessagePayload.h>
-#import <OpenAPIClient/OAIStructsListSection.h>
-#import <OpenAPIClient/OAIStructsLocationMessagePayload.h>
-#import <OpenAPIClient/OAIStructsLocationMessagePayloadLocation.h>
-#import <OpenAPIClient/OAIStructsPollMessagePayload.h>
-#import <OpenAPIClient/OAIStructsReplyButton.h>
-#import <OpenAPIClient/OAIStructsSendMediaPayload.h>
-#import <OpenAPIClient/OAIStructsTemplateButton.h>
-#import <OpenAPIClient/OAIStructsTemplateButtonPayload.h>
-#import <OpenAPIClient/OAIStructsTemplateButtonWithMediaPayload.h>
-#import <OpenAPIClient/OAIStructsTextMessage.h>
-#import <OpenAPIClient/OAIStructsUserInfoPayload.h>
-#import <OpenAPIClient/OAIStructsWebhookPayload.h>
+#import <OpenAPIClient/OAIListItem.h>
+#import <OpenAPIClient/OAIListMessagePayload.h>
+#import <OpenAPIClient/OAIListSection.h>
+#import <OpenAPIClient/OAILocationMessagePayload.h>
+#import <OpenAPIClient/OAILocationMessagePayloadLocation.h>
+#import <OpenAPIClient/OAIPollMessagePayload.h>
+#import <OpenAPIClient/OAIReplyButton.h>
+#import <OpenAPIClient/OAISendMediaPayload.h>
+#import <OpenAPIClient/OAITemplateButton.h>
+#import <OpenAPIClient/OAITemplateButtonPayload.h>
+#import <OpenAPIClient/OAITemplateButtonWithMediaPayload.h>
+#import <OpenAPIClient/OAITextMessage.h>
+#import <OpenAPIClient/OAIUserInfoPayload.h>
+#import <OpenAPIClient/OAIWebhookPayload.h>
 // load API classes for accessing endpoints
+#import <OpenAPIClient/OAIBusinessManagementApi.h>
 #import <OpenAPIClient/OAIGroupManagementApi.h>
 #import <OpenAPIClient/OAIInstanceApi.h>
 #import <OpenAPIClient/OAIMessageSendingApi.h>
@@ -99,11 +100,11 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 
 NSString* *instanceKey = @"instanceKey_example"; // Instance key
 
-OAIGroupManagementApi *apiInstance = [[OAIGroupManagementApi alloc] init];
+OAIBusinessManagementApi *apiInstance = [[OAIBusinessManagementApi alloc] init];
 
-// Get admin groupss.
-[apiInstance instancesInstanceKeyGroupsAdminGetWithInstanceKey:instanceKey
-              completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+// Fetches the catlog.
+[apiInstance instancesInstanceKeyBusinessCatalogGetWithInstanceKey:instanceKey
+              completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -120,6 +121,7 @@ All URIs are relative to */api*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*OAIBusinessManagementApi* | [**instancesInstanceKeyBusinessCatalogGet**](docs/OAIBusinessManagementApi.md#instancesinstancekeybusinesscatalogget) | **GET** /instances/{instance_key}/business/catalog | Fetches the catlog.
 *OAIGroupManagementApi* | [**instancesInstanceKeyGroupsAdminGet**](docs/OAIGroupManagementApi.md#instancesinstancekeygroupsadminget) | **GET** /instances/{instance_key}/groups/admin | Get admin groupss.
 *OAIGroupManagementApi* | [**instancesInstanceKeyGroupsCreatePost**](docs/OAIGroupManagementApi.md#instancesinstancekeygroupscreatepost) | **POST** /instances/{instance_key}/groups/create | Create group.
 *OAIGroupManagementApi* | [**instancesInstanceKeyGroupsGet**](docs/OAIGroupManagementApi.md#instancesinstancekeygroupsget) | **GET** /instances/{instance_key}/groups/ | Get all groups.
@@ -144,7 +146,6 @@ Class | Method | HTTP request | Description
 *OAIInstanceApi* | [**instancesInstanceKeyQrcodeGet**](docs/OAIInstanceApi.md#instancesinstancekeyqrcodeget) | **GET** /instances/{instance_key}/qrcode | Get QrCode.
 *OAIInstanceApi* | [**instancesInstanceKeyWebhookPut**](docs/OAIInstanceApi.md#instancesinstancekeywebhookput) | **PUT** /instances/{instance_key}/webhook | Change Webhook url.
 *OAIInstanceApi* | [**instancesListGet**](docs/OAIInstanceApi.md#instanceslistget) | **GET** /instances/list | Get all instances.
-*OAIMessageSendingApi* | [**instancesInstanceKeyBusinessCatalogGet**](docs/OAIMessageSendingApi.md#instancesinstancekeybusinesscatalogget) | **GET** /instances/{instance_key}/business/catalog | Fetches the catlog.
 *OAIMessageSendingApi* | [**instancesInstanceKeySendAudioPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendaudiopost) | **POST** /instances/{instance_key}/send/audio | Send raw audio.
 *OAIMessageSendingApi* | [**instancesInstanceKeySendButtonMediaPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendbuttonmediapost) | **POST** /instances/{instance_key}/send/button-media | Send a button message with a media header.
 *OAIMessageSendingApi* | [**instancesInstanceKeySendButtonsPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendbuttonspost) | **POST** /instances/{instance_key}/send/buttons | Send a button message.
@@ -154,7 +155,7 @@ Class | Method | HTTP request | Description
 *OAIMessageSendingApi* | [**instancesInstanceKeySendListPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendlistpost) | **POST** /instances/{instance_key}/send/list | Send a List message.
 *OAIMessageSendingApi* | [**instancesInstanceKeySendLocationPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendlocationpost) | **POST** /instances/{instance_key}/send/location | Send a location message.
 *OAIMessageSendingApi* | [**instancesInstanceKeySendMediaPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendmediapost) | **POST** /instances/{instance_key}/send/media | Send a media message.
-*OAIMessageSendingApi* | [**instancesInstanceKeySendPollPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendpollpost) | **POST** /instances/{instance_key}/send/poll | Send a Poll message with media.
+*OAIMessageSendingApi* | [**instancesInstanceKeySendPollPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendpollpost) | **POST** /instances/{instance_key}/send/poll | Send a Poll message.
 *OAIMessageSendingApi* | [**instancesInstanceKeySendTemplateMediaPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendtemplatemediapost) | **POST** /instances/{instance_key}/send/template-media | Send a template message with media.
 *OAIMessageSendingApi* | [**instancesInstanceKeySendTemplatePost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendtemplatepost) | **POST** /instances/{instance_key}/send/template | Send a template message.
 *OAIMessageSendingApi* | [**instancesInstanceKeySendTextPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendtextpost) | **POST** /instances/{instance_key}/send/text | Send a text message.
@@ -166,36 +167,36 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [OAIAPIResponse](docs/OAIAPIResponse.md)
+ - [OAIButtonMessagePayload](docs/OAIButtonMessagePayload.md)
+ - [OAIButtonMessageWithMediaPayload](docs/OAIButtonMessageWithMediaPayload.md)
+ - [OAIContactMessagePayload](docs/OAIContactMessagePayload.md)
+ - [OAIContactMessagePayloadVcard](docs/OAIContactMessagePayloadVcard.md)
+ - [OAIFileUpload](docs/OAIFileUpload.md)
+ - [OAIGroupCreatePayload](docs/OAIGroupCreatePayload.md)
+ - [OAIGroupUpdateDescriptionPayload](docs/OAIGroupUpdateDescriptionPayload.md)
+ - [OAIGroupUpdateNamePayload](docs/OAIGroupUpdateNamePayload.md)
+ - [OAIGroupUpdateParticipantsPayload](docs/OAIGroupUpdateParticipantsPayload.md)
  - [OAIInstancesInstanceKeyGroupsGroupIdProfilePicPutRequest](docs/OAIInstancesInstanceKeyGroupsGroupIdProfilePicPutRequest.md)
  - [OAIInstancesInstanceKeySendAudioPostRequest](docs/OAIInstancesInstanceKeySendAudioPostRequest.md)
  - [OAIInstancesInstanceKeySendDocumentPostRequest](docs/OAIInstancesInstanceKeySendDocumentPostRequest.md)
  - [OAIInstancesInstanceKeySendImagePostRequest](docs/OAIInstancesInstanceKeySendImagePostRequest.md)
  - [OAIInstancesInstanceKeySendUploadPostRequest](docs/OAIInstancesInstanceKeySendUploadPostRequest.md)
  - [OAIInstancesInstanceKeySendVideoPostRequest](docs/OAIInstancesInstanceKeySendVideoPostRequest.md)
- - [OAIMainAPIResponse](docs/OAIMainAPIResponse.md)
- - [OAIStructsButtonMessagePayload](docs/OAIStructsButtonMessagePayload.md)
- - [OAIStructsButtonMessageWithMediaPayload](docs/OAIStructsButtonMessageWithMediaPayload.md)
- - [OAIStructsContactMessagePayload](docs/OAIStructsContactMessagePayload.md)
- - [OAIStructsContactMessagePayloadVcard](docs/OAIStructsContactMessagePayloadVcard.md)
- - [OAIStructsFileUpload](docs/OAIStructsFileUpload.md)
- - [OAIStructsGroupCreatePayload](docs/OAIStructsGroupCreatePayload.md)
- - [OAIStructsGroupUpdateDescriptionPayload](docs/OAIStructsGroupUpdateDescriptionPayload.md)
- - [OAIStructsGroupUpdateNamePayload](docs/OAIStructsGroupUpdateNamePayload.md)
- - [OAIStructsGroupUpdateParticipantsPayload](docs/OAIStructsGroupUpdateParticipantsPayload.md)
- - [OAIStructsListItem](docs/OAIStructsListItem.md)
- - [OAIStructsListMessagePayload](docs/OAIStructsListMessagePayload.md)
- - [OAIStructsListSection](docs/OAIStructsListSection.md)
- - [OAIStructsLocationMessagePayload](docs/OAIStructsLocationMessagePayload.md)
- - [OAIStructsLocationMessagePayloadLocation](docs/OAIStructsLocationMessagePayloadLocation.md)
- - [OAIStructsPollMessagePayload](docs/OAIStructsPollMessagePayload.md)
- - [OAIStructsReplyButton](docs/OAIStructsReplyButton.md)
- - [OAIStructsSendMediaPayload](docs/OAIStructsSendMediaPayload.md)
- - [OAIStructsTemplateButton](docs/OAIStructsTemplateButton.md)
- - [OAIStructsTemplateButtonPayload](docs/OAIStructsTemplateButtonPayload.md)
- - [OAIStructsTemplateButtonWithMediaPayload](docs/OAIStructsTemplateButtonWithMediaPayload.md)
- - [OAIStructsTextMessage](docs/OAIStructsTextMessage.md)
- - [OAIStructsUserInfoPayload](docs/OAIStructsUserInfoPayload.md)
- - [OAIStructsWebhookPayload](docs/OAIStructsWebhookPayload.md)
+ - [OAIListItem](docs/OAIListItem.md)
+ - [OAIListMessagePayload](docs/OAIListMessagePayload.md)
+ - [OAIListSection](docs/OAIListSection.md)
+ - [OAILocationMessagePayload](docs/OAILocationMessagePayload.md)
+ - [OAILocationMessagePayloadLocation](docs/OAILocationMessagePayloadLocation.md)
+ - [OAIPollMessagePayload](docs/OAIPollMessagePayload.md)
+ - [OAIReplyButton](docs/OAIReplyButton.md)
+ - [OAISendMediaPayload](docs/OAISendMediaPayload.md)
+ - [OAITemplateButton](docs/OAITemplateButton.md)
+ - [OAITemplateButtonPayload](docs/OAITemplateButtonPayload.md)
+ - [OAITemplateButtonWithMediaPayload](docs/OAITemplateButtonWithMediaPayload.md)
+ - [OAITextMessage](docs/OAITextMessage.md)
+ - [OAIUserInfoPayload](docs/OAIUserInfoPayload.md)
+ - [OAIWebhookPayload](docs/OAIWebhookPayload.md)
 
 
 ## Documentation For Authorization

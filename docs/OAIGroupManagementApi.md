@@ -25,7 +25,7 @@ Method | HTTP request | Description
 # **instancesInstanceKeyGroupsAdminGet**
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyGroupsAdminGetWithInstanceKey: (NSString*) instanceKey
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Get admin groupss.
@@ -48,7 +48,7 @@ OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 
 // Get admin groupss.
 [apiInstance instancesInstanceKeyGroupsAdminGetWithInstanceKey:instanceKey
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -82,8 +82,8 @@ Name | Type | Description  | Notes
 # **instancesInstanceKeyGroupsCreatePost**
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyGroupsCreatePostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsGroupCreatePayload*) data
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIGroupCreatePayload*) data
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Create group.
@@ -101,14 +101,14 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 
 
 NSString* instanceKey = @"instanceKey_example"; // Instance key
-OAIStructsGroupCreatePayload* data = [[OAIStructsGroupCreatePayload alloc] init]; // Group create payload
+OAIGroupCreatePayload* data = [[OAIGroupCreatePayload alloc] init]; // Group create payload
 
 OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 
 // Create group.
 [apiInstance instancesInstanceKeyGroupsCreatePostWithInstanceKey:instanceKey
               data:data
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -123,11 +123,11 @@ OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **NSString***| Instance key | 
- **data** | [**OAIStructsGroupCreatePayload***](OAIStructsGroupCreatePayload.md)| Group create payload | 
+ **data** | [**OAIGroupCreatePayload***](OAIGroupCreatePayload.md)| Group create payload | 
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -144,7 +144,7 @@ Name | Type | Description  | Notes
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGetWithInstanceKey: (NSString*) instanceKey
     includeParticipants: (NSString*) includeParticipants
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Get all groups.
@@ -169,7 +169,7 @@ OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 // Get all groups.
 [apiInstance instancesInstanceKeyGroupsGetWithInstanceKey:instanceKey
               includeParticipants:includeParticipants
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -188,7 +188,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -206,7 +206,7 @@ Name | Type | Description  | Notes
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdAnnouncePutWithInstanceKey: (NSString*) instanceKey
     announce: (NSNumber*) announce
     groupId: (NSString*) groupId
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Set group announce.
@@ -233,7 +233,7 @@ OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 [apiInstance instancesInstanceKeyGroupsGroupIdAnnouncePutWithInstanceKey:instanceKey
               announce:announce
               groupId:groupId
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -253,7 +253,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -270,7 +270,7 @@ Name | Type | Description  | Notes
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdDeleteWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Leaves the group.
@@ -295,7 +295,7 @@ OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 // Leaves the group.
 [apiInstance instancesInstanceKeyGroupsGroupIdDeleteWithInstanceKey:instanceKey
               groupId:groupId
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -314,7 +314,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -331,8 +331,8 @@ Name | Type | Description  | Notes
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdDescriptionPutWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    data: (OAIStructsGroupUpdateDescriptionPayload*) data
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIGroupUpdateDescriptionPayload*) data
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Set group description.
@@ -351,7 +351,7 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 
 NSString* instanceKey = @"instanceKey_example"; // Instance key
 NSString* groupId = @"groupId_example"; // Group id of the group
-OAIStructsGroupUpdateDescriptionPayload* data = [[OAIStructsGroupUpdateDescriptionPayload alloc] init]; // Group description data
+OAIGroupUpdateDescriptionPayload* data = [[OAIGroupUpdateDescriptionPayload alloc] init]; // Group description data
 
 OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 
@@ -359,7 +359,7 @@ OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 [apiInstance instancesInstanceKeyGroupsGroupIdDescriptionPutWithInstanceKey:instanceKey
               groupId:groupId
               data:data
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -375,11 +375,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **NSString***| Instance key | 
  **groupId** | **NSString***| Group id of the group | 
- **data** | [**OAIStructsGroupUpdateDescriptionPayload***](OAIStructsGroupUpdateDescriptionPayload.md)| Group description data | 
+ **data** | [**OAIGroupUpdateDescriptionPayload***](OAIGroupUpdateDescriptionPayload.md)| Group description data | 
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -396,7 +396,7 @@ Name | Type | Description  | Notes
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdGetWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Get group.
@@ -421,7 +421,7 @@ OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 // Get group.
 [apiInstance instancesInstanceKeyGroupsGroupIdGetWithInstanceKey:instanceKey
               groupId:groupId
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -440,7 +440,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -457,7 +457,7 @@ Name | Type | Description  | Notes
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdInviteCodeGetWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Get group invite code.
@@ -482,7 +482,7 @@ OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 // Get group invite code.
 [apiInstance instancesInstanceKeyGroupsGroupIdInviteCodeGetWithInstanceKey:instanceKey
               groupId:groupId
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -501,7 +501,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -519,7 +519,7 @@ Name | Type | Description  | Notes
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdLockPutWithInstanceKey: (NSString*) instanceKey
     locked: (NSNumber*) locked
     groupId: (NSString*) groupId
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Set group locked.
@@ -546,7 +546,7 @@ OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 [apiInstance instancesInstanceKeyGroupsGroupIdLockPutWithInstanceKey:instanceKey
               locked:locked
               groupId:groupId
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -566,7 +566,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -583,8 +583,8 @@ Name | Type | Description  | Notes
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdNamePutWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    data: (OAIStructsGroupUpdateNamePayload*) data
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIGroupUpdateNamePayload*) data
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Set group name.
@@ -603,7 +603,7 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 
 NSString* instanceKey = @"instanceKey_example"; // Instance key
 NSString* groupId = @"groupId_example"; // Group id of the group
-OAIStructsGroupUpdateNamePayload* data = [[OAIStructsGroupUpdateNamePayload alloc] init]; // Group name data
+OAIGroupUpdateNamePayload* data = [[OAIGroupUpdateNamePayload alloc] init]; // Group name data
 
 OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 
@@ -611,7 +611,7 @@ OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 [apiInstance instancesInstanceKeyGroupsGroupIdNamePutWithInstanceKey:instanceKey
               groupId:groupId
               data:data
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -627,11 +627,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **NSString***| Instance key | 
  **groupId** | **NSString***| Group id of the group | 
- **data** | [**OAIStructsGroupUpdateNamePayload***](OAIStructsGroupUpdateNamePayload.md)| Group name data | 
+ **data** | [**OAIGroupUpdateNamePayload***](OAIGroupUpdateNamePayload.md)| Group name data | 
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -648,8 +648,8 @@ Name | Type | Description  | Notes
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdParticipantsAddPostWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    data: (OAIStructsGroupUpdateParticipantsPayload*) data
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIGroupUpdateParticipantsPayload*) data
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Add participant.
@@ -668,7 +668,7 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 
 NSString* instanceKey = @"instanceKey_example"; // Instance key
 NSString* groupId = @"groupId_example"; // Group id of the group
-OAIStructsGroupUpdateParticipantsPayload* data = [[OAIStructsGroupUpdateParticipantsPayload alloc] init]; // Group update payload
+OAIGroupUpdateParticipantsPayload* data = [[OAIGroupUpdateParticipantsPayload alloc] init]; // Group update payload
 
 OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 
@@ -676,7 +676,7 @@ OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 [apiInstance instancesInstanceKeyGroupsGroupIdParticipantsAddPostWithInstanceKey:instanceKey
               groupId:groupId
               data:data
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -692,11 +692,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **NSString***| Instance key | 
  **groupId** | **NSString***| Group id of the group | 
- **data** | [**OAIStructsGroupUpdateParticipantsPayload***](OAIStructsGroupUpdateParticipantsPayload.md)| Group update payload | 
+ **data** | [**OAIGroupUpdateParticipantsPayload***](OAIGroupUpdateParticipantsPayload.md)| Group update payload | 
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -713,8 +713,8 @@ Name | Type | Description  | Notes
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdParticipantsDemotePutWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    data: (OAIStructsGroupUpdateParticipantsPayload*) data
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIGroupUpdateParticipantsPayload*) data
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Demote participant.
@@ -733,7 +733,7 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 
 NSString* instanceKey = @"instanceKey_example"; // Instance key
 NSString* groupId = @"groupId_example"; // Group id of the group
-OAIStructsGroupUpdateParticipantsPayload* data = [[OAIStructsGroupUpdateParticipantsPayload alloc] init]; // Group update payload
+OAIGroupUpdateParticipantsPayload* data = [[OAIGroupUpdateParticipantsPayload alloc] init]; // Group update payload
 
 OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 
@@ -741,7 +741,7 @@ OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 [apiInstance instancesInstanceKeyGroupsGroupIdParticipantsDemotePutWithInstanceKey:instanceKey
               groupId:groupId
               data:data
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -757,11 +757,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **NSString***| Instance key | 
  **groupId** | **NSString***| Group id of the group | 
- **data** | [**OAIStructsGroupUpdateParticipantsPayload***](OAIStructsGroupUpdateParticipantsPayload.md)| Group update payload | 
+ **data** | [**OAIGroupUpdateParticipantsPayload***](OAIGroupUpdateParticipantsPayload.md)| Group update payload | 
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -778,8 +778,8 @@ Name | Type | Description  | Notes
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdParticipantsPromotePutWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    data: (OAIStructsGroupUpdateParticipantsPayload*) data
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIGroupUpdateParticipantsPayload*) data
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Promote participant.
@@ -798,7 +798,7 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 
 NSString* instanceKey = @"instanceKey_example"; // Instance key
 NSString* groupId = @"groupId_example"; // Group id of the group
-OAIStructsGroupUpdateParticipantsPayload* data = [[OAIStructsGroupUpdateParticipantsPayload alloc] init]; // Group update payload
+OAIGroupUpdateParticipantsPayload* data = [[OAIGroupUpdateParticipantsPayload alloc] init]; // Group update payload
 
 OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 
@@ -806,7 +806,7 @@ OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 [apiInstance instancesInstanceKeyGroupsGroupIdParticipantsPromotePutWithInstanceKey:instanceKey
               groupId:groupId
               data:data
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -822,11 +822,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **NSString***| Instance key | 
  **groupId** | **NSString***| Group id of the group | 
- **data** | [**OAIStructsGroupUpdateParticipantsPayload***](OAIStructsGroupUpdateParticipantsPayload.md)| Group update payload | 
+ **data** | [**OAIGroupUpdateParticipantsPayload***](OAIGroupUpdateParticipantsPayload.md)| Group update payload | 
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -843,8 +843,8 @@ Name | Type | Description  | Notes
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdParticipantsRemoveDeleteWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    data: (OAIStructsGroupUpdateParticipantsPayload*) data
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIGroupUpdateParticipantsPayload*) data
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Remove participant.
@@ -863,7 +863,7 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 
 NSString* instanceKey = @"instanceKey_example"; // Instance key
 NSString* groupId = @"groupId_example"; // Group id of the group
-OAIStructsGroupUpdateParticipantsPayload* data = [[OAIStructsGroupUpdateParticipantsPayload alloc] init]; // Group update payload
+OAIGroupUpdateParticipantsPayload* data = [[OAIGroupUpdateParticipantsPayload alloc] init]; // Group update payload
 
 OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 
@@ -871,7 +871,7 @@ OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 [apiInstance instancesInstanceKeyGroupsGroupIdParticipantsRemoveDeleteWithInstanceKey:instanceKey
               groupId:groupId
               data:data
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -887,11 +887,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **NSString***| Instance key | 
  **groupId** | **NSString***| Group id of the group | 
- **data** | [**OAIStructsGroupUpdateParticipantsPayload***](OAIStructsGroupUpdateParticipantsPayload.md)| Group update payload | 
+ **data** | [**OAIGroupUpdateParticipantsPayload***](OAIGroupUpdateParticipantsPayload.md)| Group update payload | 
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -909,7 +909,7 @@ Name | Type | Description  | Notes
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdProfilePicPutWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
     instancesInstanceKeyGroupsGroupIdProfilePicPutRequest: (OAIInstancesInstanceKeyGroupsGroupIdProfilePicPutRequest*) instancesInstanceKeyGroupsGroupIdProfilePicPutRequest
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Set group picture.
@@ -936,7 +936,7 @@ OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 [apiInstance instancesInstanceKeyGroupsGroupIdProfilePicPutWithInstanceKey:instanceKey
               groupId:groupId
               instancesInstanceKeyGroupsGroupIdProfilePicPutRequest:instancesInstanceKeyGroupsGroupIdProfilePicPutRequest
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -956,7 +956,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -973,7 +973,7 @@ Name | Type | Description  | Notes
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyGroupsInviteInfoGetWithInstanceKey: (NSString*) instanceKey
     inviteLink: (NSString*) inviteLink
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Get group from invite link.
@@ -998,7 +998,7 @@ OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
 // Get group from invite link.
 [apiInstance instancesInstanceKeyGroupsInviteInfoGetWithInstanceKey:instanceKey
               inviteLink:inviteLink
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -1017,7 +1017,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 

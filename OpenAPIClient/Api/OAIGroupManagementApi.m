@@ -1,12 +1,12 @@
 #import "OAIGroupManagementApi.h"
 #import "OAIQueryParamCollection.h"
 #import "OAIApiClient.h"
+#import "OAIAPIResponse.h"
+#import "OAIGroupCreatePayload.h"
+#import "OAIGroupUpdateDescriptionPayload.h"
+#import "OAIGroupUpdateNamePayload.h"
+#import "OAIGroupUpdateParticipantsPayload.h"
 #import "OAIInstancesInstanceKeyGroupsGroupIdProfilePicPutRequest.h"
-#import "OAIMainAPIResponse.h"
-#import "OAIStructsGroupCreatePayload.h"
-#import "OAIStructsGroupUpdateDescriptionPayload.h"
-#import "OAIStructsGroupUpdateNamePayload.h"
-#import "OAIStructsGroupUpdateParticipantsPayload.h"
 
 
 @interface OAIGroupManagementApi ()
@@ -59,10 +59,10 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 /// Returns list of all groups in which you are admin.
 ///  @param instanceKey Instance key 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyGroupsAdminGetWithInstanceKey: (NSString*) instanceKey
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -114,10 +114,10 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -129,11 +129,11 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @param data Group create payload 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyGroupsCreatePostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsGroupCreatePayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    data: (OAIGroupCreatePayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -197,10 +197,10 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -212,11 +212,11 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @param includeParticipants Include participants data (optional, default to @"true")
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGetWithInstanceKey: (NSString*) instanceKey
     includeParticipants: (NSString*) includeParticipants
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -271,10 +271,10 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -288,12 +288,12 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @param groupId Group id of the group 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdAnnouncePutWithInstanceKey: (NSString*) instanceKey
     announce: (NSNumber*) announce
     groupId: (NSString*) groupId
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -373,10 +373,10 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -388,11 +388,11 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @param groupId Group id of the group 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdDeleteWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -458,10 +458,10 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -475,12 +475,12 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @param data Group description data 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdDescriptionPutWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    data: (OAIStructsGroupUpdateDescriptionPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    data: (OAIGroupUpdateDescriptionPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -558,10 +558,10 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -573,11 +573,11 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @param groupId Group id of the group 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdGetWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -643,10 +643,10 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -658,11 +658,11 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @param groupId Group id of the group 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdInviteCodeGetWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -728,10 +728,10 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -745,12 +745,12 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @param groupId Group id of the group 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdLockPutWithInstanceKey: (NSString*) instanceKey
     locked: (NSNumber*) locked
     groupId: (NSString*) groupId
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -830,10 +830,10 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -847,12 +847,12 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @param data Group name data 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdNamePutWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    data: (OAIStructsGroupUpdateNamePayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    data: (OAIGroupUpdateNamePayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -930,10 +930,10 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -947,12 +947,12 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @param data Group update payload 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdParticipantsAddPostWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    data: (OAIStructsGroupUpdateParticipantsPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    data: (OAIGroupUpdateParticipantsPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -1030,10 +1030,10 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -1047,12 +1047,12 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @param data Group update payload 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdParticipantsDemotePutWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    data: (OAIStructsGroupUpdateParticipantsPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    data: (OAIGroupUpdateParticipantsPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -1130,10 +1130,10 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -1147,12 +1147,12 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @param data Group update payload 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdParticipantsPromotePutWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    data: (OAIStructsGroupUpdateParticipantsPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    data: (OAIGroupUpdateParticipantsPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -1230,10 +1230,10 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -1247,12 +1247,12 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @param data Group update payload 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdParticipantsRemoveDeleteWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    data: (OAIStructsGroupUpdateParticipantsPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    data: (OAIGroupUpdateParticipantsPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -1330,10 +1330,10 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -1347,12 +1347,12 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @param instancesInstanceKeyGroupsGroupIdProfilePicPutRequest  
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdProfilePicPutWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
     instancesInstanceKeyGroupsGroupIdProfilePicPutRequest: (OAIInstancesInstanceKeyGroupsGroupIdProfilePicPutRequest*) instancesInstanceKeyGroupsGroupIdProfilePicPutRequest
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -1430,10 +1430,10 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -1445,11 +1445,11 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @param inviteLink The invite link to check 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeyGroupsInviteInfoGetWithInstanceKey: (NSString*) instanceKey
     inviteLink: (NSString*) inviteLink
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -1515,10 +1515,10 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }

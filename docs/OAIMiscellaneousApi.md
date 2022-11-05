@@ -12,7 +12,7 @@ Method | HTTP request | Description
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyMiscProfilePicGetWithInstanceKey: (NSString*) instanceKey
     jid: (NSString*) jid
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Get profile pic.
@@ -37,7 +37,7 @@ OAIMiscellaneousApi*apiInstance = [[OAIMiscellaneousApi alloc] init];
 // Get profile pic.
 [apiInstance instancesInstanceKeyMiscProfilePicGetWithInstanceKey:instanceKey
               jid:jid
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -56,7 +56,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -72,8 +72,8 @@ Name | Type | Description  | Notes
 # **instancesInstanceKeyMiscUserInfoPost**
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyMiscUserInfoPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsUserInfoPayload*) data
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIUserInfoPayload*) data
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Fetches the users info.
@@ -91,14 +91,14 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 
 
 NSString* instanceKey = @"instanceKey_example"; // Instance key
-OAIStructsUserInfoPayload* data = [[OAIStructsUserInfoPayload alloc] init]; // Data
+OAIUserInfoPayload* data = [[OAIUserInfoPayload alloc] init]; // Data
 
 OAIMiscellaneousApi*apiInstance = [[OAIMiscellaneousApi alloc] init];
 
 // Fetches the users info.
 [apiInstance instancesInstanceKeyMiscUserInfoPostWithInstanceKey:instanceKey
               data:data
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -113,11 +113,11 @@ OAIMiscellaneousApi*apiInstance = [[OAIMiscellaneousApi alloc] init];
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **NSString***| Instance key | 
- **data** | [**OAIStructsUserInfoPayload***](OAIStructsUserInfoPayload.md)| Data | 
+ **data** | [**OAIUserInfoPayload***](OAIUserInfoPayload.md)| Data | 
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 

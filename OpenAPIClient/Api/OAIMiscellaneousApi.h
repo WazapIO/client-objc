@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
-#import "OAIMainAPIResponse.h"
-#import "OAIStructsUserInfoPayload.h"
+#import "OAIAPIResponse.h"
+#import "OAIUserInfoPayload.h"
 #import "OAIApi.h"
 
 /**
@@ -36,10 +36,10 @@ extern NSInteger kOAIMiscellaneousApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyMiscProfilePicGetWithInstanceKey: (NSString*) instanceKey
     jid: (NSString*) jid
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Fetches the users info.
@@ -54,10 +54,10 @@ extern NSInteger kOAIMiscellaneousApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyMiscUserInfoPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsUserInfoPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIUserInfoPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 

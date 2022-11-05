@@ -1,22 +1,22 @@
 #import "OAIMessageSendingApi.h"
 #import "OAIQueryParamCollection.h"
 #import "OAIApiClient.h"
+#import "OAIAPIResponse.h"
+#import "OAIButtonMessagePayload.h"
+#import "OAIButtonMessageWithMediaPayload.h"
+#import "OAIContactMessagePayload.h"
 #import "OAIInstancesInstanceKeySendAudioPostRequest.h"
 #import "OAIInstancesInstanceKeySendDocumentPostRequest.h"
 #import "OAIInstancesInstanceKeySendImagePostRequest.h"
 #import "OAIInstancesInstanceKeySendUploadPostRequest.h"
 #import "OAIInstancesInstanceKeySendVideoPostRequest.h"
-#import "OAIMainAPIResponse.h"
-#import "OAIStructsButtonMessagePayload.h"
-#import "OAIStructsButtonMessageWithMediaPayload.h"
-#import "OAIStructsContactMessagePayload.h"
-#import "OAIStructsListMessagePayload.h"
-#import "OAIStructsLocationMessagePayload.h"
-#import "OAIStructsPollMessagePayload.h"
-#import "OAIStructsSendMediaPayload.h"
-#import "OAIStructsTemplateButtonPayload.h"
-#import "OAIStructsTemplateButtonWithMediaPayload.h"
-#import "OAIStructsTextMessage.h"
+#import "OAIListMessagePayload.h"
+#import "OAILocationMessagePayload.h"
+#import "OAIPollMessagePayload.h"
+#import "OAISendMediaPayload.h"
+#import "OAITemplateButtonPayload.h"
+#import "OAITemplateButtonWithMediaPayload.h"
+#import "OAITextMessage.h"
 
 
 @interface OAIMessageSendingApi ()
@@ -65,74 +65,6 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 #pragma mark - Api Methods
 
 ///
-/// Fetches the catlog.
-/// Gets list of all products registered by you.
-///  @param instanceKey Instance key 
-///
-///  @returns OAIMainAPIResponse*
-///
--(NSURLSessionTask*) instancesInstanceKeyBusinessCatalogGetWithInstanceKey: (NSString*) instanceKey
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
-    // verify the required parameter 'instanceKey' is set
-    if (instanceKey == nil) {
-        NSParameterAssert(instanceKey);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
-            NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/business/catalog"];
-
-    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
-    if (instanceKey != nil) {
-        pathParams[@"instance_key"] = instanceKey;
-    }
-
-    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
-    [headerParams addEntriesFromDictionary:self.defaultHeaders];
-    // HTTP header `Accept`
-    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
-    if(acceptHeader.length > 0) {
-        headerParams[@"Accept"] = acceptHeader;
-    }
-
-    // response content type
-    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
-
-    // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
-
-    // Authentication setting
-    NSArray *authSettings = @[@"ApiKeyAuth"];
-
-    id bodyParam = nil;
-    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-
-    return [self.apiClient requestWithPath: resourcePath
-                                    method: @"GET"
-                                pathParams: pathParams
-                               queryParams: queryParams
-                                formParams: formParams
-                                     files: localVarFiles
-                                      body: bodyParam
-                              headerParams: headerParams
-                              authSettings: authSettings
-                        requestContentType: requestContentType
-                       responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
-                           completionBlock: ^(id data, NSError *error) {
-                                if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
-                                }
-                            }];
-}
-
-///
 /// Send raw audio.
 /// Sends a audio message by uploading to the WhatsApp servers every time. This is not recommended for bulk sending.
 ///  @param instanceKey Instance key 
@@ -143,13 +75,13 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @param caption Attached caption (optional)
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeySendAudioPostWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
     instancesInstanceKeySendAudioPostRequest: (OAIInstancesInstanceKeySendAudioPostRequest*) instancesInstanceKeySendAudioPostRequest
     caption: (NSString*) caption
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -230,10 +162,10 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -245,11 +177,11 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @param data Message data 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeySendButtonMediaPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsButtonMessageWithMediaPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    data: (OAIButtonMessageWithMediaPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -313,10 +245,10 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -328,11 +260,11 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @param data Message data 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeySendButtonsPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsButtonMessagePayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    data: (OAIButtonMessagePayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -396,10 +328,10 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -411,11 +343,11 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @param data Message data 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeySendContactPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsContactMessagePayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    data: (OAIContactMessagePayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -479,10 +411,10 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -498,13 +430,13 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @param caption Attached caption (optional)
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeySendDocumentPostWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
     instancesInstanceKeySendDocumentPostRequest: (OAIInstancesInstanceKeySendDocumentPostRequest*) instancesInstanceKeySendDocumentPostRequest
     caption: (NSString*) caption
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -585,10 +517,10 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -604,13 +536,13 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @param caption Attached caption (optional)
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeySendImagePostWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
     instancesInstanceKeySendImagePostRequest: (OAIInstancesInstanceKeySendImagePostRequest*) instancesInstanceKeySendImagePostRequest
     caption: (NSString*) caption
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -691,10 +623,10 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -706,11 +638,11 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @param data Message data 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeySendListPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsListMessagePayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    data: (OAIListMessagePayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -774,10 +706,10 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -789,11 +721,11 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @param data Message data 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeySendLocationPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsLocationMessagePayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    data: (OAILocationMessagePayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -857,10 +789,10 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -872,11 +804,11 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @param data Message data 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeySendMediaPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsSendMediaPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    data: (OAISendMediaPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -940,26 +872,26 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
 
 ///
-/// Send a Poll message with media.
-/// Sends an interactive poll message with a media header to the given user. The poll message is a new feature that is currently in beta.
+/// Send a Poll message.
+/// Sends an interactive poll message to the given user. The poll message is a new feature that is currently in beta.
 ///  @param instanceKey Instance key 
 ///
 ///  @param data Message data 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeySendPollPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsPollMessagePayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    data: (OAIPollMessagePayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -1023,10 +955,10 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -1038,11 +970,11 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @param data Message data 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeySendTemplateMediaPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsTemplateButtonWithMediaPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    data: (OAITemplateButtonWithMediaPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -1106,10 +1038,10 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -1121,11 +1053,11 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @param data Message data 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeySendTemplatePostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsTemplateButtonPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    data: (OAITemplateButtonPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -1189,10 +1121,10 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -1204,11 +1136,11 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @param data Message data 
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeySendTextPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsTextMessage*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    data: (OAITextMessage*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -1272,10 +1204,10 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -1289,12 +1221,12 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @param instancesInstanceKeySendUploadPostRequest  
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeySendUploadPostWithInstanceKey: (NSString*) instanceKey
     type: (NSString*) type
     instancesInstanceKeySendUploadPostRequest: (OAIInstancesInstanceKeySendUploadPostRequest*) instancesInstanceKeySendUploadPostRequest
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -1372,10 +1304,10 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }
@@ -1391,13 +1323,13 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @param caption Attached caption (optional)
 ///
-///  @returns OAIMainAPIResponse*
+///  @returns OAIAPIResponse*
 ///
 -(NSURLSessionTask*) instancesInstanceKeySendVideoPostWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
     instancesInstanceKeySendVideoPostRequest: (OAIInstancesInstanceKeySendVideoPostRequest*) instancesInstanceKeySendVideoPostRequest
     caption: (NSString*) caption
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler {
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
         NSParameterAssert(instanceKey);
@@ -1478,10 +1410,10 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
                               authSettings: authSettings
                         requestContentType: requestContentType
                        responseContentType: responseContentType
-                              responseType: @"OAIMainAPIResponse*"
+                              responseType: @"OAIAPIResponse*"
                            completionBlock: ^(id data, NSError *error) {
                                 if(handler) {
-                                    handler((OAIMainAPIResponse*)data, error);
+                                    handler((OAIAPIResponse*)data, error);
                                 }
                             }];
 }

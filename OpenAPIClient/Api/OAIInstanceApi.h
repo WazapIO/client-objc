@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
-#import "OAIMainAPIResponse.h"
-#import "OAIStructsWebhookPayload.h"
+#import "OAIAPIResponse.h"
+#import "OAIWebhookPayload.h"
 #import "OAIApi.h"
 
 /**
@@ -35,9 +35,9 @@ extern NSInteger kOAIInstanceApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesCreateGetWithInstanceKey: (NSString*) instanceKey
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Get contacts.
@@ -51,9 +51,9 @@ extern NSInteger kOAIInstanceApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyContactsGetWithInstanceKey: (NSString*) instanceKey
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Delete Instance.
@@ -67,9 +67,9 @@ extern NSInteger kOAIInstanceApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyDeleteDeleteWithInstanceKey: (NSString*) instanceKey
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Get Instance.
@@ -83,9 +83,9 @@ extern NSInteger kOAIInstanceApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyGetWithInstanceKey: (NSString*) instanceKey
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Logout Instance.
@@ -99,9 +99,9 @@ extern NSInteger kOAIInstanceApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyLogoutDeleteWithInstanceKey: (NSString*) instanceKey
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Get QrCode.
@@ -115,9 +115,9 @@ extern NSInteger kOAIInstanceApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyQrcodeGetWithInstanceKey: (NSString*) instanceKey
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Change Webhook url.
@@ -132,10 +132,10 @@ extern NSInteger kOAIInstanceApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyWebhookPutWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsWebhookPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIWebhookPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Get all instances.
@@ -148,9 +148,9 @@ extern NSInteger kOAIInstanceApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesListGetWithCompletionHandler: 
-    (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 

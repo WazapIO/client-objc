@@ -17,7 +17,7 @@ Method | HTTP request | Description
 # **instancesCreateGet**
 ```objc
 -(NSURLSessionTask*) instancesCreateGetWithInstanceKey: (NSString*) instanceKey
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Creates a new instance key.
@@ -40,7 +40,7 @@ OAIInstanceApi*apiInstance = [[OAIInstanceApi alloc] init];
 
 // Creates a new instance key.
 [apiInstance instancesCreateGetWithInstanceKey:instanceKey
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -58,7 +58,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
 # **instancesInstanceKeyContactsGet**
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyContactsGetWithInstanceKey: (NSString*) instanceKey
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Get contacts.
@@ -97,7 +97,7 @@ OAIInstanceApi*apiInstance = [[OAIInstanceApi alloc] init];
 
 // Get contacts.
 [apiInstance instancesInstanceKeyContactsGetWithInstanceKey:instanceKey
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -115,7 +115,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -131,7 +131,7 @@ Name | Type | Description  | Notes
 # **instancesInstanceKeyDeleteDelete**
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyDeleteDeleteWithInstanceKey: (NSString*) instanceKey
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Delete Instance.
@@ -154,7 +154,7 @@ OAIInstanceApi*apiInstance = [[OAIInstanceApi alloc] init];
 
 // Delete Instance.
 [apiInstance instancesInstanceKeyDeleteDeleteWithInstanceKey:instanceKey
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -172,7 +172,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -188,7 +188,7 @@ Name | Type | Description  | Notes
 # **instancesInstanceKeyGet**
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyGetWithInstanceKey: (NSString*) instanceKey
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Get Instance.
@@ -211,7 +211,7 @@ OAIInstanceApi*apiInstance = [[OAIInstanceApi alloc] init];
 
 // Get Instance.
 [apiInstance instancesInstanceKeyGetWithInstanceKey:instanceKey
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -229,7 +229,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -245,7 +245,7 @@ Name | Type | Description  | Notes
 # **instancesInstanceKeyLogoutDelete**
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyLogoutDeleteWithInstanceKey: (NSString*) instanceKey
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Logout Instance.
@@ -268,7 +268,7 @@ OAIInstanceApi*apiInstance = [[OAIInstanceApi alloc] init];
 
 // Logout Instance.
 [apiInstance instancesInstanceKeyLogoutDeleteWithInstanceKey:instanceKey
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -286,7 +286,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -302,7 +302,7 @@ Name | Type | Description  | Notes
 # **instancesInstanceKeyQrcodeGet**
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyQrcodeGetWithInstanceKey: (NSString*) instanceKey
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Get QrCode.
@@ -325,7 +325,7 @@ OAIInstanceApi*apiInstance = [[OAIInstanceApi alloc] init];
 
 // Get QrCode.
 [apiInstance instancesInstanceKeyQrcodeGetWithInstanceKey:instanceKey
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -343,7 +343,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -359,8 +359,8 @@ Name | Type | Description  | Notes
 # **instancesInstanceKeyWebhookPut**
 ```objc
 -(NSURLSessionTask*) instancesInstanceKeyWebhookPutWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsWebhookPayload*) data
-        completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIWebhookPayload*) data
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Change Webhook url.
@@ -378,14 +378,14 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 
 
 NSString* instanceKey = @"instanceKey_example"; // Instance key
-OAIStructsWebhookPayload* data = [[OAIStructsWebhookPayload alloc] init]; // Message data
+OAIWebhookPayload* data = [[OAIWebhookPayload alloc] init]; // Message data
 
 OAIInstanceApi*apiInstance = [[OAIInstanceApi alloc] init];
 
 // Change Webhook url.
 [apiInstance instancesInstanceKeyWebhookPutWithInstanceKey:instanceKey
               data:data
-          completionHandler: ^(OAIMainAPIResponse* output, NSError* error) {
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -400,11 +400,11 @@ OAIInstanceApi*apiInstance = [[OAIInstanceApi alloc] init];
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **NSString***| Instance key | 
- **data** | [**OAIStructsWebhookPayload***](OAIStructsWebhookPayload.md)| Message data | 
+ **data** | [**OAIWebhookPayload***](OAIWebhookPayload.md)| Message data | 
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 
@@ -420,7 +420,7 @@ Name | Type | Description  | Notes
 # **instancesListGet**
 ```objc
 -(NSURLSessionTask*) instancesListGetWithCompletionHandler: 
-        (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+        (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
 Get all instances.
@@ -442,7 +442,7 @@ OAIInstanceApi*apiInstance = [[OAIInstanceApi alloc] init];
 
 // Get all instances.
 [apiInstance instancesListGetWithCompletionHandler: 
-          ^(OAIMainAPIResponse* output, NSError* error) {
+          ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
@@ -457,7 +457,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**OAIMainAPIResponse***](OAIMainAPIResponse.md)
+[**OAIAPIResponse***](OAIAPIResponse.md)
 
 ### Authorization
 

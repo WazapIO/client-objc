@@ -1,10 +1,10 @@
 #import <Foundation/Foundation.h>
+#import "OAIAPIResponse.h"
+#import "OAIGroupCreatePayload.h"
+#import "OAIGroupUpdateDescriptionPayload.h"
+#import "OAIGroupUpdateNamePayload.h"
+#import "OAIGroupUpdateParticipantsPayload.h"
 #import "OAIInstancesInstanceKeyGroupsGroupIdProfilePicPutRequest.h"
-#import "OAIMainAPIResponse.h"
-#import "OAIStructsGroupCreatePayload.h"
-#import "OAIStructsGroupUpdateDescriptionPayload.h"
-#import "OAIStructsGroupUpdateNamePayload.h"
-#import "OAIStructsGroupUpdateParticipantsPayload.h"
 #import "OAIApi.h"
 
 /**
@@ -39,9 +39,9 @@ extern NSInteger kOAIGroupManagementApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyGroupsAdminGetWithInstanceKey: (NSString*) instanceKey
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Create group.
@@ -56,10 +56,10 @@ extern NSInteger kOAIGroupManagementApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyGroupsCreatePostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsGroupCreatePayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIGroupCreatePayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Get all groups.
@@ -74,10 +74,10 @@ extern NSInteger kOAIGroupManagementApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGetWithInstanceKey: (NSString*) instanceKey
     includeParticipants: (NSString*) includeParticipants
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Set group announce.
@@ -93,11 +93,11 @@ extern NSInteger kOAIGroupManagementApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdAnnouncePutWithInstanceKey: (NSString*) instanceKey
     announce: (NSNumber*) announce
     groupId: (NSString*) groupId
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Leaves the group.
@@ -112,10 +112,10 @@ extern NSInteger kOAIGroupManagementApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdDeleteWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Set group description.
@@ -131,11 +131,11 @@ extern NSInteger kOAIGroupManagementApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdDescriptionPutWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    data: (OAIStructsGroupUpdateDescriptionPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIGroupUpdateDescriptionPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Get group.
@@ -150,10 +150,10 @@ extern NSInteger kOAIGroupManagementApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdGetWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Get group invite code.
@@ -168,10 +168,10 @@ extern NSInteger kOAIGroupManagementApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdInviteCodeGetWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Set group locked.
@@ -187,11 +187,11 @@ extern NSInteger kOAIGroupManagementApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdLockPutWithInstanceKey: (NSString*) instanceKey
     locked: (NSNumber*) locked
     groupId: (NSString*) groupId
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Set group name.
@@ -207,11 +207,11 @@ extern NSInteger kOAIGroupManagementApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdNamePutWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    data: (OAIStructsGroupUpdateNamePayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIGroupUpdateNamePayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Add participant.
@@ -227,11 +227,11 @@ extern NSInteger kOAIGroupManagementApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdParticipantsAddPostWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    data: (OAIStructsGroupUpdateParticipantsPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIGroupUpdateParticipantsPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Demote participant.
@@ -247,11 +247,11 @@ extern NSInteger kOAIGroupManagementApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdParticipantsDemotePutWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    data: (OAIStructsGroupUpdateParticipantsPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIGroupUpdateParticipantsPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Promote participant.
@@ -267,11 +267,11 @@ extern NSInteger kOAIGroupManagementApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdParticipantsPromotePutWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    data: (OAIStructsGroupUpdateParticipantsPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIGroupUpdateParticipantsPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Remove participant.
@@ -287,11 +287,11 @@ extern NSInteger kOAIGroupManagementApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdParticipantsRemoveDeleteWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    data: (OAIStructsGroupUpdateParticipantsPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIGroupUpdateParticipantsPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Set group picture.
@@ -307,11 +307,11 @@ extern NSInteger kOAIGroupManagementApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdProfilePicPutWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
     instancesInstanceKeyGroupsGroupIdProfilePicPutRequest: (OAIInstancesInstanceKeyGroupsGroupIdProfilePicPutRequest*) instancesInstanceKeyGroupsGroupIdProfilePicPutRequest
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Get group from invite link.
@@ -326,10 +326,10 @@ extern NSInteger kOAIGroupManagementApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeyGroupsInviteInfoGetWithInstanceKey: (NSString*) instanceKey
     inviteLink: (NSString*) inviteLink
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 

@@ -1,20 +1,20 @@
 #import <Foundation/Foundation.h>
+#import "OAIAPIResponse.h"
+#import "OAIButtonMessagePayload.h"
+#import "OAIButtonMessageWithMediaPayload.h"
+#import "OAIContactMessagePayload.h"
 #import "OAIInstancesInstanceKeySendAudioPostRequest.h"
 #import "OAIInstancesInstanceKeySendDocumentPostRequest.h"
 #import "OAIInstancesInstanceKeySendImagePostRequest.h"
 #import "OAIInstancesInstanceKeySendUploadPostRequest.h"
 #import "OAIInstancesInstanceKeySendVideoPostRequest.h"
-#import "OAIMainAPIResponse.h"
-#import "OAIStructsButtonMessagePayload.h"
-#import "OAIStructsButtonMessageWithMediaPayload.h"
-#import "OAIStructsContactMessagePayload.h"
-#import "OAIStructsListMessagePayload.h"
-#import "OAIStructsLocationMessagePayload.h"
-#import "OAIStructsPollMessagePayload.h"
-#import "OAIStructsSendMediaPayload.h"
-#import "OAIStructsTemplateButtonPayload.h"
-#import "OAIStructsTemplateButtonWithMediaPayload.h"
-#import "OAIStructsTextMessage.h"
+#import "OAIListMessagePayload.h"
+#import "OAILocationMessagePayload.h"
+#import "OAIPollMessagePayload.h"
+#import "OAISendMediaPayload.h"
+#import "OAITemplateButtonPayload.h"
+#import "OAITemplateButtonWithMediaPayload.h"
+#import "OAITextMessage.h"
 #import "OAIApi.h"
 
 /**
@@ -38,22 +38,6 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 
 -(instancetype) initWithApiClient:(OAIApiClient *)apiClient NS_DESIGNATED_INITIALIZER;
 
-/// Fetches the catlog.
-/// Gets list of all products registered by you.
-///
-/// @param instanceKey Instance key
-/// 
-///  code:200 message:"Success",
-///  code:400 message:"Bad Request",
-///  code:401 message:"Unauthorized",
-///  code:404 message:"Instance not found",
-///  code:500 message:"Internal Server Error"
-///
-/// @return OAIMainAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeyBusinessCatalogGetWithInstanceKey: (NSString*) instanceKey
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
-
-
 /// Send raw audio.
 /// Sends a audio message by uploading to the WhatsApp servers every time. This is not recommended for bulk sending.
 ///
@@ -68,12 +52,12 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeySendAudioPostWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
     instancesInstanceKeySendAudioPostRequest: (OAIInstancesInstanceKeySendAudioPostRequest*) instancesInstanceKeySendAudioPostRequest
     caption: (NSString*) caption
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Send a button message with a media header.
@@ -88,10 +72,10 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeySendButtonMediaPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsButtonMessageWithMediaPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIButtonMessageWithMediaPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Send a button message.
@@ -106,10 +90,10 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeySendButtonsPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsButtonMessagePayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIButtonMessagePayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Send a contact message.
@@ -124,10 +108,10 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeySendContactPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsContactMessagePayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIContactMessagePayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Send raw document.
@@ -144,12 +128,12 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeySendDocumentPostWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
     instancesInstanceKeySendDocumentPostRequest: (OAIInstancesInstanceKeySendDocumentPostRequest*) instancesInstanceKeySendDocumentPostRequest
     caption: (NSString*) caption
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Send raw image.
@@ -166,12 +150,12 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeySendImagePostWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
     instancesInstanceKeySendImagePostRequest: (OAIInstancesInstanceKeySendImagePostRequest*) instancesInstanceKeySendImagePostRequest
     caption: (NSString*) caption
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Send a List message.
@@ -186,10 +170,10 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeySendListPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsListMessagePayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIListMessagePayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Send a location message.
@@ -204,10 +188,10 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeySendLocationPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsLocationMessagePayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAILocationMessagePayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Send a media message.
@@ -222,14 +206,14 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeySendMediaPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsSendMediaPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAISendMediaPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
-/// Send a Poll message with media.
-/// Sends an interactive poll message with a media header to the given user. The poll message is a new feature that is currently in beta.
+/// Send a Poll message.
+/// Sends an interactive poll message to the given user. The poll message is a new feature that is currently in beta.
 ///
 /// @param instanceKey Instance key
 /// @param data Message data
@@ -240,10 +224,10 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeySendPollPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsPollMessagePayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAIPollMessagePayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Send a template message with media.
@@ -258,10 +242,10 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeySendTemplateMediaPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsTemplateButtonWithMediaPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAITemplateButtonWithMediaPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Send a template message.
@@ -276,10 +260,10 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeySendTemplatePostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsTemplateButtonPayload*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAITemplateButtonPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Send a text message.
@@ -294,10 +278,10 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeySendTextPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIStructsTextMessage*) data
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    data: (OAITextMessage*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Upload media.
@@ -313,11 +297,11 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeySendUploadPostWithInstanceKey: (NSString*) instanceKey
     type: (NSString*) type
     instancesInstanceKeySendUploadPostRequest: (OAIInstancesInstanceKeySendUploadPostRequest*) instancesInstanceKeySendUploadPostRequest
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 /// Send raw video.
@@ -334,12 +318,12 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:404 message:"Instance not found",
 ///  code:500 message:"Internal Server Error"
 ///
-/// @return OAIMainAPIResponse*
+/// @return OAIAPIResponse*
 -(NSURLSessionTask*) instancesInstanceKeySendVideoPostWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
     instancesInstanceKeySendVideoPostRequest: (OAIInstancesInstanceKeySendVideoPostRequest*) instancesInstanceKeySendVideoPostRequest
     caption: (NSString*) caption
-    completionHandler: (void (^)(OAIMainAPIResponse* output, NSError* error)) handler;
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 
