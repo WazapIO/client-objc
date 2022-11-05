@@ -37,7 +37,7 @@ extern NSInteger kOAIMiscellaneousApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeyMiscProfilePicGetWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) getProfilePicWithInstanceKey: (NSString*) instanceKey
     jid: (NSString*) jid
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
@@ -55,7 +55,7 @@ extern NSInteger kOAIMiscellaneousApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeyMiscUserInfoPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) getUsersInfoWithInstanceKey: (NSString*) instanceKey
     data: (OAIUserInfoPayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 

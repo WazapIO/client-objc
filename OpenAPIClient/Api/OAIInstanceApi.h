@@ -24,6 +24,24 @@ extern NSInteger kOAIInstanceApiMissingParamErrorCode;
 
 -(instancetype) initWithApiClient:(OAIApiClient *)apiClient NS_DESIGNATED_INITIALIZER;
 
+/// Change Webhook url.
+/// Changes the webhook url of an instance.
+///
+/// @param instanceKey Instance key
+/// @param data Message data
+/// 
+///  code:200 message:"Success",
+///  code:400 message:"Bad Request",
+///  code:401 message:"Unauthorized",
+///  code:404 message:"Instance not found",
+///  code:500 message:"Internal Server Error"
+///
+/// @return OAIAPIResponse*
+-(NSURLSessionTask*) changeWebhookUrlWithInstanceKey: (NSString*) instanceKey
+    data: (OAIWebhookPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+
+
 /// Creates a new instance key.
 /// This endpoint is used to create a new WhatsApp Web instance.
 ///
@@ -36,23 +54,7 @@ extern NSInteger kOAIInstanceApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesCreateGetWithInstanceKey: (NSString*) instanceKey
-    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
-
-
-/// Get contacts.
-/// Fetches the list of contacts in the instance.
-///
-/// @param instanceKey Instance key
-/// 
-///  code:200 message:"Success",
-///  code:400 message:"Bad Request",
-///  code:401 message:"Unauthorized",
-///  code:404 message:"Instance not found",
-///  code:500 message:"Internal Server Error"
-///
-/// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeyContactsGetWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) createInstanceWithInstanceKey: (NSString*) instanceKey
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
@@ -68,7 +70,23 @@ extern NSInteger kOAIInstanceApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeyDeleteDeleteWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) deleteInstanceWithInstanceKey: (NSString*) instanceKey
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+
+
+/// Get contacts.
+/// Fetches the list of contacts in the instance.
+///
+/// @param instanceKey Instance key
+/// 
+///  code:200 message:"Success",
+///  code:400 message:"Bad Request",
+///  code:401 message:"Unauthorized",
+///  code:404 message:"Instance not found",
+///  code:500 message:"Internal Server Error"
+///
+/// @return OAIAPIResponse*
+-(NSURLSessionTask*) getContactsWithInstanceKey: (NSString*) instanceKey
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
@@ -84,23 +102,7 @@ extern NSInteger kOAIInstanceApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeyGetWithInstanceKey: (NSString*) instanceKey
-    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
-
-
-/// Logout Instance.
-/// Logouts of the instance with the provided key.
-///
-/// @param instanceKey Instance key
-/// 
-///  code:200 message:"Success",
-///  code:400 message:"Bad Request",
-///  code:401 message:"Unauthorized",
-///  code:404 message:"Instance not found",
-///  code:500 message:"Internal Server Error"
-///
-/// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeyLogoutDeleteWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) getInstanceWithInstanceKey: (NSString*) instanceKey
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
@@ -116,25 +118,7 @@ extern NSInteger kOAIInstanceApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeyQrcodeGetWithInstanceKey: (NSString*) instanceKey
-    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
-
-
-/// Change Webhook url.
-/// Changes the webhook url of an instance.
-///
-/// @param instanceKey Instance key
-/// @param data Message data
-/// 
-///  code:200 message:"Success",
-///  code:400 message:"Bad Request",
-///  code:401 message:"Unauthorized",
-///  code:404 message:"Instance not found",
-///  code:500 message:"Internal Server Error"
-///
-/// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeyWebhookPutWithInstanceKey: (NSString*) instanceKey
-    data: (OAIWebhookPayload*) data
+-(NSURLSessionTask*) getQrCodeWithInstanceKey: (NSString*) instanceKey
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
@@ -149,8 +133,24 @@ extern NSInteger kOAIInstanceApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesListGetWithCompletionHandler: 
+-(NSURLSessionTask*) listInstancesWithCompletionHandler: 
     (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+
+
+/// Logout Instance.
+/// Logouts of the instance with the provided key.
+///
+/// @param instanceKey Instance key
+/// 
+///  code:200 message:"Success",
+///  code:400 message:"Bad Request",
+///  code:401 message:"Unauthorized",
+///  code:404 message:"Instance not found",
+///  code:500 message:"Internal Server Error"
+///
+/// @return OAIAPIResponse*
+-(NSURLSessionTask*) logoutInstanceWithInstanceKey: (NSString*) instanceKey
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
 

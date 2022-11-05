@@ -6,7 +6,7 @@
 #import "OAIGroupUpdateDescriptionPayload.h"
 #import "OAIGroupUpdateNamePayload.h"
 #import "OAIGroupUpdateParticipantsPayload.h"
-#import "OAIInstancesInstanceKeyGroupsGroupIdProfilePicPutRequest.h"
+#import "OAISetGroupPictureRequest.h"
 
 
 @interface OAIGroupManagementApi ()
@@ -55,13 +55,19 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 #pragma mark - Api Methods
 
 ///
-/// Get admin groupss.
-/// Returns list of all groups in which you are admin.
+/// Add participant.
+/// Handles adding participants to a group. You must be admin in the group or the query will fail.
 ///  @param instanceKey Instance key 
+///
+///  @param groupId Group id of the group 
+///
+///  @param data Group update payload 
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeyGroupsAdminGetWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) addParticipantWithInstanceKey: (NSString*) instanceKey
+    groupId: (NSString*) groupId
+    data: (OAIGroupUpdateParticipantsPayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
@@ -74,11 +80,36 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
         return nil;
     }
 
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/groups/admin"];
+    // verify the required parameter 'groupId' is set
+    if (groupId == nil) {
+        NSParameterAssert(groupId);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"groupId"] };
+            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'data' is set
+    if (data == nil) {
+        NSParameterAssert(data);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"data"] };
+            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/groups/{group_id}/participants/add"];
 
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
     if (instanceKey != nil) {
         pathParams[@"instance_key"] = instanceKey;
+    }
+    if (groupId != nil) {
+        pathParams[@"group_id"] = groupId;
     }
 
     NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
@@ -94,7 +125,7 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
     NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
 
     // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json"]];
 
     // Authentication setting
     NSArray *authSettings = @[@"ApiKeyAuth"];
@@ -102,9 +133,10 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+    bodyParam = data;
 
     return [self.apiClient requestWithPath: resourcePath
-                                    method: @"GET"
+                                    method: @"POST"
                                 pathParams: pathParams
                                queryParams: queryParams
                                 formParams: formParams
@@ -131,7 +163,7 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeyGroupsCreatePostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) createGroupWithInstanceKey: (NSString*) instanceKey
     data: (OAIGroupCreatePayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
@@ -206,6 +238,174 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 }
 
 ///
+/// Demote participant.
+/// Demotes admins in groups. You must be admin in the group or the query will fail.
+///  @param instanceKey Instance key 
+///
+///  @param groupId Group id of the group 
+///
+///  @param data Group update payload 
+///
+///  @returns OAIAPIResponse*
+///
+-(NSURLSessionTask*) demoteParticipantWithInstanceKey: (NSString*) instanceKey
+    groupId: (NSString*) groupId
+    data: (OAIGroupUpdateParticipantsPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
+    // verify the required parameter 'instanceKey' is set
+    if (instanceKey == nil) {
+        NSParameterAssert(instanceKey);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
+            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'groupId' is set
+    if (groupId == nil) {
+        NSParameterAssert(groupId);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"groupId"] };
+            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'data' is set
+    if (data == nil) {
+        NSParameterAssert(data);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"data"] };
+            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/groups/{group_id}/participants/demote"];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+    if (instanceKey != nil) {
+        pathParams[@"instance_key"] = instanceKey;
+    }
+    if (groupId != nil) {
+        pathParams[@"group_id"] = groupId;
+    }
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json"]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"ApiKeyAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+    bodyParam = data;
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"PUT"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"OAIAPIResponse*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((OAIAPIResponse*)data, error);
+                                }
+                            }];
+}
+
+///
+/// Get admin groups.
+/// Returns list of all groups in which you are admin.
+///  @param instanceKey Instance key 
+///
+///  @returns OAIAPIResponse*
+///
+-(NSURLSessionTask*) getAdminGroupsWithInstanceKey: (NSString*) instanceKey
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
+    // verify the required parameter 'instanceKey' is set
+    if (instanceKey == nil) {
+        NSParameterAssert(instanceKey);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
+            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/groups/admin"];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+    if (instanceKey != nil) {
+        pathParams[@"instance_key"] = instanceKey;
+    }
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"ApiKeyAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"GET"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"OAIAPIResponse*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((OAIAPIResponse*)data, error);
+                                }
+                            }];
+}
+
+///
 /// Get all groups.
 /// Returns list of all groups with participants data. Set include_participants to false to exclude participants data.
 ///  @param instanceKey Instance key 
@@ -214,7 +414,7 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeyGroupsGetWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) getAllGroupsWithInstanceKey: (NSString*) instanceKey
     includeParticipants: (NSString*) includeParticipants
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
@@ -280,6 +480,546 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 }
 
 ///
+/// Get group.
+/// Fetches the group data.
+///  @param instanceKey Instance key 
+///
+///  @param groupId Group id of the group 
+///
+///  @returns OAIAPIResponse*
+///
+-(NSURLSessionTask*) getGroupWithInstanceKey: (NSString*) instanceKey
+    groupId: (NSString*) groupId
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
+    // verify the required parameter 'instanceKey' is set
+    if (instanceKey == nil) {
+        NSParameterAssert(instanceKey);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
+            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'groupId' is set
+    if (groupId == nil) {
+        NSParameterAssert(groupId);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"groupId"] };
+            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/groups/{group_id}"];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+    if (instanceKey != nil) {
+        pathParams[@"instance_key"] = instanceKey;
+    }
+    if (groupId != nil) {
+        pathParams[@"group_id"] = groupId;
+    }
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"ApiKeyAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"GET"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"OAIAPIResponse*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((OAIAPIResponse*)data, error);
+                                }
+                            }];
+}
+
+///
+/// Get group from invite link.
+/// Gets a group info from an invite link. An invite link is a link that can be used to join a group. It is usually in the format https://chat.whatsapp.com/{invitecode}
+///  @param instanceKey Instance key 
+///
+///  @param inviteLink The invite link to check 
+///
+///  @returns OAIAPIResponse*
+///
+-(NSURLSessionTask*) getGroupFromInviteLinkWithInstanceKey: (NSString*) instanceKey
+    inviteLink: (NSString*) inviteLink
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
+    // verify the required parameter 'instanceKey' is set
+    if (instanceKey == nil) {
+        NSParameterAssert(instanceKey);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
+            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'inviteLink' is set
+    if (inviteLink == nil) {
+        NSParameterAssert(inviteLink);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"inviteLink"] };
+            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/groups/invite-info"];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+    if (instanceKey != nil) {
+        pathParams[@"instance_key"] = instanceKey;
+    }
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    if (inviteLink != nil) {
+        queryParams[@"invite_link"] = inviteLink;
+    }
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"ApiKeyAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"GET"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"OAIAPIResponse*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((OAIAPIResponse*)data, error);
+                                }
+                            }];
+}
+
+///
+/// Get group invite code.
+/// Gets the invite code of the group.
+///  @param instanceKey Instance key 
+///
+///  @param groupId Group id of the group 
+///
+///  @returns OAIAPIResponse*
+///
+-(NSURLSessionTask*) getGroupInviteCodeWithInstanceKey: (NSString*) instanceKey
+    groupId: (NSString*) groupId
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
+    // verify the required parameter 'instanceKey' is set
+    if (instanceKey == nil) {
+        NSParameterAssert(instanceKey);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
+            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'groupId' is set
+    if (groupId == nil) {
+        NSParameterAssert(groupId);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"groupId"] };
+            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/groups/{group_id}/invite-code"];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+    if (instanceKey != nil) {
+        pathParams[@"instance_key"] = instanceKey;
+    }
+    if (groupId != nil) {
+        pathParams[@"group_id"] = groupId;
+    }
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"ApiKeyAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"GET"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"OAIAPIResponse*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((OAIAPIResponse*)data, error);
+                                }
+                            }];
+}
+
+///
+/// Leaves the group.
+/// Leaves the specified group.
+///  @param instanceKey Instance key 
+///
+///  @param groupId Group id of the group 
+///
+///  @returns OAIAPIResponse*
+///
+-(NSURLSessionTask*) leaveGroupWithInstanceKey: (NSString*) instanceKey
+    groupId: (NSString*) groupId
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
+    // verify the required parameter 'instanceKey' is set
+    if (instanceKey == nil) {
+        NSParameterAssert(instanceKey);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
+            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'groupId' is set
+    if (groupId == nil) {
+        NSParameterAssert(groupId);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"groupId"] };
+            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/groups/{group_id}/"];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+    if (instanceKey != nil) {
+        pathParams[@"instance_key"] = instanceKey;
+    }
+    if (groupId != nil) {
+        pathParams[@"group_id"] = groupId;
+    }
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"ApiKeyAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"DELETE"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"OAIAPIResponse*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((OAIAPIResponse*)data, error);
+                                }
+                            }];
+}
+
+///
+/// Promote participant.
+/// Promotes participants to admin. You must be admin in the group or the query will fail.
+///  @param instanceKey Instance key 
+///
+///  @param groupId Group id of the group 
+///
+///  @param data Group update payload 
+///
+///  @returns OAIAPIResponse*
+///
+-(NSURLSessionTask*) promoteParticipantWithInstanceKey: (NSString*) instanceKey
+    groupId: (NSString*) groupId
+    data: (OAIGroupUpdateParticipantsPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
+    // verify the required parameter 'instanceKey' is set
+    if (instanceKey == nil) {
+        NSParameterAssert(instanceKey);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
+            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'groupId' is set
+    if (groupId == nil) {
+        NSParameterAssert(groupId);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"groupId"] };
+            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'data' is set
+    if (data == nil) {
+        NSParameterAssert(data);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"data"] };
+            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/groups/{group_id}/participants/promote"];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+    if (instanceKey != nil) {
+        pathParams[@"instance_key"] = instanceKey;
+    }
+    if (groupId != nil) {
+        pathParams[@"group_id"] = groupId;
+    }
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json"]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"ApiKeyAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+    bodyParam = data;
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"PUT"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"OAIAPIResponse*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((OAIAPIResponse*)data, error);
+                                }
+                            }];
+}
+
+///
+/// Remove participant.
+/// Handles removing participants from a group. You must be admin in the group or the query will fail.
+///  @param instanceKey Instance key 
+///
+///  @param groupId Group id of the group 
+///
+///  @param data Group update payload 
+///
+///  @returns OAIAPIResponse*
+///
+-(NSURLSessionTask*) removeParticipantWithInstanceKey: (NSString*) instanceKey
+    groupId: (NSString*) groupId
+    data: (OAIGroupUpdateParticipantsPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
+    // verify the required parameter 'instanceKey' is set
+    if (instanceKey == nil) {
+        NSParameterAssert(instanceKey);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
+            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'groupId' is set
+    if (groupId == nil) {
+        NSParameterAssert(groupId);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"groupId"] };
+            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'data' is set
+    if (data == nil) {
+        NSParameterAssert(data);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"data"] };
+            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/groups/{group_id}/participants/remove"];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+    if (instanceKey != nil) {
+        pathParams[@"instance_key"] = instanceKey;
+    }
+    if (groupId != nil) {
+        pathParams[@"group_id"] = groupId;
+    }
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json"]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"ApiKeyAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+    bodyParam = data;
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"DELETE"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"OAIAPIResponse*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((OAIAPIResponse*)data, error);
+                                }
+                            }];
+}
+
+///
 /// Set group announce.
 /// Set if non-admins are allowed to send messages in groups
 ///  @param instanceKey Instance key 
@@ -290,7 +1030,7 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdAnnouncePutWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) setGroupAnnounceWithInstanceKey: (NSString*) instanceKey
     announce: (NSNumber*) announce
     groupId: (NSString*) groupId
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
@@ -382,91 +1122,6 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 }
 
 ///
-/// Leaves the group.
-/// Leaves the specified group.
-///  @param instanceKey Instance key 
-///
-///  @param groupId Group id of the group 
-///
-///  @returns OAIAPIResponse*
-///
--(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdDeleteWithInstanceKey: (NSString*) instanceKey
-    groupId: (NSString*) groupId
-    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
-    // verify the required parameter 'instanceKey' is set
-    if (instanceKey == nil) {
-        NSParameterAssert(instanceKey);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
-            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    // verify the required parameter 'groupId' is set
-    if (groupId == nil) {
-        NSParameterAssert(groupId);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"groupId"] };
-            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/groups/{group_id}/"];
-
-    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
-    if (instanceKey != nil) {
-        pathParams[@"instance_key"] = instanceKey;
-    }
-    if (groupId != nil) {
-        pathParams[@"group_id"] = groupId;
-    }
-
-    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
-    [headerParams addEntriesFromDictionary:self.defaultHeaders];
-    // HTTP header `Accept`
-    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
-    if(acceptHeader.length > 0) {
-        headerParams[@"Accept"] = acceptHeader;
-    }
-
-    // response content type
-    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
-
-    // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
-
-    // Authentication setting
-    NSArray *authSettings = @[@"ApiKeyAuth"];
-
-    id bodyParam = nil;
-    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-
-    return [self.apiClient requestWithPath: resourcePath
-                                    method: @"DELETE"
-                                pathParams: pathParams
-                               queryParams: queryParams
-                                formParams: formParams
-                                     files: localVarFiles
-                                      body: bodyParam
-                              headerParams: headerParams
-                              authSettings: authSettings
-                        requestContentType: requestContentType
-                       responseContentType: responseContentType
-                              responseType: @"OAIAPIResponse*"
-                           completionBlock: ^(id data, NSError *error) {
-                                if(handler) {
-                                    handler((OAIAPIResponse*)data, error);
-                                }
-                            }];
-}
-
-///
 /// Set group description.
 /// Changes the group description
 ///  @param instanceKey Instance key 
@@ -477,7 +1132,7 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdDescriptionPutWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) setGroupDescriptionWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
     data: (OAIGroupUpdateDescriptionPayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
@@ -567,176 +1222,6 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 }
 
 ///
-/// Get group.
-/// Fetches the group data.
-///  @param instanceKey Instance key 
-///
-///  @param groupId Group id of the group 
-///
-///  @returns OAIAPIResponse*
-///
--(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdGetWithInstanceKey: (NSString*) instanceKey
-    groupId: (NSString*) groupId
-    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
-    // verify the required parameter 'instanceKey' is set
-    if (instanceKey == nil) {
-        NSParameterAssert(instanceKey);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
-            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    // verify the required parameter 'groupId' is set
-    if (groupId == nil) {
-        NSParameterAssert(groupId);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"groupId"] };
-            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/groups/{group_id}"];
-
-    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
-    if (instanceKey != nil) {
-        pathParams[@"instance_key"] = instanceKey;
-    }
-    if (groupId != nil) {
-        pathParams[@"group_id"] = groupId;
-    }
-
-    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
-    [headerParams addEntriesFromDictionary:self.defaultHeaders];
-    // HTTP header `Accept`
-    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
-    if(acceptHeader.length > 0) {
-        headerParams[@"Accept"] = acceptHeader;
-    }
-
-    // response content type
-    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
-
-    // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
-
-    // Authentication setting
-    NSArray *authSettings = @[@"ApiKeyAuth"];
-
-    id bodyParam = nil;
-    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-
-    return [self.apiClient requestWithPath: resourcePath
-                                    method: @"GET"
-                                pathParams: pathParams
-                               queryParams: queryParams
-                                formParams: formParams
-                                     files: localVarFiles
-                                      body: bodyParam
-                              headerParams: headerParams
-                              authSettings: authSettings
-                        requestContentType: requestContentType
-                       responseContentType: responseContentType
-                              responseType: @"OAIAPIResponse*"
-                           completionBlock: ^(id data, NSError *error) {
-                                if(handler) {
-                                    handler((OAIAPIResponse*)data, error);
-                                }
-                            }];
-}
-
-///
-/// Get group invite code.
-/// Gets the invite code of the group.
-///  @param instanceKey Instance key 
-///
-///  @param groupId Group id of the group 
-///
-///  @returns OAIAPIResponse*
-///
--(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdInviteCodeGetWithInstanceKey: (NSString*) instanceKey
-    groupId: (NSString*) groupId
-    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
-    // verify the required parameter 'instanceKey' is set
-    if (instanceKey == nil) {
-        NSParameterAssert(instanceKey);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
-            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    // verify the required parameter 'groupId' is set
-    if (groupId == nil) {
-        NSParameterAssert(groupId);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"groupId"] };
-            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/groups/{group_id}/invite-code"];
-
-    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
-    if (instanceKey != nil) {
-        pathParams[@"instance_key"] = instanceKey;
-    }
-    if (groupId != nil) {
-        pathParams[@"group_id"] = groupId;
-    }
-
-    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
-    [headerParams addEntriesFromDictionary:self.defaultHeaders];
-    // HTTP header `Accept`
-    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
-    if(acceptHeader.length > 0) {
-        headerParams[@"Accept"] = acceptHeader;
-    }
-
-    // response content type
-    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
-
-    // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
-
-    // Authentication setting
-    NSArray *authSettings = @[@"ApiKeyAuth"];
-
-    id bodyParam = nil;
-    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-
-    return [self.apiClient requestWithPath: resourcePath
-                                    method: @"GET"
-                                pathParams: pathParams
-                               queryParams: queryParams
-                                formParams: formParams
-                                     files: localVarFiles
-                                      body: bodyParam
-                              headerParams: headerParams
-                              authSettings: authSettings
-                        requestContentType: requestContentType
-                       responseContentType: responseContentType
-                              responseType: @"OAIAPIResponse*"
-                           completionBlock: ^(id data, NSError *error) {
-                                if(handler) {
-                                    handler((OAIAPIResponse*)data, error);
-                                }
-                            }];
-}
-
-///
 /// Set group locked.
 /// Set if non-admins are allowed to change the group dp and other stuff
 ///  @param instanceKey Instance key 
@@ -747,7 +1232,7 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdLockPutWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) setGroupLockedWithInstanceKey: (NSString*) instanceKey
     locked: (NSNumber*) locked
     groupId: (NSString*) groupId
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
@@ -849,7 +1334,7 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdNamePutWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) setGroupNameWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
     data: (OAIGroupUpdateNamePayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
@@ -939,419 +1424,19 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
 }
 
 ///
-/// Add participant.
-/// Handles adding participants to a group. You must be admin in the group or the query will fail.
-///  @param instanceKey Instance key 
-///
-///  @param groupId Group id of the group 
-///
-///  @param data Group update payload 
-///
-///  @returns OAIAPIResponse*
-///
--(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdParticipantsAddPostWithInstanceKey: (NSString*) instanceKey
-    groupId: (NSString*) groupId
-    data: (OAIGroupUpdateParticipantsPayload*) data
-    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
-    // verify the required parameter 'instanceKey' is set
-    if (instanceKey == nil) {
-        NSParameterAssert(instanceKey);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
-            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    // verify the required parameter 'groupId' is set
-    if (groupId == nil) {
-        NSParameterAssert(groupId);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"groupId"] };
-            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    // verify the required parameter 'data' is set
-    if (data == nil) {
-        NSParameterAssert(data);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"data"] };
-            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/groups/{group_id}/participants/add"];
-
-    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
-    if (instanceKey != nil) {
-        pathParams[@"instance_key"] = instanceKey;
-    }
-    if (groupId != nil) {
-        pathParams[@"group_id"] = groupId;
-    }
-
-    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
-    [headerParams addEntriesFromDictionary:self.defaultHeaders];
-    // HTTP header `Accept`
-    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
-    if(acceptHeader.length > 0) {
-        headerParams[@"Accept"] = acceptHeader;
-    }
-
-    // response content type
-    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
-
-    // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json"]];
-
-    // Authentication setting
-    NSArray *authSettings = @[@"ApiKeyAuth"];
-
-    id bodyParam = nil;
-    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = data;
-
-    return [self.apiClient requestWithPath: resourcePath
-                                    method: @"POST"
-                                pathParams: pathParams
-                               queryParams: queryParams
-                                formParams: formParams
-                                     files: localVarFiles
-                                      body: bodyParam
-                              headerParams: headerParams
-                              authSettings: authSettings
-                        requestContentType: requestContentType
-                       responseContentType: responseContentType
-                              responseType: @"OAIAPIResponse*"
-                           completionBlock: ^(id data, NSError *error) {
-                                if(handler) {
-                                    handler((OAIAPIResponse*)data, error);
-                                }
-                            }];
-}
-
-///
-/// Demote participant.
-/// Demotes admins in groups. You must be admin in the group or the query will fail.
-///  @param instanceKey Instance key 
-///
-///  @param groupId Group id of the group 
-///
-///  @param data Group update payload 
-///
-///  @returns OAIAPIResponse*
-///
--(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdParticipantsDemotePutWithInstanceKey: (NSString*) instanceKey
-    groupId: (NSString*) groupId
-    data: (OAIGroupUpdateParticipantsPayload*) data
-    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
-    // verify the required parameter 'instanceKey' is set
-    if (instanceKey == nil) {
-        NSParameterAssert(instanceKey);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
-            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    // verify the required parameter 'groupId' is set
-    if (groupId == nil) {
-        NSParameterAssert(groupId);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"groupId"] };
-            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    // verify the required parameter 'data' is set
-    if (data == nil) {
-        NSParameterAssert(data);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"data"] };
-            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/groups/{group_id}/participants/demote"];
-
-    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
-    if (instanceKey != nil) {
-        pathParams[@"instance_key"] = instanceKey;
-    }
-    if (groupId != nil) {
-        pathParams[@"group_id"] = groupId;
-    }
-
-    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
-    [headerParams addEntriesFromDictionary:self.defaultHeaders];
-    // HTTP header `Accept`
-    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
-    if(acceptHeader.length > 0) {
-        headerParams[@"Accept"] = acceptHeader;
-    }
-
-    // response content type
-    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
-
-    // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json"]];
-
-    // Authentication setting
-    NSArray *authSettings = @[@"ApiKeyAuth"];
-
-    id bodyParam = nil;
-    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = data;
-
-    return [self.apiClient requestWithPath: resourcePath
-                                    method: @"PUT"
-                                pathParams: pathParams
-                               queryParams: queryParams
-                                formParams: formParams
-                                     files: localVarFiles
-                                      body: bodyParam
-                              headerParams: headerParams
-                              authSettings: authSettings
-                        requestContentType: requestContentType
-                       responseContentType: responseContentType
-                              responseType: @"OAIAPIResponse*"
-                           completionBlock: ^(id data, NSError *error) {
-                                if(handler) {
-                                    handler((OAIAPIResponse*)data, error);
-                                }
-                            }];
-}
-
-///
-/// Promote participant.
-/// Promotes participants to admin. You must be admin in the group or the query will fail.
-///  @param instanceKey Instance key 
-///
-///  @param groupId Group id of the group 
-///
-///  @param data Group update payload 
-///
-///  @returns OAIAPIResponse*
-///
--(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdParticipantsPromotePutWithInstanceKey: (NSString*) instanceKey
-    groupId: (NSString*) groupId
-    data: (OAIGroupUpdateParticipantsPayload*) data
-    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
-    // verify the required parameter 'instanceKey' is set
-    if (instanceKey == nil) {
-        NSParameterAssert(instanceKey);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
-            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    // verify the required parameter 'groupId' is set
-    if (groupId == nil) {
-        NSParameterAssert(groupId);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"groupId"] };
-            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    // verify the required parameter 'data' is set
-    if (data == nil) {
-        NSParameterAssert(data);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"data"] };
-            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/groups/{group_id}/participants/promote"];
-
-    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
-    if (instanceKey != nil) {
-        pathParams[@"instance_key"] = instanceKey;
-    }
-    if (groupId != nil) {
-        pathParams[@"group_id"] = groupId;
-    }
-
-    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
-    [headerParams addEntriesFromDictionary:self.defaultHeaders];
-    // HTTP header `Accept`
-    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
-    if(acceptHeader.length > 0) {
-        headerParams[@"Accept"] = acceptHeader;
-    }
-
-    // response content type
-    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
-
-    // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json"]];
-
-    // Authentication setting
-    NSArray *authSettings = @[@"ApiKeyAuth"];
-
-    id bodyParam = nil;
-    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = data;
-
-    return [self.apiClient requestWithPath: resourcePath
-                                    method: @"PUT"
-                                pathParams: pathParams
-                               queryParams: queryParams
-                                formParams: formParams
-                                     files: localVarFiles
-                                      body: bodyParam
-                              headerParams: headerParams
-                              authSettings: authSettings
-                        requestContentType: requestContentType
-                       responseContentType: responseContentType
-                              responseType: @"OAIAPIResponse*"
-                           completionBlock: ^(id data, NSError *error) {
-                                if(handler) {
-                                    handler((OAIAPIResponse*)data, error);
-                                }
-                            }];
-}
-
-///
-/// Remove participant.
-/// Handles removing participants from a group. You must be admin in the group or the query will fail.
-///  @param instanceKey Instance key 
-///
-///  @param groupId Group id of the group 
-///
-///  @param data Group update payload 
-///
-///  @returns OAIAPIResponse*
-///
--(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdParticipantsRemoveDeleteWithInstanceKey: (NSString*) instanceKey
-    groupId: (NSString*) groupId
-    data: (OAIGroupUpdateParticipantsPayload*) data
-    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
-    // verify the required parameter 'instanceKey' is set
-    if (instanceKey == nil) {
-        NSParameterAssert(instanceKey);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
-            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    // verify the required parameter 'groupId' is set
-    if (groupId == nil) {
-        NSParameterAssert(groupId);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"groupId"] };
-            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    // verify the required parameter 'data' is set
-    if (data == nil) {
-        NSParameterAssert(data);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"data"] };
-            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/groups/{group_id}/participants/remove"];
-
-    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
-    if (instanceKey != nil) {
-        pathParams[@"instance_key"] = instanceKey;
-    }
-    if (groupId != nil) {
-        pathParams[@"group_id"] = groupId;
-    }
-
-    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
-    [headerParams addEntriesFromDictionary:self.defaultHeaders];
-    // HTTP header `Accept`
-    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
-    if(acceptHeader.length > 0) {
-        headerParams[@"Accept"] = acceptHeader;
-    }
-
-    // response content type
-    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
-
-    // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json"]];
-
-    // Authentication setting
-    NSArray *authSettings = @[@"ApiKeyAuth"];
-
-    id bodyParam = nil;
-    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = data;
-
-    return [self.apiClient requestWithPath: resourcePath
-                                    method: @"DELETE"
-                                pathParams: pathParams
-                               queryParams: queryParams
-                                formParams: formParams
-                                     files: localVarFiles
-                                      body: bodyParam
-                              headerParams: headerParams
-                              authSettings: authSettings
-                        requestContentType: requestContentType
-                       responseContentType: responseContentType
-                              responseType: @"OAIAPIResponse*"
-                           completionBlock: ^(id data, NSError *error) {
-                                if(handler) {
-                                    handler((OAIAPIResponse*)data, error);
-                                }
-                            }];
-}
-
-///
 /// Set group picture.
 /// Changes the group profile picture. Currently it only seems to accept JPEG images only
 ///  @param instanceKey Instance key 
 ///
 ///  @param groupId Group id of the group 
 ///
-///  @param instancesInstanceKeyGroupsGroupIdProfilePicPutRequest  
+///  @param setGroupPictureRequest  
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeyGroupsGroupIdProfilePicPutWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) setGroupPictureWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
-    instancesInstanceKeyGroupsGroupIdProfilePicPutRequest: (OAIInstancesInstanceKeyGroupsGroupIdProfilePicPutRequest*) instancesInstanceKeyGroupsGroupIdProfilePicPutRequest
+    setGroupPictureRequest: (OAISetGroupPictureRequest*) setGroupPictureRequest
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {
@@ -1375,11 +1460,11 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
         return nil;
     }
 
-    // verify the required parameter 'instancesInstanceKeyGroupsGroupIdProfilePicPutRequest' is set
-    if (instancesInstanceKeyGroupsGroupIdProfilePicPutRequest == nil) {
-        NSParameterAssert(instancesInstanceKeyGroupsGroupIdProfilePicPutRequest);
+    // verify the required parameter 'setGroupPictureRequest' is set
+    if (setGroupPictureRequest == nil) {
+        NSParameterAssert(setGroupPictureRequest);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instancesInstanceKeyGroupsGroupIdProfilePicPutRequest"] };
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"setGroupPictureRequest"] };
             NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
@@ -1417,95 +1502,10 @@ NSInteger kOAIGroupManagementApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = instancesInstanceKeyGroupsGroupIdProfilePicPutRequest;
+    bodyParam = setGroupPictureRequest;
 
     return [self.apiClient requestWithPath: resourcePath
                                     method: @"PUT"
-                                pathParams: pathParams
-                               queryParams: queryParams
-                                formParams: formParams
-                                     files: localVarFiles
-                                      body: bodyParam
-                              headerParams: headerParams
-                              authSettings: authSettings
-                        requestContentType: requestContentType
-                       responseContentType: responseContentType
-                              responseType: @"OAIAPIResponse*"
-                           completionBlock: ^(id data, NSError *error) {
-                                if(handler) {
-                                    handler((OAIAPIResponse*)data, error);
-                                }
-                            }];
-}
-
-///
-/// Get group from invite link.
-/// Gets a group info from an invite link. An invite link is a link that can be used to join a group. It is usually in the format https://chat.whatsapp.com/{invitecode}
-///  @param instanceKey Instance key 
-///
-///  @param inviteLink The invite link to check 
-///
-///  @returns OAIAPIResponse*
-///
--(NSURLSessionTask*) instancesInstanceKeyGroupsInviteInfoGetWithInstanceKey: (NSString*) instanceKey
-    inviteLink: (NSString*) inviteLink
-    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
-    // verify the required parameter 'instanceKey' is set
-    if (instanceKey == nil) {
-        NSParameterAssert(instanceKey);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
-            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    // verify the required parameter 'inviteLink' is set
-    if (inviteLink == nil) {
-        NSParameterAssert(inviteLink);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"inviteLink"] };
-            NSError* error = [NSError errorWithDomain:kOAIGroupManagementApiErrorDomain code:kOAIGroupManagementApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/groups/invite-info"];
-
-    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
-    if (instanceKey != nil) {
-        pathParams[@"instance_key"] = instanceKey;
-    }
-
-    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
-    if (inviteLink != nil) {
-        queryParams[@"invite_link"] = inviteLink;
-    }
-    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
-    [headerParams addEntriesFromDictionary:self.defaultHeaders];
-    // HTTP header `Accept`
-    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
-    if(acceptHeader.length > 0) {
-        headerParams[@"Accept"] = acceptHeader;
-    }
-
-    // response content type
-    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
-
-    // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
-
-    // Authentication setting
-    NSArray *authSettings = @[@"ApiKeyAuth"];
-
-    id bodyParam = nil;
-    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-
-    return [self.apiClient requestWithPath: resourcePath
-                                    method: @"GET"
                                 pathParams: pathParams
                                queryParams: queryParams
                                 formParams: formParams

@@ -5,18 +5,18 @@
 #import "OAIButtonMessagePayload.h"
 #import "OAIButtonMessageWithMediaPayload.h"
 #import "OAIContactMessagePayload.h"
-#import "OAIInstancesInstanceKeySendAudioPostRequest.h"
-#import "OAIInstancesInstanceKeySendDocumentPostRequest.h"
-#import "OAIInstancesInstanceKeySendImagePostRequest.h"
-#import "OAIInstancesInstanceKeySendUploadPostRequest.h"
-#import "OAIInstancesInstanceKeySendVideoPostRequest.h"
 #import "OAIListMessagePayload.h"
 #import "OAILocationMessagePayload.h"
 #import "OAIPollMessagePayload.h"
+#import "OAISendAudioRequest.h"
+#import "OAISendDocumentRequest.h"
+#import "OAISendImageRequest.h"
 #import "OAISendMediaPayload.h"
+#import "OAISendVideoRequest.h"
 #import "OAITemplateButtonPayload.h"
 #import "OAITemplateButtonWithMediaPayload.h"
 #import "OAITextMessage.h"
+#import "OAIUploadMediaRequest.h"
 
 
 @interface OAIMessageSendingApi ()
@@ -71,15 +71,15 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @param to The recipient's number 
 ///
-///  @param instancesInstanceKeySendAudioPostRequest  
+///  @param sendAudioRequest  
 ///
 ///  @param caption Attached caption (optional)
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeySendAudioPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendAudioWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
-    instancesInstanceKeySendAudioPostRequest: (OAIInstancesInstanceKeySendAudioPostRequest*) instancesInstanceKeySendAudioPostRequest
+    sendAudioRequest: (OAISendAudioRequest*) sendAudioRequest
     caption: (NSString*) caption
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
@@ -104,11 +104,11 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
         return nil;
     }
 
-    // verify the required parameter 'instancesInstanceKeySendAudioPostRequest' is set
-    if (instancesInstanceKeySendAudioPostRequest == nil) {
-        NSParameterAssert(instancesInstanceKeySendAudioPostRequest);
+    // verify the required parameter 'sendAudioRequest' is set
+    if (sendAudioRequest == nil) {
+        NSParameterAssert(sendAudioRequest);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instancesInstanceKeySendAudioPostRequest"] };
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"sendAudioRequest"] };
             NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
@@ -149,90 +149,7 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = instancesInstanceKeySendAudioPostRequest;
-
-    return [self.apiClient requestWithPath: resourcePath
-                                    method: @"POST"
-                                pathParams: pathParams
-                               queryParams: queryParams
-                                formParams: formParams
-                                     files: localVarFiles
-                                      body: bodyParam
-                              headerParams: headerParams
-                              authSettings: authSettings
-                        requestContentType: requestContentType
-                       responseContentType: responseContentType
-                              responseType: @"OAIAPIResponse*"
-                           completionBlock: ^(id data, NSError *error) {
-                                if(handler) {
-                                    handler((OAIAPIResponse*)data, error);
-                                }
-                            }];
-}
-
-///
-/// Send a button message with a media header.
-/// Sends an interactive button message to the given user. This message also has media header with it. Make sure that all the button ids are unique
-///  @param instanceKey Instance key 
-///
-///  @param data Message data 
-///
-///  @returns OAIAPIResponse*
-///
--(NSURLSessionTask*) instancesInstanceKeySendButtonMediaPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIButtonMessageWithMediaPayload*) data
-    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
-    // verify the required parameter 'instanceKey' is set
-    if (instanceKey == nil) {
-        NSParameterAssert(instanceKey);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
-            NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    // verify the required parameter 'data' is set
-    if (data == nil) {
-        NSParameterAssert(data);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"data"] };
-            NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/send/button-media"];
-
-    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
-    if (instanceKey != nil) {
-        pathParams[@"instance_key"] = instanceKey;
-    }
-
-    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
-    [headerParams addEntriesFromDictionary:self.defaultHeaders];
-    // HTTP header `Accept`
-    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
-    if(acceptHeader.length > 0) {
-        headerParams[@"Accept"] = acceptHeader;
-    }
-
-    // response content type
-    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
-
-    // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json"]];
-
-    // Authentication setting
-    NSArray *authSettings = @[@"ApiKeyAuth"];
-
-    id bodyParam = nil;
-    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = data;
+    bodyParam = sendAudioRequest;
 
     return [self.apiClient requestWithPath: resourcePath
                                     method: @"POST"
@@ -262,7 +179,7 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeySendButtonsPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendButtonMessageWithInstanceKey: (NSString*) instanceKey
     data: (OAIButtonMessagePayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
@@ -337,6 +254,89 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 }
 
 ///
+/// Send a button message with a media header.
+/// Sends an interactive button message to the given user. This message also has media header with it. Make sure that all the button ids are unique
+///  @param instanceKey Instance key 
+///
+///  @param data Message data 
+///
+///  @returns OAIAPIResponse*
+///
+-(NSURLSessionTask*) sendButtonWithMediaWithInstanceKey: (NSString*) instanceKey
+    data: (OAIButtonMessageWithMediaPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
+    // verify the required parameter 'instanceKey' is set
+    if (instanceKey == nil) {
+        NSParameterAssert(instanceKey);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
+            NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'data' is set
+    if (data == nil) {
+        NSParameterAssert(data);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"data"] };
+            NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/send/button-media"];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+    if (instanceKey != nil) {
+        pathParams[@"instance_key"] = instanceKey;
+    }
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json"]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"ApiKeyAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+    bodyParam = data;
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"POST"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"OAIAPIResponse*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((OAIAPIResponse*)data, error);
+                                }
+                            }];
+}
+
+///
 /// Send a contact message.
 /// Sends a contact (vcard) message to the given user.
 ///  @param instanceKey Instance key 
@@ -345,7 +345,7 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeySendContactPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendContactWithInstanceKey: (NSString*) instanceKey
     data: (OAIContactMessagePayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
@@ -426,15 +426,15 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @param to The recipient's number 
 ///
-///  @param instancesInstanceKeySendDocumentPostRequest  
+///  @param sendDocumentRequest  
 ///
 ///  @param caption Attached caption (optional)
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeySendDocumentPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendDocumentWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
-    instancesInstanceKeySendDocumentPostRequest: (OAIInstancesInstanceKeySendDocumentPostRequest*) instancesInstanceKeySendDocumentPostRequest
+    sendDocumentRequest: (OAISendDocumentRequest*) sendDocumentRequest
     caption: (NSString*) caption
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
@@ -459,11 +459,11 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
         return nil;
     }
 
-    // verify the required parameter 'instancesInstanceKeySendDocumentPostRequest' is set
-    if (instancesInstanceKeySendDocumentPostRequest == nil) {
-        NSParameterAssert(instancesInstanceKeySendDocumentPostRequest);
+    // verify the required parameter 'sendDocumentRequest' is set
+    if (sendDocumentRequest == nil) {
+        NSParameterAssert(sendDocumentRequest);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instancesInstanceKeySendDocumentPostRequest"] };
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"sendDocumentRequest"] };
             NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
@@ -504,7 +504,7 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = instancesInstanceKeySendDocumentPostRequest;
+    bodyParam = sendDocumentRequest;
 
     return [self.apiClient requestWithPath: resourcePath
                                     method: @"POST"
@@ -532,15 +532,15 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @param to The recipient's number 
 ///
-///  @param instancesInstanceKeySendImagePostRequest  
+///  @param sendImageRequest  
 ///
 ///  @param caption Attached caption (optional)
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeySendImagePostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendImageWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
-    instancesInstanceKeySendImagePostRequest: (OAIInstancesInstanceKeySendImagePostRequest*) instancesInstanceKeySendImagePostRequest
+    sendImageRequest: (OAISendImageRequest*) sendImageRequest
     caption: (NSString*) caption
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
@@ -565,11 +565,11 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
         return nil;
     }
 
-    // verify the required parameter 'instancesInstanceKeySendImagePostRequest' is set
-    if (instancesInstanceKeySendImagePostRequest == nil) {
-        NSParameterAssert(instancesInstanceKeySendImagePostRequest);
+    // verify the required parameter 'sendImageRequest' is set
+    if (sendImageRequest == nil) {
+        NSParameterAssert(sendImageRequest);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instancesInstanceKeySendImagePostRequest"] };
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"sendImageRequest"] };
             NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
@@ -610,7 +610,7 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = instancesInstanceKeySendImagePostRequest;
+    bodyParam = sendImageRequest;
 
     return [self.apiClient requestWithPath: resourcePath
                                     method: @"POST"
@@ -640,7 +640,7 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeySendListPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendListMessageWithInstanceKey: (NSString*) instanceKey
     data: (OAIListMessagePayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
@@ -723,7 +723,7 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeySendLocationPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendLocationWithInstanceKey: (NSString*) instanceKey
     data: (OAILocationMessagePayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
@@ -806,7 +806,7 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeySendMediaPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendMediaMessageWithInstanceKey: (NSString*) instanceKey
     data: (OAISendMediaPayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
@@ -889,7 +889,7 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeySendPollPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendPollMessageWithInstanceKey: (NSString*) instanceKey
     data: (OAIPollMessagePayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
@@ -964,89 +964,6 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 }
 
 ///
-/// Send a template message with media.
-/// Sends an interactive template message with a media header to the given user. Note: The valid button types are \"replyButton\", \"urlButton\", \"callButton\"
-///  @param instanceKey Instance key 
-///
-///  @param data Message data 
-///
-///  @returns OAIAPIResponse*
-///
--(NSURLSessionTask*) instancesInstanceKeySendTemplateMediaPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAITemplateButtonWithMediaPayload*) data
-    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
-    // verify the required parameter 'instanceKey' is set
-    if (instanceKey == nil) {
-        NSParameterAssert(instanceKey);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
-            NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    // verify the required parameter 'data' is set
-    if (data == nil) {
-        NSParameterAssert(data);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"data"] };
-            NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/send/template-media"];
-
-    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
-    if (instanceKey != nil) {
-        pathParams[@"instance_key"] = instanceKey;
-    }
-
-    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
-    [headerParams addEntriesFromDictionary:self.defaultHeaders];
-    // HTTP header `Accept`
-    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
-    if(acceptHeader.length > 0) {
-        headerParams[@"Accept"] = acceptHeader;
-    }
-
-    // response content type
-    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
-
-    // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json"]];
-
-    // Authentication setting
-    NSArray *authSettings = @[@"ApiKeyAuth"];
-
-    id bodyParam = nil;
-    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = data;
-
-    return [self.apiClient requestWithPath: resourcePath
-                                    method: @"POST"
-                                pathParams: pathParams
-                               queryParams: queryParams
-                                formParams: formParams
-                                     files: localVarFiles
-                                      body: bodyParam
-                              headerParams: headerParams
-                              authSettings: authSettings
-                        requestContentType: requestContentType
-                       responseContentType: responseContentType
-                              responseType: @"OAIAPIResponse*"
-                           completionBlock: ^(id data, NSError *error) {
-                                if(handler) {
-                                    handler((OAIAPIResponse*)data, error);
-                                }
-                            }];
-}
-
-///
 /// Send a template message.
 /// Sends an interactive template message to the given user. Note: The valid button types are \"replyButton\", \"urlButton\", \"callButton\"
 ///  @param instanceKey Instance key 
@@ -1055,7 +972,7 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeySendTemplatePostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendTemplateWithInstanceKey: (NSString*) instanceKey
     data: (OAITemplateButtonPayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
@@ -1130,6 +1047,89 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 }
 
 ///
+/// Send a template message with media.
+/// Sends an interactive template message with a media header to the given user. Note: The valid button types are \"replyButton\", \"urlButton\", \"callButton\"
+///  @param instanceKey Instance key 
+///
+///  @param data Message data 
+///
+///  @returns OAIAPIResponse*
+///
+-(NSURLSessionTask*) sendTemplateWithMediaWithInstanceKey: (NSString*) instanceKey
+    data: (OAITemplateButtonWithMediaPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
+    // verify the required parameter 'instanceKey' is set
+    if (instanceKey == nil) {
+        NSParameterAssert(instanceKey);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
+            NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'data' is set
+    if (data == nil) {
+        NSParameterAssert(data);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"data"] };
+            NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/send/template-media"];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+    if (instanceKey != nil) {
+        pathParams[@"instance_key"] = instanceKey;
+    }
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json"]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"ApiKeyAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+    bodyParam = data;
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"POST"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"OAIAPIResponse*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((OAIAPIResponse*)data, error);
+                                }
+                            }];
+}
+
+///
 /// Send a text message.
 /// Sends a text message to the given user.
 ///  @param instanceKey Instance key 
@@ -1138,7 +1138,7 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeySendTextPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendTextMessageWithInstanceKey: (NSString*) instanceKey
     data: (OAITextMessage*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
@@ -1213,121 +1213,21 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 }
 
 ///
-/// Upload media.
-/// Uploads media to WhatsApp servers and returns the media keys. Store the returned media keys, as you will need them to send media messages
-///  @param instanceKey Instance key 
-///
-///  @param type Media type 
-///
-///  @param instancesInstanceKeySendUploadPostRequest  
-///
-///  @returns OAIAPIResponse*
-///
--(NSURLSessionTask*) instancesInstanceKeySendUploadPostWithInstanceKey: (NSString*) instanceKey
-    type: (NSString*) type
-    instancesInstanceKeySendUploadPostRequest: (OAIInstancesInstanceKeySendUploadPostRequest*) instancesInstanceKeySendUploadPostRequest
-    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
-    // verify the required parameter 'instanceKey' is set
-    if (instanceKey == nil) {
-        NSParameterAssert(instanceKey);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
-            NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    // verify the required parameter 'type' is set
-    if (type == nil) {
-        NSParameterAssert(type);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"type"] };
-            NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    // verify the required parameter 'instancesInstanceKeySendUploadPostRequest' is set
-    if (instancesInstanceKeySendUploadPostRequest == nil) {
-        NSParameterAssert(instancesInstanceKeySendUploadPostRequest);
-        if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instancesInstanceKeySendUploadPostRequest"] };
-            NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
-            handler(nil, error);
-        }
-        return nil;
-    }
-
-    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/send/upload"];
-
-    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
-    if (instanceKey != nil) {
-        pathParams[@"instance_key"] = instanceKey;
-    }
-
-    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
-    if (type != nil) {
-        queryParams[@"type"] = type;
-    }
-    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
-    [headerParams addEntriesFromDictionary:self.defaultHeaders];
-    // HTTP header `Accept`
-    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
-    if(acceptHeader.length > 0) {
-        headerParams[@"Accept"] = acceptHeader;
-    }
-
-    // response content type
-    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
-
-    // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json"]];
-
-    // Authentication setting
-    NSArray *authSettings = @[@"ApiKeyAuth"];
-
-    id bodyParam = nil;
-    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = instancesInstanceKeySendUploadPostRequest;
-
-    return [self.apiClient requestWithPath: resourcePath
-                                    method: @"POST"
-                                pathParams: pathParams
-                               queryParams: queryParams
-                                formParams: formParams
-                                     files: localVarFiles
-                                      body: bodyParam
-                              headerParams: headerParams
-                              authSettings: authSettings
-                        requestContentType: requestContentType
-                       responseContentType: responseContentType
-                              responseType: @"OAIAPIResponse*"
-                           completionBlock: ^(id data, NSError *error) {
-                                if(handler) {
-                                    handler((OAIAPIResponse*)data, error);
-                                }
-                            }];
-}
-
-///
 /// Send raw video.
 /// Sends a video message by uploading to the WhatsApp servers every time. This is not recommended for bulk sending.
 ///  @param instanceKey Instance key 
 ///
 ///  @param to The recipient's number 
 ///
-///  @param instancesInstanceKeySendVideoPostRequest  
+///  @param sendVideoRequest  
 ///
 ///  @param caption Attached caption (optional)
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeySendVideoPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendVideoWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
-    instancesInstanceKeySendVideoPostRequest: (OAIInstancesInstanceKeySendVideoPostRequest*) instancesInstanceKeySendVideoPostRequest
+    sendVideoRequest: (OAISendVideoRequest*) sendVideoRequest
     caption: (NSString*) caption
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
@@ -1352,11 +1252,11 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
         return nil;
     }
 
-    // verify the required parameter 'instancesInstanceKeySendVideoPostRequest' is set
-    if (instancesInstanceKeySendVideoPostRequest == nil) {
-        NSParameterAssert(instancesInstanceKeySendVideoPostRequest);
+    // verify the required parameter 'sendVideoRequest' is set
+    if (sendVideoRequest == nil) {
+        NSParameterAssert(sendVideoRequest);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instancesInstanceKeySendVideoPostRequest"] };
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"sendVideoRequest"] };
             NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
@@ -1397,7 +1297,107 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = instancesInstanceKeySendVideoPostRequest;
+    bodyParam = sendVideoRequest;
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"POST"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"OAIAPIResponse*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((OAIAPIResponse*)data, error);
+                                }
+                            }];
+}
+
+///
+/// Upload media.
+/// Uploads media to WhatsApp servers and returns the media keys. Store the returned media keys, as you will need them to send media messages
+///  @param instanceKey Instance key 
+///
+///  @param type Media type 
+///
+///  @param uploadMediaRequest  
+///
+///  @returns OAIAPIResponse*
+///
+-(NSURLSessionTask*) uploadMediaWithInstanceKey: (NSString*) instanceKey
+    type: (NSString*) type
+    uploadMediaRequest: (OAIUploadMediaRequest*) uploadMediaRequest
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
+    // verify the required parameter 'instanceKey' is set
+    if (instanceKey == nil) {
+        NSParameterAssert(instanceKey);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
+            NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'type' is set
+    if (type == nil) {
+        NSParameterAssert(type);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"type"] };
+            NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'uploadMediaRequest' is set
+    if (uploadMediaRequest == nil) {
+        NSParameterAssert(uploadMediaRequest);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"uploadMediaRequest"] };
+            NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/send/upload"];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+    if (instanceKey != nil) {
+        pathParams[@"instance_key"] = instanceKey;
+    }
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    if (type != nil) {
+        queryParams[@"type"] = type;
+    }
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json"]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"ApiKeyAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+    bodyParam = uploadMediaRequest;
 
     return [self.apiClient requestWithPath: resourcePath
                                     method: @"POST"

@@ -56,7 +56,7 @@ NSInteger kOAIBusinessManagementApiMissingParamErrorCode = 234513;
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeyBusinessCatalogGetWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) fetchCatlogWithInstanceKey: (NSString*) instanceKey
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
     if (instanceKey == nil) {

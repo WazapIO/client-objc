@@ -4,28 +4,28 @@ All URIs are relative to */api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**instancesInstanceKeySendAudioPost**](OAIMessageSendingApi.md#instancesinstancekeysendaudiopost) | **POST** /instances/{instance_key}/send/audio | Send raw audio.
-[**instancesInstanceKeySendButtonMediaPost**](OAIMessageSendingApi.md#instancesinstancekeysendbuttonmediapost) | **POST** /instances/{instance_key}/send/button-media | Send a button message with a media header.
-[**instancesInstanceKeySendButtonsPost**](OAIMessageSendingApi.md#instancesinstancekeysendbuttonspost) | **POST** /instances/{instance_key}/send/buttons | Send a button message.
-[**instancesInstanceKeySendContactPost**](OAIMessageSendingApi.md#instancesinstancekeysendcontactpost) | **POST** /instances/{instance_key}/send/contact | Send a contact message.
-[**instancesInstanceKeySendDocumentPost**](OAIMessageSendingApi.md#instancesinstancekeysenddocumentpost) | **POST** /instances/{instance_key}/send/document | Send raw document.
-[**instancesInstanceKeySendImagePost**](OAIMessageSendingApi.md#instancesinstancekeysendimagepost) | **POST** /instances/{instance_key}/send/image | Send raw image.
-[**instancesInstanceKeySendListPost**](OAIMessageSendingApi.md#instancesinstancekeysendlistpost) | **POST** /instances/{instance_key}/send/list | Send a List message.
-[**instancesInstanceKeySendLocationPost**](OAIMessageSendingApi.md#instancesinstancekeysendlocationpost) | **POST** /instances/{instance_key}/send/location | Send a location message.
-[**instancesInstanceKeySendMediaPost**](OAIMessageSendingApi.md#instancesinstancekeysendmediapost) | **POST** /instances/{instance_key}/send/media | Send a media message.
-[**instancesInstanceKeySendPollPost**](OAIMessageSendingApi.md#instancesinstancekeysendpollpost) | **POST** /instances/{instance_key}/send/poll | Send a Poll message.
-[**instancesInstanceKeySendTemplateMediaPost**](OAIMessageSendingApi.md#instancesinstancekeysendtemplatemediapost) | **POST** /instances/{instance_key}/send/template-media | Send a template message with media.
-[**instancesInstanceKeySendTemplatePost**](OAIMessageSendingApi.md#instancesinstancekeysendtemplatepost) | **POST** /instances/{instance_key}/send/template | Send a template message.
-[**instancesInstanceKeySendTextPost**](OAIMessageSendingApi.md#instancesinstancekeysendtextpost) | **POST** /instances/{instance_key}/send/text | Send a text message.
-[**instancesInstanceKeySendUploadPost**](OAIMessageSendingApi.md#instancesinstancekeysenduploadpost) | **POST** /instances/{instance_key}/send/upload | Upload media.
-[**instancesInstanceKeySendVideoPost**](OAIMessageSendingApi.md#instancesinstancekeysendvideopost) | **POST** /instances/{instance_key}/send/video | Send raw video.
+[**sendAudio**](OAIMessageSendingApi.md#sendaudio) | **POST** /instances/{instance_key}/send/audio | Send raw audio.
+[**sendButtonMessage**](OAIMessageSendingApi.md#sendbuttonmessage) | **POST** /instances/{instance_key}/send/buttons | Send a button message.
+[**sendButtonWithMedia**](OAIMessageSendingApi.md#sendbuttonwithmedia) | **POST** /instances/{instance_key}/send/button-media | Send a button message with a media header.
+[**sendContact**](OAIMessageSendingApi.md#sendcontact) | **POST** /instances/{instance_key}/send/contact | Send a contact message.
+[**sendDocument**](OAIMessageSendingApi.md#senddocument) | **POST** /instances/{instance_key}/send/document | Send raw document.
+[**sendImage**](OAIMessageSendingApi.md#sendimage) | **POST** /instances/{instance_key}/send/image | Send raw image.
+[**sendListMessage**](OAIMessageSendingApi.md#sendlistmessage) | **POST** /instances/{instance_key}/send/list | Send a List message.
+[**sendLocation**](OAIMessageSendingApi.md#sendlocation) | **POST** /instances/{instance_key}/send/location | Send a location message.
+[**sendMediaMessage**](OAIMessageSendingApi.md#sendmediamessage) | **POST** /instances/{instance_key}/send/media | Send a media message.
+[**sendPollMessage**](OAIMessageSendingApi.md#sendpollmessage) | **POST** /instances/{instance_key}/send/poll | Send a Poll message.
+[**sendTemplate**](OAIMessageSendingApi.md#sendtemplate) | **POST** /instances/{instance_key}/send/template | Send a template message.
+[**sendTemplateWithMedia**](OAIMessageSendingApi.md#sendtemplatewithmedia) | **POST** /instances/{instance_key}/send/template-media | Send a template message with media.
+[**sendTextMessage**](OAIMessageSendingApi.md#sendtextmessage) | **POST** /instances/{instance_key}/send/text | Send a text message.
+[**sendVideo**](OAIMessageSendingApi.md#sendvideo) | **POST** /instances/{instance_key}/send/video | Send raw video.
+[**uploadMedia**](OAIMessageSendingApi.md#uploadmedia) | **POST** /instances/{instance_key}/send/upload | Upload media.
 
 
-# **instancesInstanceKeySendAudioPost**
+# **sendAudio**
 ```objc
--(NSURLSessionTask*) instancesInstanceKeySendAudioPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendAudioWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
-    instancesInstanceKeySendAudioPostRequest: (OAIInstancesInstanceKeySendAudioPostRequest*) instancesInstanceKeySendAudioPostRequest
+    sendAudioRequest: (OAISendAudioRequest*) sendAudioRequest
     caption: (NSString*) caption
         completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
@@ -46,22 +46,22 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 
 NSString* instanceKey = @"instanceKey_example"; // Instance key
 NSString* to = @"to_example"; // The recipient's number
-OAIInstancesInstanceKeySendAudioPostRequest* instancesInstanceKeySendAudioPostRequest = [[OAIInstancesInstanceKeySendAudioPostRequest alloc] init]; // 
+OAISendAudioRequest* sendAudioRequest = [[OAISendAudioRequest alloc] init]; // 
 NSString* caption = @"caption_example"; // Attached caption (optional)
 
 OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
 
 // Send raw audio.
-[apiInstance instancesInstanceKeySendAudioPostWithInstanceKey:instanceKey
+[apiInstance sendAudioWithInstanceKey:instanceKey
               to:to
-              instancesInstanceKeySendAudioPostRequest:instancesInstanceKeySendAudioPostRequest
+              sendAudioRequest:sendAudioRequest
               caption:caption
           completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling OAIMessageSendingApi->instancesInstanceKeySendAudioPost: %@", error);
+                            NSLog(@"Error calling OAIMessageSendingApi->sendAudio: %@", error);
                         }
                     }];
 ```
@@ -72,7 +72,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **NSString***| Instance key | 
  **to** | **NSString***| The recipient&#39;s number | 
- **instancesInstanceKeySendAudioPostRequest** | [**OAIInstancesInstanceKeySendAudioPostRequest***](OAIInstancesInstanceKeySendAudioPostRequest.md)|  | 
+ **sendAudioRequest** | [**OAISendAudioRequest***](OAISendAudioRequest.md)|  | 
  **caption** | **NSString***| Attached caption | [optional] 
 
 ### Return type
@@ -90,70 +90,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **instancesInstanceKeySendButtonMediaPost**
+# **sendButtonMessage**
 ```objc
--(NSURLSessionTask*) instancesInstanceKeySendButtonMediaPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIButtonMessageWithMediaPayload*) data
-        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
-```
-
-Send a button message with a media header.
-
-Sends an interactive button message to the given user. This message also has media header with it. Make sure that all the button ids are unique
-
-### Example
-```objc
-OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
-
-// Configure API key authorization: (authentication scheme: ApiKeyAuth)
-[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
-
-
-NSString* instanceKey = @"instanceKey_example"; // Instance key
-OAIButtonMessageWithMediaPayload* data = [[OAIButtonMessageWithMediaPayload alloc] init]; // Message data
-
-OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
-
-// Send a button message with a media header.
-[apiInstance instancesInstanceKeySendButtonMediaPostWithInstanceKey:instanceKey
-              data:data
-          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
-                        if (output) {
-                            NSLog(@"%@", output);
-                        }
-                        if (error) {
-                            NSLog(@"Error calling OAIMessageSendingApi->instancesInstanceKeySendButtonMediaPost: %@", error);
-                        }
-                    }];
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **instanceKey** | **NSString***| Instance key | 
- **data** | [**OAIButtonMessageWithMediaPayload***](OAIButtonMessageWithMediaPayload.md)| Message data | 
-
-### Return type
-
-[**OAIAPIResponse***](OAIAPIResponse.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: */*
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **instancesInstanceKeySendButtonsPost**
-```objc
--(NSURLSessionTask*) instancesInstanceKeySendButtonsPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendButtonMessageWithInstanceKey: (NSString*) instanceKey
     data: (OAIButtonMessagePayload*) data
         completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
@@ -178,14 +117,14 @@ OAIButtonMessagePayload* data = [[OAIButtonMessagePayload alloc] init]; // Messa
 OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
 
 // Send a button message.
-[apiInstance instancesInstanceKeySendButtonsPostWithInstanceKey:instanceKey
+[apiInstance sendButtonMessageWithInstanceKey:instanceKey
               data:data
           completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling OAIMessageSendingApi->instancesInstanceKeySendButtonsPost: %@", error);
+                            NSLog(@"Error calling OAIMessageSendingApi->sendButtonMessage: %@", error);
                         }
                     }];
 ```
@@ -212,9 +151,70 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **instancesInstanceKeySendContactPost**
+# **sendButtonWithMedia**
 ```objc
--(NSURLSessionTask*) instancesInstanceKeySendContactPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendButtonWithMediaWithInstanceKey: (NSString*) instanceKey
+    data: (OAIButtonMessageWithMediaPayload*) data
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+```
+
+Send a button message with a media header.
+
+Sends an interactive button message to the given user. This message also has media header with it. Make sure that all the button ids are unique
+
+### Example
+```objc
+OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: ApiKeyAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSString* instanceKey = @"instanceKey_example"; // Instance key
+OAIButtonMessageWithMediaPayload* data = [[OAIButtonMessageWithMediaPayload alloc] init]; // Message data
+
+OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
+
+// Send a button message with a media header.
+[apiInstance sendButtonWithMediaWithInstanceKey:instanceKey
+              data:data
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling OAIMessageSendingApi->sendButtonWithMedia: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instanceKey** | **NSString***| Instance key | 
+ **data** | [**OAIButtonMessageWithMediaPayload***](OAIButtonMessageWithMediaPayload.md)| Message data | 
+
+### Return type
+
+[**OAIAPIResponse***](OAIAPIResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: */*
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **sendContact**
+```objc
+-(NSURLSessionTask*) sendContactWithInstanceKey: (NSString*) instanceKey
     data: (OAIContactMessagePayload*) data
         completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
@@ -239,14 +239,14 @@ OAIContactMessagePayload* data = [[OAIContactMessagePayload alloc] init]; // Mes
 OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
 
 // Send a contact message.
-[apiInstance instancesInstanceKeySendContactPostWithInstanceKey:instanceKey
+[apiInstance sendContactWithInstanceKey:instanceKey
               data:data
           completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling OAIMessageSendingApi->instancesInstanceKeySendContactPost: %@", error);
+                            NSLog(@"Error calling OAIMessageSendingApi->sendContact: %@", error);
                         }
                     }];
 ```
@@ -273,11 +273,11 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **instancesInstanceKeySendDocumentPost**
+# **sendDocument**
 ```objc
--(NSURLSessionTask*) instancesInstanceKeySendDocumentPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendDocumentWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
-    instancesInstanceKeySendDocumentPostRequest: (OAIInstancesInstanceKeySendDocumentPostRequest*) instancesInstanceKeySendDocumentPostRequest
+    sendDocumentRequest: (OAISendDocumentRequest*) sendDocumentRequest
     caption: (NSString*) caption
         completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
@@ -298,22 +298,22 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 
 NSString* instanceKey = @"instanceKey_example"; // Instance key
 NSString* to = @"to_example"; // The recipient's number
-OAIInstancesInstanceKeySendDocumentPostRequest* instancesInstanceKeySendDocumentPostRequest = [[OAIInstancesInstanceKeySendDocumentPostRequest alloc] init]; // 
+OAISendDocumentRequest* sendDocumentRequest = [[OAISendDocumentRequest alloc] init]; // 
 NSString* caption = @"caption_example"; // Attached caption (optional)
 
 OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
 
 // Send raw document.
-[apiInstance instancesInstanceKeySendDocumentPostWithInstanceKey:instanceKey
+[apiInstance sendDocumentWithInstanceKey:instanceKey
               to:to
-              instancesInstanceKeySendDocumentPostRequest:instancesInstanceKeySendDocumentPostRequest
+              sendDocumentRequest:sendDocumentRequest
               caption:caption
           completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling OAIMessageSendingApi->instancesInstanceKeySendDocumentPost: %@", error);
+                            NSLog(@"Error calling OAIMessageSendingApi->sendDocument: %@", error);
                         }
                     }];
 ```
@@ -324,7 +324,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **NSString***| Instance key | 
  **to** | **NSString***| The recipient&#39;s number | 
- **instancesInstanceKeySendDocumentPostRequest** | [**OAIInstancesInstanceKeySendDocumentPostRequest***](OAIInstancesInstanceKeySendDocumentPostRequest.md)|  | 
+ **sendDocumentRequest** | [**OAISendDocumentRequest***](OAISendDocumentRequest.md)|  | 
  **caption** | **NSString***| Attached caption | [optional] 
 
 ### Return type
@@ -342,11 +342,11 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **instancesInstanceKeySendImagePost**
+# **sendImage**
 ```objc
--(NSURLSessionTask*) instancesInstanceKeySendImagePostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendImageWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
-    instancesInstanceKeySendImagePostRequest: (OAIInstancesInstanceKeySendImagePostRequest*) instancesInstanceKeySendImagePostRequest
+    sendImageRequest: (OAISendImageRequest*) sendImageRequest
     caption: (NSString*) caption
         completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
@@ -367,22 +367,22 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 
 NSString* instanceKey = @"instanceKey_example"; // Instance key
 NSString* to = @"to_example"; // The recipient's number
-OAIInstancesInstanceKeySendImagePostRequest* instancesInstanceKeySendImagePostRequest = [[OAIInstancesInstanceKeySendImagePostRequest alloc] init]; // 
+OAISendImageRequest* sendImageRequest = [[OAISendImageRequest alloc] init]; // 
 NSString* caption = @"caption_example"; // Attached caption (optional)
 
 OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
 
 // Send raw image.
-[apiInstance instancesInstanceKeySendImagePostWithInstanceKey:instanceKey
+[apiInstance sendImageWithInstanceKey:instanceKey
               to:to
-              instancesInstanceKeySendImagePostRequest:instancesInstanceKeySendImagePostRequest
+              sendImageRequest:sendImageRequest
               caption:caption
           completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling OAIMessageSendingApi->instancesInstanceKeySendImagePost: %@", error);
+                            NSLog(@"Error calling OAIMessageSendingApi->sendImage: %@", error);
                         }
                     }];
 ```
@@ -393,7 +393,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **NSString***| Instance key | 
  **to** | **NSString***| The recipient&#39;s number | 
- **instancesInstanceKeySendImagePostRequest** | [**OAIInstancesInstanceKeySendImagePostRequest***](OAIInstancesInstanceKeySendImagePostRequest.md)|  | 
+ **sendImageRequest** | [**OAISendImageRequest***](OAISendImageRequest.md)|  | 
  **caption** | **NSString***| Attached caption | [optional] 
 
 ### Return type
@@ -411,9 +411,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **instancesInstanceKeySendListPost**
+# **sendListMessage**
 ```objc
--(NSURLSessionTask*) instancesInstanceKeySendListPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendListMessageWithInstanceKey: (NSString*) instanceKey
     data: (OAIListMessagePayload*) data
         completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
@@ -438,14 +438,14 @@ OAIListMessagePayload* data = [[OAIListMessagePayload alloc] init]; // Message d
 OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
 
 // Send a List message.
-[apiInstance instancesInstanceKeySendListPostWithInstanceKey:instanceKey
+[apiInstance sendListMessageWithInstanceKey:instanceKey
               data:data
           completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling OAIMessageSendingApi->instancesInstanceKeySendListPost: %@", error);
+                            NSLog(@"Error calling OAIMessageSendingApi->sendListMessage: %@", error);
                         }
                     }];
 ```
@@ -472,9 +472,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **instancesInstanceKeySendLocationPost**
+# **sendLocation**
 ```objc
--(NSURLSessionTask*) instancesInstanceKeySendLocationPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendLocationWithInstanceKey: (NSString*) instanceKey
     data: (OAILocationMessagePayload*) data
         completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
@@ -499,14 +499,14 @@ OAILocationMessagePayload* data = [[OAILocationMessagePayload alloc] init]; // M
 OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
 
 // Send a location message.
-[apiInstance instancesInstanceKeySendLocationPostWithInstanceKey:instanceKey
+[apiInstance sendLocationWithInstanceKey:instanceKey
               data:data
           completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling OAIMessageSendingApi->instancesInstanceKeySendLocationPost: %@", error);
+                            NSLog(@"Error calling OAIMessageSendingApi->sendLocation: %@", error);
                         }
                     }];
 ```
@@ -533,9 +533,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **instancesInstanceKeySendMediaPost**
+# **sendMediaMessage**
 ```objc
--(NSURLSessionTask*) instancesInstanceKeySendMediaPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendMediaMessageWithInstanceKey: (NSString*) instanceKey
     data: (OAISendMediaPayload*) data
         completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
@@ -560,14 +560,14 @@ OAISendMediaPayload* data = [[OAISendMediaPayload alloc] init]; // Message data
 OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
 
 // Send a media message.
-[apiInstance instancesInstanceKeySendMediaPostWithInstanceKey:instanceKey
+[apiInstance sendMediaMessageWithInstanceKey:instanceKey
               data:data
           completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling OAIMessageSendingApi->instancesInstanceKeySendMediaPost: %@", error);
+                            NSLog(@"Error calling OAIMessageSendingApi->sendMediaMessage: %@", error);
                         }
                     }];
 ```
@@ -594,9 +594,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **instancesInstanceKeySendPollPost**
+# **sendPollMessage**
 ```objc
--(NSURLSessionTask*) instancesInstanceKeySendPollPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendPollMessageWithInstanceKey: (NSString*) instanceKey
     data: (OAIPollMessagePayload*) data
         completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
@@ -621,14 +621,14 @@ OAIPollMessagePayload* data = [[OAIPollMessagePayload alloc] init]; // Message d
 OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
 
 // Send a Poll message.
-[apiInstance instancesInstanceKeySendPollPostWithInstanceKey:instanceKey
+[apiInstance sendPollMessageWithInstanceKey:instanceKey
               data:data
           completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling OAIMessageSendingApi->instancesInstanceKeySendPollPost: %@", error);
+                            NSLog(@"Error calling OAIMessageSendingApi->sendPollMessage: %@", error);
                         }
                     }];
 ```
@@ -655,70 +655,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **instancesInstanceKeySendTemplateMediaPost**
+# **sendTemplate**
 ```objc
--(NSURLSessionTask*) instancesInstanceKeySendTemplateMediaPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAITemplateButtonWithMediaPayload*) data
-        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
-```
-
-Send a template message with media.
-
-Sends an interactive template message with a media header to the given user. Note: The valid button types are \"replyButton\", \"urlButton\", \"callButton\"
-
-### Example
-```objc
-OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
-
-// Configure API key authorization: (authentication scheme: ApiKeyAuth)
-[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
-
-
-NSString* instanceKey = @"instanceKey_example"; // Instance key
-OAITemplateButtonWithMediaPayload* data = [[OAITemplateButtonWithMediaPayload alloc] init]; // Message data
-
-OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
-
-// Send a template message with media.
-[apiInstance instancesInstanceKeySendTemplateMediaPostWithInstanceKey:instanceKey
-              data:data
-          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
-                        if (output) {
-                            NSLog(@"%@", output);
-                        }
-                        if (error) {
-                            NSLog(@"Error calling OAIMessageSendingApi->instancesInstanceKeySendTemplateMediaPost: %@", error);
-                        }
-                    }];
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **instanceKey** | **NSString***| Instance key | 
- **data** | [**OAITemplateButtonWithMediaPayload***](OAITemplateButtonWithMediaPayload.md)| Message data | 
-
-### Return type
-
-[**OAIAPIResponse***](OAIAPIResponse.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: */*
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **instancesInstanceKeySendTemplatePost**
-```objc
--(NSURLSessionTask*) instancesInstanceKeySendTemplatePostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendTemplateWithInstanceKey: (NSString*) instanceKey
     data: (OAITemplateButtonPayload*) data
         completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
@@ -743,14 +682,14 @@ OAITemplateButtonPayload* data = [[OAITemplateButtonPayload alloc] init]; // Mes
 OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
 
 // Send a template message.
-[apiInstance instancesInstanceKeySendTemplatePostWithInstanceKey:instanceKey
+[apiInstance sendTemplateWithInstanceKey:instanceKey
               data:data
           completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling OAIMessageSendingApi->instancesInstanceKeySendTemplatePost: %@", error);
+                            NSLog(@"Error calling OAIMessageSendingApi->sendTemplate: %@", error);
                         }
                     }];
 ```
@@ -777,9 +716,70 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **instancesInstanceKeySendTextPost**
+# **sendTemplateWithMedia**
 ```objc
--(NSURLSessionTask*) instancesInstanceKeySendTextPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendTemplateWithMediaWithInstanceKey: (NSString*) instanceKey
+    data: (OAITemplateButtonWithMediaPayload*) data
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+```
+
+Send a template message with media.
+
+Sends an interactive template message with a media header to the given user. Note: The valid button types are \"replyButton\", \"urlButton\", \"callButton\"
+
+### Example
+```objc
+OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: ApiKeyAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSString* instanceKey = @"instanceKey_example"; // Instance key
+OAITemplateButtonWithMediaPayload* data = [[OAITemplateButtonWithMediaPayload alloc] init]; // Message data
+
+OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
+
+// Send a template message with media.
+[apiInstance sendTemplateWithMediaWithInstanceKey:instanceKey
+              data:data
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling OAIMessageSendingApi->sendTemplateWithMedia: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instanceKey** | **NSString***| Instance key | 
+ **data** | [**OAITemplateButtonWithMediaPayload***](OAITemplateButtonWithMediaPayload.md)| Message data | 
+
+### Return type
+
+[**OAIAPIResponse***](OAIAPIResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: */*
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **sendTextMessage**
+```objc
+-(NSURLSessionTask*) sendTextMessageWithInstanceKey: (NSString*) instanceKey
     data: (OAITextMessage*) data
         completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
@@ -804,14 +804,14 @@ OAITextMessage* data = [[OAITextMessage alloc] init]; // Message data
 OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
 
 // Send a text message.
-[apiInstance instancesInstanceKeySendTextPostWithInstanceKey:instanceKey
+[apiInstance sendTextMessageWithInstanceKey:instanceKey
               data:data
           completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling OAIMessageSendingApi->instancesInstanceKeySendTextPost: %@", error);
+                            NSLog(@"Error calling OAIMessageSendingApi->sendTextMessage: %@", error);
                         }
                     }];
 ```
@@ -838,76 +838,11 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **instancesInstanceKeySendUploadPost**
+# **sendVideo**
 ```objc
--(NSURLSessionTask*) instancesInstanceKeySendUploadPostWithInstanceKey: (NSString*) instanceKey
-    type: (NSString*) type
-    instancesInstanceKeySendUploadPostRequest: (OAIInstancesInstanceKeySendUploadPostRequest*) instancesInstanceKeySendUploadPostRequest
-        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
-```
-
-Upload media.
-
-Uploads media to WhatsApp servers and returns the media keys. Store the returned media keys, as you will need them to send media messages
-
-### Example
-```objc
-OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
-
-// Configure API key authorization: (authentication scheme: ApiKeyAuth)
-[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
-
-
-NSString* instanceKey = @"instanceKey_example"; // Instance key
-NSString* type = @"type_example"; // Media type
-OAIInstancesInstanceKeySendUploadPostRequest* instancesInstanceKeySendUploadPostRequest = [[OAIInstancesInstanceKeySendUploadPostRequest alloc] init]; // 
-
-OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
-
-// Upload media.
-[apiInstance instancesInstanceKeySendUploadPostWithInstanceKey:instanceKey
-              type:type
-              instancesInstanceKeySendUploadPostRequest:instancesInstanceKeySendUploadPostRequest
-          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
-                        if (output) {
-                            NSLog(@"%@", output);
-                        }
-                        if (error) {
-                            NSLog(@"Error calling OAIMessageSendingApi->instancesInstanceKeySendUploadPost: %@", error);
-                        }
-                    }];
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **instanceKey** | **NSString***| Instance key | 
- **type** | **NSString***| Media type | 
- **instancesInstanceKeySendUploadPostRequest** | [**OAIInstancesInstanceKeySendUploadPostRequest***](OAIInstancesInstanceKeySendUploadPostRequest.md)|  | 
-
-### Return type
-
-[**OAIAPIResponse***](OAIAPIResponse.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: */*
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **instancesInstanceKeySendVideoPost**
-```objc
--(NSURLSessionTask*) instancesInstanceKeySendVideoPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendVideoWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
-    instancesInstanceKeySendVideoPostRequest: (OAIInstancesInstanceKeySendVideoPostRequest*) instancesInstanceKeySendVideoPostRequest
+    sendVideoRequest: (OAISendVideoRequest*) sendVideoRequest
     caption: (NSString*) caption
         completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
@@ -928,22 +863,22 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 
 NSString* instanceKey = @"instanceKey_example"; // Instance key
 NSString* to = @"to_example"; // The recipient's number
-OAIInstancesInstanceKeySendVideoPostRequest* instancesInstanceKeySendVideoPostRequest = [[OAIInstancesInstanceKeySendVideoPostRequest alloc] init]; // 
+OAISendVideoRequest* sendVideoRequest = [[OAISendVideoRequest alloc] init]; // 
 NSString* caption = @"caption_example"; // Attached caption (optional)
 
 OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
 
 // Send raw video.
-[apiInstance instancesInstanceKeySendVideoPostWithInstanceKey:instanceKey
+[apiInstance sendVideoWithInstanceKey:instanceKey
               to:to
-              instancesInstanceKeySendVideoPostRequest:instancesInstanceKeySendVideoPostRequest
+              sendVideoRequest:sendVideoRequest
               caption:caption
           completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling OAIMessageSendingApi->instancesInstanceKeySendVideoPost: %@", error);
+                            NSLog(@"Error calling OAIMessageSendingApi->sendVideo: %@", error);
                         }
                     }];
 ```
@@ -954,8 +889,73 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **NSString***| Instance key | 
  **to** | **NSString***| The recipient&#39;s number | 
- **instancesInstanceKeySendVideoPostRequest** | [**OAIInstancesInstanceKeySendVideoPostRequest***](OAIInstancesInstanceKeySendVideoPostRequest.md)|  | 
+ **sendVideoRequest** | [**OAISendVideoRequest***](OAISendVideoRequest.md)|  | 
  **caption** | **NSString***| Attached caption | [optional] 
+
+### Return type
+
+[**OAIAPIResponse***](OAIAPIResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: */*
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **uploadMedia**
+```objc
+-(NSURLSessionTask*) uploadMediaWithInstanceKey: (NSString*) instanceKey
+    type: (NSString*) type
+    uploadMediaRequest: (OAIUploadMediaRequest*) uploadMediaRequest
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+```
+
+Upload media.
+
+Uploads media to WhatsApp servers and returns the media keys. Store the returned media keys, as you will need them to send media messages
+
+### Example
+```objc
+OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: ApiKeyAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSString* instanceKey = @"instanceKey_example"; // Instance key
+NSString* type = @"type_example"; // Media type
+OAIUploadMediaRequest* uploadMediaRequest = [[OAIUploadMediaRequest alloc] init]; // 
+
+OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
+
+// Upload media.
+[apiInstance uploadMediaWithInstanceKey:instanceKey
+              type:type
+              uploadMediaRequest:uploadMediaRequest
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling OAIMessageSendingApi->uploadMedia: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instanceKey** | **NSString***| Instance key | 
+ **type** | **NSString***| Media type | 
+ **uploadMediaRequest** | [**OAIUploadMediaRequest***](OAIUploadMediaRequest.md)|  | 
 
 ### Return type
 

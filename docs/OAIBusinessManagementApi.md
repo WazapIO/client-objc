@@ -4,12 +4,12 @@ All URIs are relative to */api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**instancesInstanceKeyBusinessCatalogGet**](OAIBusinessManagementApi.md#instancesinstancekeybusinesscatalogget) | **GET** /instances/{instance_key}/business/catalog | Fetches the catlog.
+[**fetchCatlog**](OAIBusinessManagementApi.md#fetchcatlog) | **GET** /instances/{instance_key}/business/catalog | Fetches the catlog.
 
 
-# **instancesInstanceKeyBusinessCatalogGet**
+# **fetchCatlog**
 ```objc
--(NSURLSessionTask*) instancesInstanceKeyBusinessCatalogGetWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) fetchCatlogWithInstanceKey: (NSString*) instanceKey
         completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
@@ -32,13 +32,13 @@ NSString* instanceKey = @"instanceKey_example"; // Instance key
 OAIBusinessManagementApi*apiInstance = [[OAIBusinessManagementApi alloc] init];
 
 // Fetches the catlog.
-[apiInstance instancesInstanceKeyBusinessCatalogGetWithInstanceKey:instanceKey
+[apiInstance fetchCatlogWithInstanceKey:instanceKey
           completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling OAIBusinessManagementApi->instancesInstanceKeyBusinessCatalogGet: %@", error);
+                            NSLog(@"Error calling OAIBusinessManagementApi->fetchCatlog: %@", error);
                         }
                     }];
 ```

@@ -4,13 +4,13 @@ All URIs are relative to */api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**instancesInstanceKeyMiscProfilePicGet**](OAIMiscellaneousApi.md#instancesinstancekeymiscprofilepicget) | **GET** /instances/{instance_key}/misc/profile-pic | Get profile pic.
-[**instancesInstanceKeyMiscUserInfoPost**](OAIMiscellaneousApi.md#instancesinstancekeymiscuserinfopost) | **POST** /instances/{instance_key}/misc/user-info | Fetches the users info.
+[**getProfilePic**](OAIMiscellaneousApi.md#getprofilepic) | **GET** /instances/{instance_key}/misc/profile-pic | Get profile pic.
+[**getUsersInfo**](OAIMiscellaneousApi.md#getusersinfo) | **POST** /instances/{instance_key}/misc/user-info | Fetches the users info.
 
 
-# **instancesInstanceKeyMiscProfilePicGet**
+# **getProfilePic**
 ```objc
--(NSURLSessionTask*) instancesInstanceKeyMiscProfilePicGetWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) getProfilePicWithInstanceKey: (NSString*) instanceKey
     jid: (NSString*) jid
         completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
@@ -35,14 +35,14 @@ NSString* jid = @"jid_example"; // JID
 OAIMiscellaneousApi*apiInstance = [[OAIMiscellaneousApi alloc] init];
 
 // Get profile pic.
-[apiInstance instancesInstanceKeyMiscProfilePicGetWithInstanceKey:instanceKey
+[apiInstance getProfilePicWithInstanceKey:instanceKey
               jid:jid
           completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling OAIMiscellaneousApi->instancesInstanceKeyMiscProfilePicGet: %@", error);
+                            NSLog(@"Error calling OAIMiscellaneousApi->getProfilePic: %@", error);
                         }
                     }];
 ```
@@ -69,9 +69,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **instancesInstanceKeyMiscUserInfoPost**
+# **getUsersInfo**
 ```objc
--(NSURLSessionTask*) instancesInstanceKeyMiscUserInfoPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) getUsersInfoWithInstanceKey: (NSString*) instanceKey
     data: (OAIUserInfoPayload*) data
         completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
@@ -96,14 +96,14 @@ OAIUserInfoPayload* data = [[OAIUserInfoPayload alloc] init]; // Data
 OAIMiscellaneousApi*apiInstance = [[OAIMiscellaneousApi alloc] init];
 
 // Fetches the users info.
-[apiInstance instancesInstanceKeyMiscUserInfoPostWithInstanceKey:instanceKey
+[apiInstance getUsersInfoWithInstanceKey:instanceKey
               data:data
           completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
                         }
                         if (error) {
-                            NSLog(@"Error calling OAIMiscellaneousApi->instancesInstanceKeyMiscUserInfoPost: %@", error);
+                            NSLog(@"Error calling OAIMiscellaneousApi->getUsersInfo: %@", error);
                         }
                     }];
 ```

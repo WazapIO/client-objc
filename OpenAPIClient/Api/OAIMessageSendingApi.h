@@ -3,18 +3,18 @@
 #import "OAIButtonMessagePayload.h"
 #import "OAIButtonMessageWithMediaPayload.h"
 #import "OAIContactMessagePayload.h"
-#import "OAIInstancesInstanceKeySendAudioPostRequest.h"
-#import "OAIInstancesInstanceKeySendDocumentPostRequest.h"
-#import "OAIInstancesInstanceKeySendImagePostRequest.h"
-#import "OAIInstancesInstanceKeySendUploadPostRequest.h"
-#import "OAIInstancesInstanceKeySendVideoPostRequest.h"
 #import "OAIListMessagePayload.h"
 #import "OAILocationMessagePayload.h"
 #import "OAIPollMessagePayload.h"
+#import "OAISendAudioRequest.h"
+#import "OAISendDocumentRequest.h"
+#import "OAISendImageRequest.h"
 #import "OAISendMediaPayload.h"
+#import "OAISendVideoRequest.h"
 #import "OAITemplateButtonPayload.h"
 #import "OAITemplateButtonWithMediaPayload.h"
 #import "OAITextMessage.h"
+#import "OAIUploadMediaRequest.h"
 #import "OAIApi.h"
 
 /**
@@ -43,7 +43,7 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///
 /// @param instanceKey Instance key
 /// @param to The recipient&#39;s number
-/// @param instancesInstanceKeySendAudioPostRequest 
+/// @param sendAudioRequest 
 /// @param caption Attached caption (optional)
 /// 
 ///  code:200 message:"Success",
@@ -53,28 +53,10 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeySendAudioPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendAudioWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
-    instancesInstanceKeySendAudioPostRequest: (OAIInstancesInstanceKeySendAudioPostRequest*) instancesInstanceKeySendAudioPostRequest
+    sendAudioRequest: (OAISendAudioRequest*) sendAudioRequest
     caption: (NSString*) caption
-    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
-
-
-/// Send a button message with a media header.
-/// Sends an interactive button message to the given user. This message also has media header with it. Make sure that all the button ids are unique
-///
-/// @param instanceKey Instance key
-/// @param data Message data
-/// 
-///  code:200 message:"Success",
-///  code:400 message:"Bad Request",
-///  code:401 message:"Unauthorized",
-///  code:404 message:"Instance not found",
-///  code:500 message:"Internal Server Error"
-///
-/// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeySendButtonMediaPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAIButtonMessageWithMediaPayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
@@ -91,8 +73,26 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeySendButtonsPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendButtonMessageWithInstanceKey: (NSString*) instanceKey
     data: (OAIButtonMessagePayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+
+
+/// Send a button message with a media header.
+/// Sends an interactive button message to the given user. This message also has media header with it. Make sure that all the button ids are unique
+///
+/// @param instanceKey Instance key
+/// @param data Message data
+/// 
+///  code:200 message:"Success",
+///  code:400 message:"Bad Request",
+///  code:401 message:"Unauthorized",
+///  code:404 message:"Instance not found",
+///  code:500 message:"Internal Server Error"
+///
+/// @return OAIAPIResponse*
+-(NSURLSessionTask*) sendButtonWithMediaWithInstanceKey: (NSString*) instanceKey
+    data: (OAIButtonMessageWithMediaPayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
@@ -109,7 +109,7 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeySendContactPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendContactWithInstanceKey: (NSString*) instanceKey
     data: (OAIContactMessagePayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
@@ -119,7 +119,7 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///
 /// @param instanceKey Instance key
 /// @param to The recipient&#39;s number
-/// @param instancesInstanceKeySendDocumentPostRequest 
+/// @param sendDocumentRequest 
 /// @param caption Attached caption (optional)
 /// 
 ///  code:200 message:"Success",
@@ -129,9 +129,9 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeySendDocumentPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendDocumentWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
-    instancesInstanceKeySendDocumentPostRequest: (OAIInstancesInstanceKeySendDocumentPostRequest*) instancesInstanceKeySendDocumentPostRequest
+    sendDocumentRequest: (OAISendDocumentRequest*) sendDocumentRequest
     caption: (NSString*) caption
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
@@ -141,7 +141,7 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///
 /// @param instanceKey Instance key
 /// @param to The recipient&#39;s number
-/// @param instancesInstanceKeySendImagePostRequest 
+/// @param sendImageRequest 
 /// @param caption Attached caption (optional)
 /// 
 ///  code:200 message:"Success",
@@ -151,9 +151,9 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeySendImagePostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendImageWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
-    instancesInstanceKeySendImagePostRequest: (OAIInstancesInstanceKeySendImagePostRequest*) instancesInstanceKeySendImagePostRequest
+    sendImageRequest: (OAISendImageRequest*) sendImageRequest
     caption: (NSString*) caption
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
@@ -171,7 +171,7 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeySendListPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendListMessageWithInstanceKey: (NSString*) instanceKey
     data: (OAIListMessagePayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
@@ -189,7 +189,7 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeySendLocationPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendLocationWithInstanceKey: (NSString*) instanceKey
     data: (OAILocationMessagePayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
@@ -207,7 +207,7 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeySendMediaPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendMediaMessageWithInstanceKey: (NSString*) instanceKey
     data: (OAISendMediaPayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
@@ -225,26 +225,8 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeySendPollPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendPollMessageWithInstanceKey: (NSString*) instanceKey
     data: (OAIPollMessagePayload*) data
-    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
-
-
-/// Send a template message with media.
-/// Sends an interactive template message with a media header to the given user. Note: The valid button types are \"replyButton\", \"urlButton\", \"callButton\"
-///
-/// @param instanceKey Instance key
-/// @param data Message data
-/// 
-///  code:200 message:"Success",
-///  code:400 message:"Bad Request",
-///  code:401 message:"Unauthorized",
-///  code:404 message:"Instance not found",
-///  code:500 message:"Internal Server Error"
-///
-/// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeySendTemplateMediaPostWithInstanceKey: (NSString*) instanceKey
-    data: (OAITemplateButtonWithMediaPayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
@@ -261,8 +243,26 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeySendTemplatePostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendTemplateWithInstanceKey: (NSString*) instanceKey
     data: (OAITemplateButtonPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+
+
+/// Send a template message with media.
+/// Sends an interactive template message with a media header to the given user. Note: The valid button types are \"replyButton\", \"urlButton\", \"callButton\"
+///
+/// @param instanceKey Instance key
+/// @param data Message data
+/// 
+///  code:200 message:"Success",
+///  code:400 message:"Bad Request",
+///  code:401 message:"Unauthorized",
+///  code:404 message:"Instance not found",
+///  code:500 message:"Internal Server Error"
+///
+/// @return OAIAPIResponse*
+-(NSURLSessionTask*) sendTemplateWithMediaWithInstanceKey: (NSString*) instanceKey
+    data: (OAITemplateButtonWithMediaPayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
@@ -279,28 +279,8 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeySendTextPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendTextMessageWithInstanceKey: (NSString*) instanceKey
     data: (OAITextMessage*) data
-    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
-
-
-/// Upload media.
-/// Uploads media to WhatsApp servers and returns the media keys. Store the returned media keys, as you will need them to send media messages
-///
-/// @param instanceKey Instance key
-/// @param type Media type
-/// @param instancesInstanceKeySendUploadPostRequest 
-/// 
-///  code:200 message:"Success",
-///  code:400 message:"Bad Request",
-///  code:401 message:"Unauthorized",
-///  code:404 message:"Instance not found",
-///  code:500 message:"Internal Server Error"
-///
-/// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeySendUploadPostWithInstanceKey: (NSString*) instanceKey
-    type: (NSString*) type
-    instancesInstanceKeySendUploadPostRequest: (OAIInstancesInstanceKeySendUploadPostRequest*) instancesInstanceKeySendUploadPostRequest
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
@@ -309,7 +289,7 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///
 /// @param instanceKey Instance key
 /// @param to The recipient&#39;s number
-/// @param instancesInstanceKeySendVideoPostRequest 
+/// @param sendVideoRequest 
 /// @param caption Attached caption (optional)
 /// 
 ///  code:200 message:"Success",
@@ -319,10 +299,30 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeySendVideoPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) sendVideoWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
-    instancesInstanceKeySendVideoPostRequest: (OAIInstancesInstanceKeySendVideoPostRequest*) instancesInstanceKeySendVideoPostRequest
+    sendVideoRequest: (OAISendVideoRequest*) sendVideoRequest
     caption: (NSString*) caption
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+
+
+/// Upload media.
+/// Uploads media to WhatsApp servers and returns the media keys. Store the returned media keys, as you will need them to send media messages
+///
+/// @param instanceKey Instance key
+/// @param type Media type
+/// @param uploadMediaRequest 
+/// 
+///  code:200 message:"Success",
+///  code:400 message:"Bad Request",
+///  code:401 message:"Unauthorized",
+///  code:404 message:"Instance not found",
+///  code:500 message:"Internal Server Error"
+///
+/// @return OAIAPIResponse*
+-(NSURLSessionTask*) uploadMediaWithInstanceKey: (NSString*) instanceKey
+    type: (NSString*) type
+    uploadMediaRequest: (OAIUploadMediaRequest*) uploadMediaRequest
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 

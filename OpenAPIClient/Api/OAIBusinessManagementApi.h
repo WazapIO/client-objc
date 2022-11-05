@@ -35,7 +35,7 @@ extern NSInteger kOAIBusinessManagementApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) instancesInstanceKeyBusinessCatalogGetWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) fetchCatlogWithInstanceKey: (NSString*) instanceKey
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 

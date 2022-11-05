@@ -59,7 +59,7 @@ NSInteger kOAIMiscellaneousApiMissingParamErrorCode = 234513;
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeyMiscProfilePicGetWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) getProfilePicWithInstanceKey: (NSString*) instanceKey
     jid: (NSString*) jid
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
@@ -144,7 +144,7 @@ NSInteger kOAIMiscellaneousApiMissingParamErrorCode = 234513;
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) instancesInstanceKeyMiscUserInfoPostWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) getUsersInfoWithInstanceKey: (NSString*) instanceKey
     data: (OAIUserInfoPayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set

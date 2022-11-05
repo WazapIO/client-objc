@@ -51,12 +51,6 @@ Import the following:
 #import <OpenAPIClient/OAIGroupUpdateDescriptionPayload.h>
 #import <OpenAPIClient/OAIGroupUpdateNamePayload.h>
 #import <OpenAPIClient/OAIGroupUpdateParticipantsPayload.h>
-#import <OpenAPIClient/OAIInstancesInstanceKeyGroupsGroupIdProfilePicPutRequest.h>
-#import <OpenAPIClient/OAIInstancesInstanceKeySendAudioPostRequest.h>
-#import <OpenAPIClient/OAIInstancesInstanceKeySendDocumentPostRequest.h>
-#import <OpenAPIClient/OAIInstancesInstanceKeySendImagePostRequest.h>
-#import <OpenAPIClient/OAIInstancesInstanceKeySendUploadPostRequest.h>
-#import <OpenAPIClient/OAIInstancesInstanceKeySendVideoPostRequest.h>
 #import <OpenAPIClient/OAIListItem.h>
 #import <OpenAPIClient/OAIListMessagePayload.h>
 #import <OpenAPIClient/OAIListSection.h>
@@ -64,11 +58,17 @@ Import the following:
 #import <OpenAPIClient/OAILocationMessagePayloadLocation.h>
 #import <OpenAPIClient/OAIPollMessagePayload.h>
 #import <OpenAPIClient/OAIReplyButton.h>
+#import <OpenAPIClient/OAISendAudioRequest.h>
+#import <OpenAPIClient/OAISendDocumentRequest.h>
+#import <OpenAPIClient/OAISendImageRequest.h>
 #import <OpenAPIClient/OAISendMediaPayload.h>
+#import <OpenAPIClient/OAISendVideoRequest.h>
+#import <OpenAPIClient/OAISetGroupPictureRequest.h>
 #import <OpenAPIClient/OAITemplateButton.h>
 #import <OpenAPIClient/OAITemplateButtonPayload.h>
 #import <OpenAPIClient/OAITemplateButtonWithMediaPayload.h>
 #import <OpenAPIClient/OAITextMessage.h>
+#import <OpenAPIClient/OAIUploadMediaRequest.h>
 #import <OpenAPIClient/OAIUserInfoPayload.h>
 #import <OpenAPIClient/OAIWebhookPayload.h>
 // load API classes for accessing endpoints
@@ -103,7 +103,7 @@ NSString* *instanceKey = @"instanceKey_example"; // Instance key
 OAIBusinessManagementApi *apiInstance = [[OAIBusinessManagementApi alloc] init];
 
 // Fetches the catlog.
-[apiInstance instancesInstanceKeyBusinessCatalogGetWithInstanceKey:instanceKey
+[apiInstance fetchCatlogWithInstanceKey:instanceKey
               completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
@@ -121,48 +121,48 @@ All URIs are relative to */api*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*OAIBusinessManagementApi* | [**instancesInstanceKeyBusinessCatalogGet**](docs/OAIBusinessManagementApi.md#instancesinstancekeybusinesscatalogget) | **GET** /instances/{instance_key}/business/catalog | Fetches the catlog.
-*OAIGroupManagementApi* | [**instancesInstanceKeyGroupsAdminGet**](docs/OAIGroupManagementApi.md#instancesinstancekeygroupsadminget) | **GET** /instances/{instance_key}/groups/admin | Get admin groupss.
-*OAIGroupManagementApi* | [**instancesInstanceKeyGroupsCreatePost**](docs/OAIGroupManagementApi.md#instancesinstancekeygroupscreatepost) | **POST** /instances/{instance_key}/groups/create | Create group.
-*OAIGroupManagementApi* | [**instancesInstanceKeyGroupsGet**](docs/OAIGroupManagementApi.md#instancesinstancekeygroupsget) | **GET** /instances/{instance_key}/groups/ | Get all groups.
-*OAIGroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdAnnouncePut**](docs/OAIGroupManagementApi.md#instancesinstancekeygroupsgroupidannounceput) | **PUT** /instances/{instance_key}/groups/{group_id}/announce | Set group announce.
-*OAIGroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdDelete**](docs/OAIGroupManagementApi.md#instancesinstancekeygroupsgroupiddelete) | **DELETE** /instances/{instance_key}/groups/{group_id}/ | Leaves the group.
-*OAIGroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdDescriptionPut**](docs/OAIGroupManagementApi.md#instancesinstancekeygroupsgroupiddescriptionput) | **PUT** /instances/{instance_key}/groups/{group_id}/description | Set group description.
-*OAIGroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdGet**](docs/OAIGroupManagementApi.md#instancesinstancekeygroupsgroupidget) | **GET** /instances/{instance_key}/groups/{group_id} | Get group.
-*OAIGroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdInviteCodeGet**](docs/OAIGroupManagementApi.md#instancesinstancekeygroupsgroupidinvitecodeget) | **GET** /instances/{instance_key}/groups/{group_id}/invite-code | Get group invite code.
-*OAIGroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdLockPut**](docs/OAIGroupManagementApi.md#instancesinstancekeygroupsgroupidlockput) | **PUT** /instances/{instance_key}/groups/{group_id}/lock | Set group locked.
-*OAIGroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdNamePut**](docs/OAIGroupManagementApi.md#instancesinstancekeygroupsgroupidnameput) | **PUT** /instances/{instance_key}/groups/{group_id}/name | Set group name.
-*OAIGroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdParticipantsAddPost**](docs/OAIGroupManagementApi.md#instancesinstancekeygroupsgroupidparticipantsaddpost) | **POST** /instances/{instance_key}/groups/{group_id}/participants/add | Add participant.
-*OAIGroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdParticipantsDemotePut**](docs/OAIGroupManagementApi.md#instancesinstancekeygroupsgroupidparticipantsdemoteput) | **PUT** /instances/{instance_key}/groups/{group_id}/participants/demote | Demote participant.
-*OAIGroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdParticipantsPromotePut**](docs/OAIGroupManagementApi.md#instancesinstancekeygroupsgroupidparticipantspromoteput) | **PUT** /instances/{instance_key}/groups/{group_id}/participants/promote | Promote participant.
-*OAIGroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdParticipantsRemoveDelete**](docs/OAIGroupManagementApi.md#instancesinstancekeygroupsgroupidparticipantsremovedelete) | **DELETE** /instances/{instance_key}/groups/{group_id}/participants/remove | Remove participant.
-*OAIGroupManagementApi* | [**instancesInstanceKeyGroupsGroupIdProfilePicPut**](docs/OAIGroupManagementApi.md#instancesinstancekeygroupsgroupidprofilepicput) | **PUT** /instances/{instance_key}/groups/{group_id}/profile-pic | Set group picture.
-*OAIGroupManagementApi* | [**instancesInstanceKeyGroupsInviteInfoGet**](docs/OAIGroupManagementApi.md#instancesinstancekeygroupsinviteinfoget) | **GET** /instances/{instance_key}/groups/invite-info | Get group from invite link.
-*OAIInstanceApi* | [**instancesCreateGet**](docs/OAIInstanceApi.md#instancescreateget) | **GET** /instances/create | Creates a new instance key.
-*OAIInstanceApi* | [**instancesInstanceKeyContactsGet**](docs/OAIInstanceApi.md#instancesinstancekeycontactsget) | **GET** /instances/{instance_key}/contacts | Get contacts.
-*OAIInstanceApi* | [**instancesInstanceKeyDeleteDelete**](docs/OAIInstanceApi.md#instancesinstancekeydeletedelete) | **DELETE** /instances/{instance_key}/delete | Delete Instance.
-*OAIInstanceApi* | [**instancesInstanceKeyGet**](docs/OAIInstanceApi.md#instancesinstancekeyget) | **GET** /instances/{instance_key}/ | Get Instance.
-*OAIInstanceApi* | [**instancesInstanceKeyLogoutDelete**](docs/OAIInstanceApi.md#instancesinstancekeylogoutdelete) | **DELETE** /instances/{instance_key}/logout | Logout Instance.
-*OAIInstanceApi* | [**instancesInstanceKeyQrcodeGet**](docs/OAIInstanceApi.md#instancesinstancekeyqrcodeget) | **GET** /instances/{instance_key}/qrcode | Get QrCode.
-*OAIInstanceApi* | [**instancesInstanceKeyWebhookPut**](docs/OAIInstanceApi.md#instancesinstancekeywebhookput) | **PUT** /instances/{instance_key}/webhook | Change Webhook url.
-*OAIInstanceApi* | [**instancesListGet**](docs/OAIInstanceApi.md#instanceslistget) | **GET** /instances/list | Get all instances.
-*OAIMessageSendingApi* | [**instancesInstanceKeySendAudioPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendaudiopost) | **POST** /instances/{instance_key}/send/audio | Send raw audio.
-*OAIMessageSendingApi* | [**instancesInstanceKeySendButtonMediaPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendbuttonmediapost) | **POST** /instances/{instance_key}/send/button-media | Send a button message with a media header.
-*OAIMessageSendingApi* | [**instancesInstanceKeySendButtonsPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendbuttonspost) | **POST** /instances/{instance_key}/send/buttons | Send a button message.
-*OAIMessageSendingApi* | [**instancesInstanceKeySendContactPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendcontactpost) | **POST** /instances/{instance_key}/send/contact | Send a contact message.
-*OAIMessageSendingApi* | [**instancesInstanceKeySendDocumentPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysenddocumentpost) | **POST** /instances/{instance_key}/send/document | Send raw document.
-*OAIMessageSendingApi* | [**instancesInstanceKeySendImagePost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendimagepost) | **POST** /instances/{instance_key}/send/image | Send raw image.
-*OAIMessageSendingApi* | [**instancesInstanceKeySendListPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendlistpost) | **POST** /instances/{instance_key}/send/list | Send a List message.
-*OAIMessageSendingApi* | [**instancesInstanceKeySendLocationPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendlocationpost) | **POST** /instances/{instance_key}/send/location | Send a location message.
-*OAIMessageSendingApi* | [**instancesInstanceKeySendMediaPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendmediapost) | **POST** /instances/{instance_key}/send/media | Send a media message.
-*OAIMessageSendingApi* | [**instancesInstanceKeySendPollPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendpollpost) | **POST** /instances/{instance_key}/send/poll | Send a Poll message.
-*OAIMessageSendingApi* | [**instancesInstanceKeySendTemplateMediaPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendtemplatemediapost) | **POST** /instances/{instance_key}/send/template-media | Send a template message with media.
-*OAIMessageSendingApi* | [**instancesInstanceKeySendTemplatePost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendtemplatepost) | **POST** /instances/{instance_key}/send/template | Send a template message.
-*OAIMessageSendingApi* | [**instancesInstanceKeySendTextPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendtextpost) | **POST** /instances/{instance_key}/send/text | Send a text message.
-*OAIMessageSendingApi* | [**instancesInstanceKeySendUploadPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysenduploadpost) | **POST** /instances/{instance_key}/send/upload | Upload media.
-*OAIMessageSendingApi* | [**instancesInstanceKeySendVideoPost**](docs/OAIMessageSendingApi.md#instancesinstancekeysendvideopost) | **POST** /instances/{instance_key}/send/video | Send raw video.
-*OAIMiscellaneousApi* | [**instancesInstanceKeyMiscProfilePicGet**](docs/OAIMiscellaneousApi.md#instancesinstancekeymiscprofilepicget) | **GET** /instances/{instance_key}/misc/profile-pic | Get profile pic.
-*OAIMiscellaneousApi* | [**instancesInstanceKeyMiscUserInfoPost**](docs/OAIMiscellaneousApi.md#instancesinstancekeymiscuserinfopost) | **POST** /instances/{instance_key}/misc/user-info | Fetches the users info.
+*OAIBusinessManagementApi* | [**fetchCatlog**](docs/OAIBusinessManagementApi.md#fetchcatlog) | **GET** /instances/{instance_key}/business/catalog | Fetches the catlog.
+*OAIGroupManagementApi* | [**addParticipant**](docs/OAIGroupManagementApi.md#addparticipant) | **POST** /instances/{instance_key}/groups/{group_id}/participants/add | Add participant.
+*OAIGroupManagementApi* | [**createGroup**](docs/OAIGroupManagementApi.md#creategroup) | **POST** /instances/{instance_key}/groups/create | Create group.
+*OAIGroupManagementApi* | [**demoteParticipant**](docs/OAIGroupManagementApi.md#demoteparticipant) | **PUT** /instances/{instance_key}/groups/{group_id}/participants/demote | Demote participant.
+*OAIGroupManagementApi* | [**getAdminGroups**](docs/OAIGroupManagementApi.md#getadmingroups) | **GET** /instances/{instance_key}/groups/admin | Get admin groups.
+*OAIGroupManagementApi* | [**getAllGroups**](docs/OAIGroupManagementApi.md#getallgroups) | **GET** /instances/{instance_key}/groups/ | Get all groups.
+*OAIGroupManagementApi* | [**getGroup**](docs/OAIGroupManagementApi.md#getgroup) | **GET** /instances/{instance_key}/groups/{group_id} | Get group.
+*OAIGroupManagementApi* | [**getGroupFromInviteLink**](docs/OAIGroupManagementApi.md#getgroupfrominvitelink) | **GET** /instances/{instance_key}/groups/invite-info | Get group from invite link.
+*OAIGroupManagementApi* | [**getGroupInviteCode**](docs/OAIGroupManagementApi.md#getgroupinvitecode) | **GET** /instances/{instance_key}/groups/{group_id}/invite-code | Get group invite code.
+*OAIGroupManagementApi* | [**leaveGroup**](docs/OAIGroupManagementApi.md#leavegroup) | **DELETE** /instances/{instance_key}/groups/{group_id}/ | Leaves the group.
+*OAIGroupManagementApi* | [**promoteParticipant**](docs/OAIGroupManagementApi.md#promoteparticipant) | **PUT** /instances/{instance_key}/groups/{group_id}/participants/promote | Promote participant.
+*OAIGroupManagementApi* | [**removeParticipant**](docs/OAIGroupManagementApi.md#removeparticipant) | **DELETE** /instances/{instance_key}/groups/{group_id}/participants/remove | Remove participant.
+*OAIGroupManagementApi* | [**setGroupAnnounce**](docs/OAIGroupManagementApi.md#setgroupannounce) | **PUT** /instances/{instance_key}/groups/{group_id}/announce | Set group announce.
+*OAIGroupManagementApi* | [**setGroupDescription**](docs/OAIGroupManagementApi.md#setgroupdescription) | **PUT** /instances/{instance_key}/groups/{group_id}/description | Set group description.
+*OAIGroupManagementApi* | [**setGroupLocked**](docs/OAIGroupManagementApi.md#setgrouplocked) | **PUT** /instances/{instance_key}/groups/{group_id}/lock | Set group locked.
+*OAIGroupManagementApi* | [**setGroupName**](docs/OAIGroupManagementApi.md#setgroupname) | **PUT** /instances/{instance_key}/groups/{group_id}/name | Set group name.
+*OAIGroupManagementApi* | [**setGroupPicture**](docs/OAIGroupManagementApi.md#setgrouppicture) | **PUT** /instances/{instance_key}/groups/{group_id}/profile-pic | Set group picture.
+*OAIInstanceApi* | [**changeWebhookUrl**](docs/OAIInstanceApi.md#changewebhookurl) | **PUT** /instances/{instance_key}/webhook | Change Webhook url.
+*OAIInstanceApi* | [**createInstance**](docs/OAIInstanceApi.md#createinstance) | **GET** /instances/create | Creates a new instance key.
+*OAIInstanceApi* | [**deleteInstance**](docs/OAIInstanceApi.md#deleteinstance) | **DELETE** /instances/{instance_key}/delete | Delete Instance.
+*OAIInstanceApi* | [**getContacts**](docs/OAIInstanceApi.md#getcontacts) | **GET** /instances/{instance_key}/contacts | Get contacts.
+*OAIInstanceApi* | [**getInstance**](docs/OAIInstanceApi.md#getinstance) | **GET** /instances/{instance_key}/ | Get Instance.
+*OAIInstanceApi* | [**getQrCode**](docs/OAIInstanceApi.md#getqrcode) | **GET** /instances/{instance_key}/qrcode | Get QrCode.
+*OAIInstanceApi* | [**listInstances**](docs/OAIInstanceApi.md#listinstances) | **GET** /instances/list | Get all instances.
+*OAIInstanceApi* | [**logoutInstance**](docs/OAIInstanceApi.md#logoutinstance) | **DELETE** /instances/{instance_key}/logout | Logout Instance.
+*OAIMessageSendingApi* | [**sendAudio**](docs/OAIMessageSendingApi.md#sendaudio) | **POST** /instances/{instance_key}/send/audio | Send raw audio.
+*OAIMessageSendingApi* | [**sendButtonMessage**](docs/OAIMessageSendingApi.md#sendbuttonmessage) | **POST** /instances/{instance_key}/send/buttons | Send a button message.
+*OAIMessageSendingApi* | [**sendButtonWithMedia**](docs/OAIMessageSendingApi.md#sendbuttonwithmedia) | **POST** /instances/{instance_key}/send/button-media | Send a button message with a media header.
+*OAIMessageSendingApi* | [**sendContact**](docs/OAIMessageSendingApi.md#sendcontact) | **POST** /instances/{instance_key}/send/contact | Send a contact message.
+*OAIMessageSendingApi* | [**sendDocument**](docs/OAIMessageSendingApi.md#senddocument) | **POST** /instances/{instance_key}/send/document | Send raw document.
+*OAIMessageSendingApi* | [**sendImage**](docs/OAIMessageSendingApi.md#sendimage) | **POST** /instances/{instance_key}/send/image | Send raw image.
+*OAIMessageSendingApi* | [**sendListMessage**](docs/OAIMessageSendingApi.md#sendlistmessage) | **POST** /instances/{instance_key}/send/list | Send a List message.
+*OAIMessageSendingApi* | [**sendLocation**](docs/OAIMessageSendingApi.md#sendlocation) | **POST** /instances/{instance_key}/send/location | Send a location message.
+*OAIMessageSendingApi* | [**sendMediaMessage**](docs/OAIMessageSendingApi.md#sendmediamessage) | **POST** /instances/{instance_key}/send/media | Send a media message.
+*OAIMessageSendingApi* | [**sendPollMessage**](docs/OAIMessageSendingApi.md#sendpollmessage) | **POST** /instances/{instance_key}/send/poll | Send a Poll message.
+*OAIMessageSendingApi* | [**sendTemplate**](docs/OAIMessageSendingApi.md#sendtemplate) | **POST** /instances/{instance_key}/send/template | Send a template message.
+*OAIMessageSendingApi* | [**sendTemplateWithMedia**](docs/OAIMessageSendingApi.md#sendtemplatewithmedia) | **POST** /instances/{instance_key}/send/template-media | Send a template message with media.
+*OAIMessageSendingApi* | [**sendTextMessage**](docs/OAIMessageSendingApi.md#sendtextmessage) | **POST** /instances/{instance_key}/send/text | Send a text message.
+*OAIMessageSendingApi* | [**sendVideo**](docs/OAIMessageSendingApi.md#sendvideo) | **POST** /instances/{instance_key}/send/video | Send raw video.
+*OAIMessageSendingApi* | [**uploadMedia**](docs/OAIMessageSendingApi.md#uploadmedia) | **POST** /instances/{instance_key}/send/upload | Upload media.
+*OAIMiscellaneousApi* | [**getProfilePic**](docs/OAIMiscellaneousApi.md#getprofilepic) | **GET** /instances/{instance_key}/misc/profile-pic | Get profile pic.
+*OAIMiscellaneousApi* | [**getUsersInfo**](docs/OAIMiscellaneousApi.md#getusersinfo) | **POST** /instances/{instance_key}/misc/user-info | Fetches the users info.
 
 
 ## Documentation For Models
@@ -177,12 +177,6 @@ Class | Method | HTTP request | Description
  - [OAIGroupUpdateDescriptionPayload](docs/OAIGroupUpdateDescriptionPayload.md)
  - [OAIGroupUpdateNamePayload](docs/OAIGroupUpdateNamePayload.md)
  - [OAIGroupUpdateParticipantsPayload](docs/OAIGroupUpdateParticipantsPayload.md)
- - [OAIInstancesInstanceKeyGroupsGroupIdProfilePicPutRequest](docs/OAIInstancesInstanceKeyGroupsGroupIdProfilePicPutRequest.md)
- - [OAIInstancesInstanceKeySendAudioPostRequest](docs/OAIInstancesInstanceKeySendAudioPostRequest.md)
- - [OAIInstancesInstanceKeySendDocumentPostRequest](docs/OAIInstancesInstanceKeySendDocumentPostRequest.md)
- - [OAIInstancesInstanceKeySendImagePostRequest](docs/OAIInstancesInstanceKeySendImagePostRequest.md)
- - [OAIInstancesInstanceKeySendUploadPostRequest](docs/OAIInstancesInstanceKeySendUploadPostRequest.md)
- - [OAIInstancesInstanceKeySendVideoPostRequest](docs/OAIInstancesInstanceKeySendVideoPostRequest.md)
  - [OAIListItem](docs/OAIListItem.md)
  - [OAIListMessagePayload](docs/OAIListMessagePayload.md)
  - [OAIListSection](docs/OAIListSection.md)
@@ -190,11 +184,17 @@ Class | Method | HTTP request | Description
  - [OAILocationMessagePayloadLocation](docs/OAILocationMessagePayloadLocation.md)
  - [OAIPollMessagePayload](docs/OAIPollMessagePayload.md)
  - [OAIReplyButton](docs/OAIReplyButton.md)
+ - [OAISendAudioRequest](docs/OAISendAudioRequest.md)
+ - [OAISendDocumentRequest](docs/OAISendDocumentRequest.md)
+ - [OAISendImageRequest](docs/OAISendImageRequest.md)
  - [OAISendMediaPayload](docs/OAISendMediaPayload.md)
+ - [OAISendVideoRequest](docs/OAISendVideoRequest.md)
+ - [OAISetGroupPictureRequest](docs/OAISetGroupPictureRequest.md)
  - [OAITemplateButton](docs/OAITemplateButton.md)
  - [OAITemplateButtonPayload](docs/OAITemplateButtonPayload.md)
  - [OAITemplateButtonWithMediaPayload](docs/OAITemplateButtonWithMediaPayload.md)
  - [OAITextMessage](docs/OAITextMessage.md)
+ - [OAIUploadMediaRequest](docs/OAIUploadMediaRequest.md)
  - [OAIUserInfoPayload](docs/OAIUserInfoPayload.md)
  - [OAIWebhookPayload](docs/OAIWebhookPayload.md)
 
