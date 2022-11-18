@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**sendButtonWithMedia**](OAIMessageSendingApi.md#sendbuttonwithmedia) | **POST** /instances/{instance_key}/send/button-media | Send a button message with a media header.
 [**sendContact**](OAIMessageSendingApi.md#sendcontact) | **POST** /instances/{instance_key}/send/contact | Send a contact message.
 [**sendDocument**](OAIMessageSendingApi.md#senddocument) | **POST** /instances/{instance_key}/send/document | Send raw document.
+[**sendGroupInvite**](OAIMessageSendingApi.md#sendgroupinvite) | **POST** /instances/{instance_key}/send/group-invite | Send a group invite message
 [**sendImage**](OAIMessageSendingApi.md#sendimage) | **POST** /instances/{instance_key}/send/image | Send raw image.
 [**sendListMessage**](OAIMessageSendingApi.md#sendlistmessage) | **POST** /instances/{instance_key}/send/list | Send a List message.
 [**sendLocation**](OAIMessageSendingApi.md#sendlocation) | **POST** /instances/{instance_key}/send/location | Send a location message.
@@ -342,11 +343,72 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **sendGroupInvite**
+```objc
+-(NSURLSessionTask*) sendGroupInviteWithInstanceKey: (NSString*) instanceKey
+    data: (OAIGroupInviteMessagePayload*) data
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+```
+
+Send a group invite message
+
+Sends a group invite message to the specified number. Don't include \"https://chat.whatsapp.com/\" in the invite code.
+
+### Example
+```objc
+OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: ApiKeyAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSString* instanceKey = @"instanceKey_example"; // Instance key
+OAIGroupInviteMessagePayload* data = [[OAIGroupInviteMessagePayload alloc] init]; // Message data
+
+OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
+
+// Send a group invite message
+[apiInstance sendGroupInviteWithInstanceKey:instanceKey
+              data:data
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling OAIMessageSendingApi->sendGroupInvite: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instanceKey** | **NSString***| Instance key | 
+ **data** | [**OAIGroupInviteMessagePayload***](OAIGroupInviteMessagePayload.md)| Message data | 
+
+### Return type
+
+[**OAIAPIResponse***](OAIAPIResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: */*
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **sendImage**
 ```objc
 -(NSURLSessionTask*) sendImageWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
-    sendImageRequest: (OAISendImageRequest*) sendImageRequest
+    updateProfilePicRequest: (OAIUpdateProfilePicRequest*) updateProfilePicRequest
     caption: (NSString*) caption
         completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
@@ -367,7 +429,7 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 
 NSString* instanceKey = @"instanceKey_example"; // Instance key
 NSString* to = @"to_example"; // The recipient's number
-OAISendImageRequest* sendImageRequest = [[OAISendImageRequest alloc] init]; // 
+OAIUpdateProfilePicRequest* updateProfilePicRequest = [[OAIUpdateProfilePicRequest alloc] init]; // 
 NSString* caption = @"caption_example"; // Attached caption (optional)
 
 OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
@@ -375,7 +437,7 @@ OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
 // Send raw image.
 [apiInstance sendImageWithInstanceKey:instanceKey
               to:to
-              sendImageRequest:sendImageRequest
+              updateProfilePicRequest:updateProfilePicRequest
               caption:caption
           completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
@@ -393,7 +455,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **NSString***| Instance key | 
  **to** | **NSString***| The recipient&#39;s number | 
- **sendImageRequest** | [**OAISendImageRequest***](OAISendImageRequest.md)|  | 
+ **updateProfilePicRequest** | [**OAIUpdateProfilePicRequest***](OAIUpdateProfilePicRequest.md)|  | 
  **caption** | **NSString***| Attached caption | [optional] 
 
 ### Return type

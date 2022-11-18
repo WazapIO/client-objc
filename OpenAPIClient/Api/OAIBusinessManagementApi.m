@@ -2,6 +2,7 @@
 #import "OAIQueryParamCollection.h"
 #import "OAIApiClient.h"
 #import "OAIAPIResponse.h"
+#import "OAIPaymentRequestPayload.h"
 
 
 @interface OAIBusinessManagementApi ()
@@ -100,6 +101,89 @@ NSInteger kOAIBusinessManagementApiMissingParamErrorCode = 234513;
 
     return [self.apiClient requestWithPath: resourcePath
                                     method: @"GET"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"OAIAPIResponse*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((OAIAPIResponse*)data, error);
+                                }
+                            }];
+}
+
+///
+/// Send a payment request.
+/// Sends an payment request to a user. Feature is still in beta.
+///  @param instanceKey Instance key 
+///
+///  @param data Data 
+///
+///  @returns OAIAPIResponse*
+///
+-(NSURLSessionTask*) sendPaymentRequestWithInstanceKey: (NSString*) instanceKey
+    data: (OAIPaymentRequestPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
+    // verify the required parameter 'instanceKey' is set
+    if (instanceKey == nil) {
+        NSParameterAssert(instanceKey);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
+            NSError* error = [NSError errorWithDomain:kOAIBusinessManagementApiErrorDomain code:kOAIBusinessManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'data' is set
+    if (data == nil) {
+        NSParameterAssert(data);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"data"] };
+            NSError* error = [NSError errorWithDomain:kOAIBusinessManagementApiErrorDomain code:kOAIBusinessManagementApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/business/payment-request"];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+    if (instanceKey != nil) {
+        pathParams[@"instance_key"] = instanceKey;
+    }
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json"]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"ApiKeyAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+    bodyParam = data;
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"POST"
                                 pathParams: pathParams
                                queryParams: queryParams
                                 formParams: formParams

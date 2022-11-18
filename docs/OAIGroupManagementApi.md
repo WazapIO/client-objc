@@ -9,9 +9,11 @@ Method | HTTP request | Description
 [**demoteParticipant**](OAIGroupManagementApi.md#demoteparticipant) | **PUT** /instances/{instance_key}/groups/{group_id}/participants/demote | Demote participant.
 [**getAdminGroups**](OAIGroupManagementApi.md#getadmingroups) | **GET** /instances/{instance_key}/groups/admin | Get admin groups.
 [**getAllGroups**](OAIGroupManagementApi.md#getallgroups) | **GET** /instances/{instance_key}/groups/ | Get all groups.
+[**getAllParticipants**](OAIGroupManagementApi.md#getallparticipants) | **GET** /instances/{instance_key}/groups/{group_id}/participants | Get all participants.
 [**getGroup**](OAIGroupManagementApi.md#getgroup) | **GET** /instances/{instance_key}/groups/{group_id} | Get group.
 [**getGroupFromInviteLink**](OAIGroupManagementApi.md#getgroupfrominvitelink) | **GET** /instances/{instance_key}/groups/invite-info | Get group from invite link.
 [**getGroupInviteCode**](OAIGroupManagementApi.md#getgroupinvitecode) | **GET** /instances/{instance_key}/groups/{group_id}/invite-code | Get group invite code.
+[**joinGroupWithLink**](OAIGroupManagementApi.md#joingroupwithlink) | **GET** /instances/{instance_key}/groups/join | Join group with invite code.
 [**leaveGroup**](OAIGroupManagementApi.md#leavegroup) | **DELETE** /instances/{instance_key}/groups/{group_id}/ | Leaves the group.
 [**promoteParticipant**](OAIGroupManagementApi.md#promoteparticipant) | **PUT** /instances/{instance_key}/groups/{group_id}/participants/promote | Promote participant.
 [**removeParticipant**](OAIGroupManagementApi.md#removeparticipant) | **DELETE** /instances/{instance_key}/groups/{group_id}/participants/remove | Remove participant.
@@ -331,6 +333,67 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getAllParticipants**
+```objc
+-(NSURLSessionTask*) getAllParticipantsWithInstanceKey: (NSString*) instanceKey
+    groupId: (NSString*) groupId
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+```
+
+Get all participants.
+
+Returns all participants of the group.
+
+### Example
+```objc
+OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: ApiKeyAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSString* instanceKey = @"instanceKey_example"; // Instance key
+NSString* groupId = @"groupId_example"; // Group id of the group
+
+OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
+
+// Get all participants.
+[apiInstance getAllParticipantsWithInstanceKey:instanceKey
+              groupId:groupId
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling OAIGroupManagementApi->getAllParticipants: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instanceKey** | **NSString***| Instance key | 
+ **groupId** | **NSString***| Group id of the group | 
+
+### Return type
+
+[**OAIAPIResponse***](OAIAPIResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **getGroup**
 ```objc
 -(NSURLSessionTask*) getGroupWithInstanceKey: (NSString*) instanceKey
@@ -498,6 +561,67 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instanceKey** | **NSString***| Instance key | 
  **groupId** | **NSString***| Group id of the group | 
+
+### Return type
+
+[**OAIAPIResponse***](OAIAPIResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **joinGroupWithLink**
+```objc
+-(NSURLSessionTask*) joinGroupWithLinkWithInstanceKey: (NSString*) instanceKey
+    inviteCode: (NSString*) inviteCode
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+```
+
+Join group with invite code.
+
+Joins a group with group invite link. An invite link is a link that can be used to join a group. It is usually in the format https://chat.whatsapp.com/{invitecode} You have to put invite_code in the url of the request. The invite code is the part after https://chat.whatsapp.com/ For example, if the invite link is https://chat.whatsapp.com/dsfsf34r3d3dsds, then the invite code is `dsfsf34r3d3dsds“
+
+### Example
+```objc
+OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: ApiKeyAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSString* instanceKey = @"instanceKey_example"; // Instance key
+NSString* inviteCode = @"inviteCode_example"; // The invite code of group you want to join
+
+OAIGroupManagementApi*apiInstance = [[OAIGroupManagementApi alloc] init];
+
+// Join group with invite code.
+[apiInstance joinGroupWithLinkWithInstanceKey:instanceKey
+              inviteCode:inviteCode
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling OAIGroupManagementApi->joinGroupWithLink: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instanceKey** | **NSString***| Instance key | 
+ **inviteCode** | **NSString***| The invite code of group you want to join | 
 
 ### Return type
 

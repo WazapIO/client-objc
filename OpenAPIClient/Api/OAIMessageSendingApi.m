@@ -5,17 +5,18 @@
 #import "OAIButtonMessagePayload.h"
 #import "OAIButtonMessageWithMediaPayload.h"
 #import "OAIContactMessagePayload.h"
+#import "OAIGroupInviteMessagePayload.h"
 #import "OAIListMessagePayload.h"
 #import "OAILocationMessagePayload.h"
 #import "OAIPollMessagePayload.h"
 #import "OAISendAudioRequest.h"
 #import "OAISendDocumentRequest.h"
-#import "OAISendImageRequest.h"
 #import "OAISendMediaPayload.h"
 #import "OAISendVideoRequest.h"
 #import "OAITemplateButtonPayload.h"
 #import "OAITemplateButtonWithMediaPayload.h"
 #import "OAITextMessage.h"
+#import "OAIUpdateProfilePicRequest.h"
 #import "OAIUploadMediaRequest.h"
 
 
@@ -526,13 +527,96 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 }
 
 ///
+/// Send a group invite message
+/// Sends a group invite message to the specified number. Don't include \"https://chat.whatsapp.com/\" in the invite code.
+///  @param instanceKey Instance key 
+///
+///  @param data Message data 
+///
+///  @returns OAIAPIResponse*
+///
+-(NSURLSessionTask*) sendGroupInviteWithInstanceKey: (NSString*) instanceKey
+    data: (OAIGroupInviteMessagePayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
+    // verify the required parameter 'instanceKey' is set
+    if (instanceKey == nil) {
+        NSParameterAssert(instanceKey);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"instanceKey"] };
+            NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    // verify the required parameter 'data' is set
+    if (data == nil) {
+        NSParameterAssert(data);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"data"] };
+            NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
+    NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/{instance_key}/send/group-invite"];
+
+    NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
+    if (instanceKey != nil) {
+        pathParams[@"instance_key"] = instanceKey;
+    }
+
+    NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
+    [headerParams addEntriesFromDictionary:self.defaultHeaders];
+    // HTTP header `Accept`
+    NSString *acceptHeader = [self.apiClient.sanitizer selectHeaderAccept:@[@"*/*"]];
+    if(acceptHeader.length > 0) {
+        headerParams[@"Accept"] = acceptHeader;
+    }
+
+    // response content type
+    NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
+
+    // request content type
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json"]];
+
+    // Authentication setting
+    NSArray *authSettings = @[@"ApiKeyAuth"];
+
+    id bodyParam = nil;
+    NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+    bodyParam = data;
+
+    return [self.apiClient requestWithPath: resourcePath
+                                    method: @"POST"
+                                pathParams: pathParams
+                               queryParams: queryParams
+                                formParams: formParams
+                                     files: localVarFiles
+                                      body: bodyParam
+                              headerParams: headerParams
+                              authSettings: authSettings
+                        requestContentType: requestContentType
+                       responseContentType: responseContentType
+                              responseType: @"OAIAPIResponse*"
+                           completionBlock: ^(id data, NSError *error) {
+                                if(handler) {
+                                    handler((OAIAPIResponse*)data, error);
+                                }
+                            }];
+}
+
+///
 /// Send raw image.
 /// Sends a image message by uploading to the WhatsApp servers every time. This is not recommended for bulk sending.
 ///  @param instanceKey Instance key 
 ///
 ///  @param to The recipient's number 
 ///
-///  @param sendImageRequest  
+///  @param updateProfilePicRequest  
 ///
 ///  @param caption Attached caption (optional)
 ///
@@ -540,7 +624,7 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
 ///
 -(NSURLSessionTask*) sendImageWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
-    sendImageRequest: (OAISendImageRequest*) sendImageRequest
+    updateProfilePicRequest: (OAIUpdateProfilePicRequest*) updateProfilePicRequest
     caption: (NSString*) caption
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
     // verify the required parameter 'instanceKey' is set
@@ -565,11 +649,11 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
         return nil;
     }
 
-    // verify the required parameter 'sendImageRequest' is set
-    if (sendImageRequest == nil) {
-        NSParameterAssert(sendImageRequest);
+    // verify the required parameter 'updateProfilePicRequest' is set
+    if (updateProfilePicRequest == nil) {
+        NSParameterAssert(updateProfilePicRequest);
         if(handler) {
-            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"sendImageRequest"] };
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"updateProfilePicRequest"] };
             NSError* error = [NSError errorWithDomain:kOAIMessageSendingApiErrorDomain code:kOAIMessageSendingApiMissingParamErrorCode userInfo:userInfo];
             handler(nil, error);
         }
@@ -610,7 +694,7 @@ NSInteger kOAIMessageSendingApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
-    bodyParam = sendImageRequest;
+    bodyParam = updateProfilePicRequest;
 
     return [self.apiClient requestWithPath: resourcePath
                                     method: @"POST"

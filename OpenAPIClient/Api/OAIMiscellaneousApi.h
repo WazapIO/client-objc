@@ -1,5 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "OAIAPIResponse.h"
+#import "OAIFileUpload.h"
+#import "OAIUpdateProfilePicRequest.h"
 #import "OAIUserInfoPayload.h"
 #import "OAIApi.h"
 
@@ -23,6 +25,28 @@ extern NSString* kOAIMiscellaneousApiErrorDomain;
 extern NSInteger kOAIMiscellaneousApiMissingParamErrorCode;
 
 -(instancetype) initWithApiClient:(OAIApiClient *)apiClient NS_DESIGNATED_INITIALIZER;
+
+/// Download media
+/// Downloads the media from the given media keys.
+///
+/// @param instanceKey Instance key
+/// @param fileType File type
+/// @param data Media data
+/// @param responseType Response type (file, base64) (optional)
+/// 
+///  code:200 message:"Success",
+///  code:400 message:"Bad Request",
+///  code:401 message:"Unauthorized",
+///  code:404 message:"Instance not found",
+///  code:500 message:"Internal Server Error"
+///
+/// @return OAIAPIResponse*
+-(NSURLSessionTask*) downloadMediaWithInstanceKey: (NSString*) instanceKey
+    fileType: (NSString*) fileType
+    data: (OAIFileUpload*) data
+    responseType: (NSString*) responseType
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+
 
 /// Get profile pic.
 /// Returns the profile pic of the given user.
@@ -57,6 +81,44 @@ extern NSInteger kOAIMiscellaneousApiMissingParamErrorCode;
 /// @return OAIAPIResponse*
 -(NSURLSessionTask*) getUsersInfoWithInstanceKey: (NSString*) instanceKey
     data: (OAIUserInfoPayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+
+
+/// Set chat presence
+/// Sets the presence of the given chat. (Typing, Recording, Paused) Options: typing, recording, paused
+///
+/// @param instanceKey Instance key
+/// @param jid JID
+/// @param presence Presence
+/// 
+///  code:200 message:"Success",
+///  code:400 message:"Bad Request",
+///  code:401 message:"Unauthorized",
+///  code:404 message:"Instance not found",
+///  code:500 message:"Internal Server Error"
+///
+/// @return OAIAPIResponse*
+-(NSURLSessionTask*) setChatPresenceWithInstanceKey: (NSString*) instanceKey
+    jid: (NSString*) jid
+    presence: (NSString*) presence
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+
+
+/// Update profile picture
+/// Changes the profile pic of the current logged in user.
+///
+/// @param instanceKey Instance key
+/// @param updateProfilePicRequest 
+/// 
+///  code:200 message:"Success",
+///  code:400 message:"Bad Request",
+///  code:401 message:"Unauthorized",
+///  code:404 message:"Instance not found",
+///  code:500 message:"Internal Server Error"
+///
+/// @return OAIAPIResponse*
+-(NSURLSessionTask*) updateProfilePicWithInstanceKey: (NSString*) instanceKey
+    updateProfilePicRequest: (OAIUpdateProfilePicRequest*) updateProfilePicRequest
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 

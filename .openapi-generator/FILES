@@ -46,6 +46,8 @@ OpenAPIClient/Model/OAIFileUpload.h
 OpenAPIClient/Model/OAIFileUpload.m
 OpenAPIClient/Model/OAIGroupCreatePayload.h
 OpenAPIClient/Model/OAIGroupCreatePayload.m
+OpenAPIClient/Model/OAIGroupInviteMessagePayload.h
+OpenAPIClient/Model/OAIGroupInviteMessagePayload.m
 OpenAPIClient/Model/OAIGroupUpdateDescriptionPayload.h
 OpenAPIClient/Model/OAIGroupUpdateDescriptionPayload.m
 OpenAPIClient/Model/OAIGroupUpdateNamePayload.h
@@ -62,6 +64,8 @@ OpenAPIClient/Model/OAILocationMessagePayload.h
 OpenAPIClient/Model/OAILocationMessagePayload.m
 OpenAPIClient/Model/OAILocationMessagePayloadLocation.h
 OpenAPIClient/Model/OAILocationMessagePayloadLocation.m
+OpenAPIClient/Model/OAIPaymentRequestPayload.h
+OpenAPIClient/Model/OAIPaymentRequestPayload.m
 OpenAPIClient/Model/OAIPollMessagePayload.h
 OpenAPIClient/Model/OAIPollMessagePayload.m
 OpenAPIClient/Model/OAIReplyButton.h
@@ -70,8 +74,6 @@ OpenAPIClient/Model/OAISendAudioRequest.h
 OpenAPIClient/Model/OAISendAudioRequest.m
 OpenAPIClient/Model/OAISendDocumentRequest.h
 OpenAPIClient/Model/OAISendDocumentRequest.m
-OpenAPIClient/Model/OAISendImageRequest.h
-OpenAPIClient/Model/OAISendImageRequest.m
 OpenAPIClient/Model/OAISendMediaPayload.h
 OpenAPIClient/Model/OAISendMediaPayload.m
 OpenAPIClient/Model/OAISendVideoRequest.h
@@ -86,6 +88,8 @@ OpenAPIClient/Model/OAITemplateButtonWithMediaPayload.h
 OpenAPIClient/Model/OAITemplateButtonWithMediaPayload.m
 OpenAPIClient/Model/OAITextMessage.h
 OpenAPIClient/Model/OAITextMessage.m
+OpenAPIClient/Model/OAIUpdateProfilePicRequest.h
+OpenAPIClient/Model/OAIUpdateProfilePicRequest.m
 OpenAPIClient/Model/OAIUploadMediaRequest.h
 OpenAPIClient/Model/OAIUploadMediaRequest.m
 OpenAPIClient/Model/OAIUserInfoPayload.h
@@ -101,6 +105,7 @@ docs/OAIContactMessagePayload.md
 docs/OAIContactMessagePayloadVcard.md
 docs/OAIFileUpload.md
 docs/OAIGroupCreatePayload.md
+docs/OAIGroupInviteMessagePayload.md
 docs/OAIGroupManagementApi.md
 docs/OAIGroupUpdateDescriptionPayload.md
 docs/OAIGroupUpdateNamePayload.md
@@ -113,11 +118,11 @@ docs/OAILocationMessagePayload.md
 docs/OAILocationMessagePayloadLocation.md
 docs/OAIMessageSendingApi.md
 docs/OAIMiscellaneousApi.md
+docs/OAIPaymentRequestPayload.md
 docs/OAIPollMessagePayload.md
 docs/OAIReplyButton.md
 docs/OAISendAudioRequest.md
 docs/OAISendDocumentRequest.md
-docs/OAISendImageRequest.md
 docs/OAISendMediaPayload.md
 docs/OAISendVideoRequest.md
 docs/OAISetGroupPictureRequest.md
@@ -125,6 +130,7 @@ docs/OAITemplateButton.md
 docs/OAITemplateButtonPayload.md
 docs/OAITemplateButtonWithMediaPayload.md
 docs/OAITextMessage.md
+docs/OAIUpdateProfilePicRequest.md
 docs/OAIUploadMediaRequest.md
 docs/OAIUserInfoPayload.md
 docs/OAIWebhookPayload.md

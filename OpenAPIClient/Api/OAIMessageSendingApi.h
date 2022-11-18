@@ -3,17 +3,18 @@
 #import "OAIButtonMessagePayload.h"
 #import "OAIButtonMessageWithMediaPayload.h"
 #import "OAIContactMessagePayload.h"
+#import "OAIGroupInviteMessagePayload.h"
 #import "OAIListMessagePayload.h"
 #import "OAILocationMessagePayload.h"
 #import "OAIPollMessagePayload.h"
 #import "OAISendAudioRequest.h"
 #import "OAISendDocumentRequest.h"
-#import "OAISendImageRequest.h"
 #import "OAISendMediaPayload.h"
 #import "OAISendVideoRequest.h"
 #import "OAITemplateButtonPayload.h"
 #import "OAITemplateButtonWithMediaPayload.h"
 #import "OAITextMessage.h"
+#import "OAIUpdateProfilePicRequest.h"
 #import "OAIUploadMediaRequest.h"
 #import "OAIApi.h"
 
@@ -136,12 +137,30 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
+/// Send a group invite message
+/// Sends a group invite message to the specified number. Don't include \"https://chat.whatsapp.com/\" in the invite code.
+///
+/// @param instanceKey Instance key
+/// @param data Message data
+/// 
+///  code:200 message:"Success",
+///  code:400 message:"Bad Request",
+///  code:401 message:"Unauthorized",
+///  code:404 message:"Instance not found",
+///  code:500 message:"Internal Server Error"
+///
+/// @return OAIAPIResponse*
+-(NSURLSessionTask*) sendGroupInviteWithInstanceKey: (NSString*) instanceKey
+    data: (OAIGroupInviteMessagePayload*) data
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+
+
 /// Send raw image.
 /// Sends a image message by uploading to the WhatsApp servers every time. This is not recommended for bulk sending.
 ///
 /// @param instanceKey Instance key
 /// @param to The recipient&#39;s number
-/// @param sendImageRequest 
+/// @param updateProfilePicRequest 
 /// @param caption Attached caption (optional)
 /// 
 ///  code:200 message:"Success",
@@ -153,7 +172,7 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 /// @return OAIAPIResponse*
 -(NSURLSessionTask*) sendImageWithInstanceKey: (NSString*) instanceKey
     to: (NSString*) to
-    sendImageRequest: (OAISendImageRequest*) sendImageRequest
+    updateProfilePicRequest: (OAIUpdateProfilePicRequest*) updateProfilePicRequest
     caption: (NSString*) caption
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 

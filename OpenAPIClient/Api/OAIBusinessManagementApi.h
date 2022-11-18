@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "OAIAPIResponse.h"
+#import "OAIPaymentRequestPayload.h"
 #import "OAIApi.h"
 
 /**
@@ -36,6 +37,24 @@ extern NSInteger kOAIBusinessManagementApiMissingParamErrorCode;
 ///
 /// @return OAIAPIResponse*
 -(NSURLSessionTask*) fetchCatlogWithInstanceKey: (NSString*) instanceKey
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+
+
+/// Send a payment request.
+/// Sends an payment request to a user. Feature is still in beta.
+///
+/// @param instanceKey Instance key
+/// @param data Data
+/// 
+///  code:200 message:"Success",
+///  code:400 message:"Bad Request",
+///  code:401 message:"Unauthorized",
+///  code:404 message:"Instance not found",
+///  code:500 message:"Internal Server Error"
+///
+/// @return OAIAPIResponse*
+-(NSURLSessionTask*) sendPaymentRequestWithInstanceKey: (NSString*) instanceKey
+    data: (OAIPaymentRequestPayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 

@@ -120,6 +120,24 @@ extern NSInteger kOAIGroupManagementApiMissingParamErrorCode;
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 
+/// Get all participants.
+/// Returns all participants of the group.
+///
+/// @param instanceKey Instance key
+/// @param groupId Group id of the group
+/// 
+///  code:200 message:"Success",
+///  code:400 message:"Bad Request",
+///  code:401 message:"Unauthorized",
+///  code:404 message:"Instance not found",
+///  code:500 message:"Internal Server Error"
+///
+/// @return OAIAPIResponse*
+-(NSURLSessionTask*) getAllParticipantsWithInstanceKey: (NSString*) instanceKey
+    groupId: (NSString*) groupId
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+
+
 /// Get group.
 /// Fetches the group data.
 ///
@@ -171,6 +189,24 @@ extern NSInteger kOAIGroupManagementApiMissingParamErrorCode;
 /// @return OAIAPIResponse*
 -(NSURLSessionTask*) getGroupInviteCodeWithInstanceKey: (NSString*) instanceKey
     groupId: (NSString*) groupId
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+
+
+/// Join group with invite code.
+/// Joins a group with group invite link. An invite link is a link that can be used to join a group. It is usually in the format https://chat.whatsapp.com/{invitecode} You have to put invite_code in the url of the request. The invite code is the part after https://chat.whatsapp.com/ For example, if the invite link is https://chat.whatsapp.com/dsfsf34r3d3dsds, then the invite code is `dsfsf34r3d3dsds“
+///
+/// @param instanceKey Instance key
+/// @param inviteCode The invite code of group you want to join
+/// 
+///  code:200 message:"Success",
+///  code:400 message:"Bad Request",
+///  code:401 message:"Unauthorized",
+///  code:404 message:"Instance not found",
+///  code:500 message:"Internal Server Error"
+///
+/// @return OAIAPIResponse*
+-(NSURLSessionTask*) joinGroupWithLinkWithInstanceKey: (NSString*) instanceKey
+    inviteCode: (NSString*) inviteCode
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 

@@ -48,6 +48,7 @@ Import the following:
 #import <OpenAPIClient/OAIContactMessagePayloadVcard.h>
 #import <OpenAPIClient/OAIFileUpload.h>
 #import <OpenAPIClient/OAIGroupCreatePayload.h>
+#import <OpenAPIClient/OAIGroupInviteMessagePayload.h>
 #import <OpenAPIClient/OAIGroupUpdateDescriptionPayload.h>
 #import <OpenAPIClient/OAIGroupUpdateNamePayload.h>
 #import <OpenAPIClient/OAIGroupUpdateParticipantsPayload.h>
@@ -56,11 +57,11 @@ Import the following:
 #import <OpenAPIClient/OAIListSection.h>
 #import <OpenAPIClient/OAILocationMessagePayload.h>
 #import <OpenAPIClient/OAILocationMessagePayloadLocation.h>
+#import <OpenAPIClient/OAIPaymentRequestPayload.h>
 #import <OpenAPIClient/OAIPollMessagePayload.h>
 #import <OpenAPIClient/OAIReplyButton.h>
 #import <OpenAPIClient/OAISendAudioRequest.h>
 #import <OpenAPIClient/OAISendDocumentRequest.h>
-#import <OpenAPIClient/OAISendImageRequest.h>
 #import <OpenAPIClient/OAISendMediaPayload.h>
 #import <OpenAPIClient/OAISendVideoRequest.h>
 #import <OpenAPIClient/OAISetGroupPictureRequest.h>
@@ -68,6 +69,7 @@ Import the following:
 #import <OpenAPIClient/OAITemplateButtonPayload.h>
 #import <OpenAPIClient/OAITemplateButtonWithMediaPayload.h>
 #import <OpenAPIClient/OAITextMessage.h>
+#import <OpenAPIClient/OAIUpdateProfilePicRequest.h>
 #import <OpenAPIClient/OAIUploadMediaRequest.h>
 #import <OpenAPIClient/OAIUserInfoPayload.h>
 #import <OpenAPIClient/OAIWebhookPayload.h>
@@ -122,14 +124,17 @@ All URIs are relative to */api*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *OAIBusinessManagementApi* | [**fetchCatlog**](docs/OAIBusinessManagementApi.md#fetchcatlog) | **GET** /instances/{instance_key}/business/catalog | Fetches the catlog.
+*OAIBusinessManagementApi* | [**sendPaymentRequest**](docs/OAIBusinessManagementApi.md#sendpaymentrequest) | **POST** /instances/{instance_key}/business/payment-request | Send a payment request.
 *OAIGroupManagementApi* | [**addParticipant**](docs/OAIGroupManagementApi.md#addparticipant) | **POST** /instances/{instance_key}/groups/{group_id}/participants/add | Add participant.
 *OAIGroupManagementApi* | [**createGroup**](docs/OAIGroupManagementApi.md#creategroup) | **POST** /instances/{instance_key}/groups/create | Create group.
 *OAIGroupManagementApi* | [**demoteParticipant**](docs/OAIGroupManagementApi.md#demoteparticipant) | **PUT** /instances/{instance_key}/groups/{group_id}/participants/demote | Demote participant.
 *OAIGroupManagementApi* | [**getAdminGroups**](docs/OAIGroupManagementApi.md#getadmingroups) | **GET** /instances/{instance_key}/groups/admin | Get admin groups.
 *OAIGroupManagementApi* | [**getAllGroups**](docs/OAIGroupManagementApi.md#getallgroups) | **GET** /instances/{instance_key}/groups/ | Get all groups.
+*OAIGroupManagementApi* | [**getAllParticipants**](docs/OAIGroupManagementApi.md#getallparticipants) | **GET** /instances/{instance_key}/groups/{group_id}/participants | Get all participants.
 *OAIGroupManagementApi* | [**getGroup**](docs/OAIGroupManagementApi.md#getgroup) | **GET** /instances/{instance_key}/groups/{group_id} | Get group.
 *OAIGroupManagementApi* | [**getGroupFromInviteLink**](docs/OAIGroupManagementApi.md#getgroupfrominvitelink) | **GET** /instances/{instance_key}/groups/invite-info | Get group from invite link.
 *OAIGroupManagementApi* | [**getGroupInviteCode**](docs/OAIGroupManagementApi.md#getgroupinvitecode) | **GET** /instances/{instance_key}/groups/{group_id}/invite-code | Get group invite code.
+*OAIGroupManagementApi* | [**joinGroupWithLink**](docs/OAIGroupManagementApi.md#joingroupwithlink) | **GET** /instances/{instance_key}/groups/join | Join group with invite code.
 *OAIGroupManagementApi* | [**leaveGroup**](docs/OAIGroupManagementApi.md#leavegroup) | **DELETE** /instances/{instance_key}/groups/{group_id}/ | Leaves the group.
 *OAIGroupManagementApi* | [**promoteParticipant**](docs/OAIGroupManagementApi.md#promoteparticipant) | **PUT** /instances/{instance_key}/groups/{group_id}/participants/promote | Promote participant.
 *OAIGroupManagementApi* | [**removeParticipant**](docs/OAIGroupManagementApi.md#removeparticipant) | **DELETE** /instances/{instance_key}/groups/{group_id}/participants/remove | Remove participant.
@@ -151,6 +156,7 @@ Class | Method | HTTP request | Description
 *OAIMessageSendingApi* | [**sendButtonWithMedia**](docs/OAIMessageSendingApi.md#sendbuttonwithmedia) | **POST** /instances/{instance_key}/send/button-media | Send a button message with a media header.
 *OAIMessageSendingApi* | [**sendContact**](docs/OAIMessageSendingApi.md#sendcontact) | **POST** /instances/{instance_key}/send/contact | Send a contact message.
 *OAIMessageSendingApi* | [**sendDocument**](docs/OAIMessageSendingApi.md#senddocument) | **POST** /instances/{instance_key}/send/document | Send raw document.
+*OAIMessageSendingApi* | [**sendGroupInvite**](docs/OAIMessageSendingApi.md#sendgroupinvite) | **POST** /instances/{instance_key}/send/group-invite | Send a group invite message
 *OAIMessageSendingApi* | [**sendImage**](docs/OAIMessageSendingApi.md#sendimage) | **POST** /instances/{instance_key}/send/image | Send raw image.
 *OAIMessageSendingApi* | [**sendListMessage**](docs/OAIMessageSendingApi.md#sendlistmessage) | **POST** /instances/{instance_key}/send/list | Send a List message.
 *OAIMessageSendingApi* | [**sendLocation**](docs/OAIMessageSendingApi.md#sendlocation) | **POST** /instances/{instance_key}/send/location | Send a location message.
@@ -161,8 +167,11 @@ Class | Method | HTTP request | Description
 *OAIMessageSendingApi* | [**sendTextMessage**](docs/OAIMessageSendingApi.md#sendtextmessage) | **POST** /instances/{instance_key}/send/text | Send a text message.
 *OAIMessageSendingApi* | [**sendVideo**](docs/OAIMessageSendingApi.md#sendvideo) | **POST** /instances/{instance_key}/send/video | Send raw video.
 *OAIMessageSendingApi* | [**uploadMedia**](docs/OAIMessageSendingApi.md#uploadmedia) | **POST** /instances/{instance_key}/send/upload | Upload media.
+*OAIMiscellaneousApi* | [**downloadMedia**](docs/OAIMiscellaneousApi.md#downloadmedia) | **POST** /instances/{instance_key}/misc/download | Download media
 *OAIMiscellaneousApi* | [**getProfilePic**](docs/OAIMiscellaneousApi.md#getprofilepic) | **GET** /instances/{instance_key}/misc/profile-pic | Get profile pic.
 *OAIMiscellaneousApi* | [**getUsersInfo**](docs/OAIMiscellaneousApi.md#getusersinfo) | **POST** /instances/{instance_key}/misc/user-info | Fetches the users info.
+*OAIMiscellaneousApi* | [**setChatPresence**](docs/OAIMiscellaneousApi.md#setchatpresence) | **POST** /instances/{instance_key}/misc/chat-presence | Set chat presence
+*OAIMiscellaneousApi* | [**updateProfilePic**](docs/OAIMiscellaneousApi.md#updateprofilepic) | **PUT** /instances/{instance_key}/misc/profile-pic | Update profile picture
 
 
 ## Documentation For Models
@@ -174,6 +183,7 @@ Class | Method | HTTP request | Description
  - [OAIContactMessagePayloadVcard](docs/OAIContactMessagePayloadVcard.md)
  - [OAIFileUpload](docs/OAIFileUpload.md)
  - [OAIGroupCreatePayload](docs/OAIGroupCreatePayload.md)
+ - [OAIGroupInviteMessagePayload](docs/OAIGroupInviteMessagePayload.md)
  - [OAIGroupUpdateDescriptionPayload](docs/OAIGroupUpdateDescriptionPayload.md)
  - [OAIGroupUpdateNamePayload](docs/OAIGroupUpdateNamePayload.md)
  - [OAIGroupUpdateParticipantsPayload](docs/OAIGroupUpdateParticipantsPayload.md)
@@ -182,11 +192,11 @@ Class | Method | HTTP request | Description
  - [OAIListSection](docs/OAIListSection.md)
  - [OAILocationMessagePayload](docs/OAILocationMessagePayload.md)
  - [OAILocationMessagePayloadLocation](docs/OAILocationMessagePayloadLocation.md)
+ - [OAIPaymentRequestPayload](docs/OAIPaymentRequestPayload.md)
  - [OAIPollMessagePayload](docs/OAIPollMessagePayload.md)
  - [OAIReplyButton](docs/OAIReplyButton.md)
  - [OAISendAudioRequest](docs/OAISendAudioRequest.md)
  - [OAISendDocumentRequest](docs/OAISendDocumentRequest.md)
- - [OAISendImageRequest](docs/OAISendImageRequest.md)
  - [OAISendMediaPayload](docs/OAISendMediaPayload.md)
  - [OAISendVideoRequest](docs/OAISendVideoRequest.md)
  - [OAISetGroupPictureRequest](docs/OAISetGroupPictureRequest.md)
@@ -194,6 +204,7 @@ Class | Method | HTTP request | Description
  - [OAITemplateButtonPayload](docs/OAITemplateButtonPayload.md)
  - [OAITemplateButtonWithMediaPayload](docs/OAITemplateButtonWithMediaPayload.md)
  - [OAITextMessage](docs/OAITextMessage.md)
+ - [OAIUpdateProfilePicRequest](docs/OAIUpdateProfilePicRequest.md)
  - [OAIUploadMediaRequest](docs/OAIUploadMediaRequest.md)
  - [OAIUserInfoPayload](docs/OAIUserInfoPayload.md)
  - [OAIWebhookPayload](docs/OAIWebhookPayload.md)
