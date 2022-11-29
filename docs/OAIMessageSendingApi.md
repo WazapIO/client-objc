@@ -20,6 +20,7 @@ Method | HTTP request | Description
 [**sendTextMessage**](OAIMessageSendingApi.md#sendtextmessage) | **POST** /instances/{instance_key}/send/text | Send a text message.
 [**sendVideo**](OAIMessageSendingApi.md#sendvideo) | **POST** /instances/{instance_key}/send/video | Send raw video.
 [**uploadMedia**](OAIMessageSendingApi.md#uploadmedia) | **POST** /instances/{instance_key}/send/upload | Upload media.
+[**uploadMediaFromUrl**](OAIMessageSendingApi.md#uploadmediafromurl) | **POST** /instances/{instance_key}/send/upload-url | Upload media from url.
 
 
 # **sendAudio**
@@ -1018,6 +1019,71 @@ Name | Type | Description  | Notes
  **instanceKey** | **NSString***| Instance key | 
  **type** | **NSString***| Media type | 
  **uploadMediaRequest** | [**OAIUploadMediaRequest***](OAIUploadMediaRequest.md)|  | 
+
+### Return type
+
+[**OAIAPIResponse***](OAIAPIResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: */*
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **uploadMediaFromUrl**
+```objc
+-(NSURLSessionTask*) uploadMediaFromUrlWithInstanceKey: (NSString*) instanceKey
+    type: (NSString*) type
+    data: (OAIUrlMediaUploadPayload*) data
+        completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+```
+
+Upload media from url.
+
+Uploads media from a url to WhatsApp servers and returns the media keys. Store the returned media keys, as you will need them to send media messages
+
+### Example
+```objc
+OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: ApiKeyAuth)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"Authorization"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
+
+
+NSString* instanceKey = @"instanceKey_example"; // Instance key
+NSString* type = @"type_example"; // Media type
+OAIUrlMediaUploadPayload* data = [[OAIUrlMediaUploadPayload alloc] init]; // Media data
+
+OAIMessageSendingApi*apiInstance = [[OAIMessageSendingApi alloc] init];
+
+// Upload media from url.
+[apiInstance uploadMediaFromUrlWithInstanceKey:instanceKey
+              type:type
+              data:data
+          completionHandler: ^(OAIAPIResponse* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling OAIMessageSendingApi->uploadMediaFromUrl: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instanceKey** | **NSString***| Instance key | 
+ **type** | **NSString***| Media type | 
+ **data** | [**OAIUrlMediaUploadPayload***](OAIUrlMediaUploadPayload.md)| Media data | 
 
 ### Return type
 

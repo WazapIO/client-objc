@@ -16,6 +16,7 @@
 #import "OAITextMessage.h"
 #import "OAIUpdateProfilePicRequest.h"
 #import "OAIUploadMediaRequest.h"
+#import "OAIUrlMediaUploadPayload.h"
 #import "OAIApi.h"
 
 /**
@@ -342,6 +343,26 @@ extern NSInteger kOAIMessageSendingApiMissingParamErrorCode;
 -(NSURLSessionTask*) uploadMediaWithInstanceKey: (NSString*) instanceKey
     type: (NSString*) type
     uploadMediaRequest: (OAIUploadMediaRequest*) uploadMediaRequest
+    completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
+
+
+/// Upload media from url.
+/// Uploads media from a url to WhatsApp servers and returns the media keys. Store the returned media keys, as you will need them to send media messages
+///
+/// @param instanceKey Instance key
+/// @param type Media type
+/// @param data Media data
+/// 
+///  code:200 message:"Success",
+///  code:400 message:"Bad Request",
+///  code:401 message:"Unauthorized",
+///  code:404 message:"Instance not found",
+///  code:500 message:"Internal Server Error"
+///
+/// @return OAIAPIResponse*
+-(NSURLSessionTask*) uploadMediaFromUrlWithInstanceKey: (NSString*) instanceKey
+    type: (NSString*) type
+    data: (OAIUrlMediaUploadPayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 

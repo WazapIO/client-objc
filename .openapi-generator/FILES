@@ -92,6 +92,8 @@ OpenAPIClient/Model/OAIUpdateProfilePicRequest.h
 OpenAPIClient/Model/OAIUpdateProfilePicRequest.m
 OpenAPIClient/Model/OAIUploadMediaRequest.h
 OpenAPIClient/Model/OAIUploadMediaRequest.m
+OpenAPIClient/Model/OAIUrlMediaUploadPayload.h
+OpenAPIClient/Model/OAIUrlMediaUploadPayload.m
 OpenAPIClient/Model/OAIUserInfoPayload.h
 OpenAPIClient/Model/OAIUserInfoPayload.m
 OpenAPIClient/Model/OAIWebhookPayload.h
@@ -132,6 +134,7 @@ docs/OAITemplateButtonWithMediaPayload.md
 docs/OAITextMessage.md
 docs/OAIUpdateProfilePicRequest.md
 docs/OAIUploadMediaRequest.md
+docs/OAIUrlMediaUploadPayload.md
 docs/OAIUserInfoPayload.md
 docs/OAIWebhookPayload.md
 git_push.sh

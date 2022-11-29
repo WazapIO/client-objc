@@ -71,6 +71,7 @@ Import the following:
 #import <OpenAPIClient/OAITextMessage.h>
 #import <OpenAPIClient/OAIUpdateProfilePicRequest.h>
 #import <OpenAPIClient/OAIUploadMediaRequest.h>
+#import <OpenAPIClient/OAIUrlMediaUploadPayload.h>
 #import <OpenAPIClient/OAIUserInfoPayload.h>
 #import <OpenAPIClient/OAIWebhookPayload.h>
 // load API classes for accessing endpoints
@@ -167,6 +168,7 @@ Class | Method | HTTP request | Description
 *OAIMessageSendingApi* | [**sendTextMessage**](docs/OAIMessageSendingApi.md#sendtextmessage) | **POST** /instances/{instance_key}/send/text | Send a text message.
 *OAIMessageSendingApi* | [**sendVideo**](docs/OAIMessageSendingApi.md#sendvideo) | **POST** /instances/{instance_key}/send/video | Send raw video.
 *OAIMessageSendingApi* | [**uploadMedia**](docs/OAIMessageSendingApi.md#uploadmedia) | **POST** /instances/{instance_key}/send/upload | Upload media.
+*OAIMessageSendingApi* | [**uploadMediaFromUrl**](docs/OAIMessageSendingApi.md#uploadmediafromurl) | **POST** /instances/{instance_key}/send/upload-url | Upload media from url.
 *OAIMiscellaneousApi* | [**downloadMedia**](docs/OAIMiscellaneousApi.md#downloadmedia) | **POST** /instances/{instance_key}/misc/download | Download media
 *OAIMiscellaneousApi* | [**getProfilePic**](docs/OAIMiscellaneousApi.md#getprofilepic) | **GET** /instances/{instance_key}/misc/profile-pic | Get profile pic.
 *OAIMiscellaneousApi* | [**getUsersInfo**](docs/OAIMiscellaneousApi.md#getusersinfo) | **POST** /instances/{instance_key}/misc/user-info | Fetches the users info.
@@ -206,6 +208,7 @@ Class | Method | HTTP request | Description
  - [OAITextMessage](docs/OAITextMessage.md)
  - [OAIUpdateProfilePicRequest](docs/OAIUpdateProfilePicRequest.md)
  - [OAIUploadMediaRequest](docs/OAIUploadMediaRequest.md)
+ - [OAIUrlMediaUploadPayload](docs/OAIUrlMediaUploadPayload.md)
  - [OAIUserInfoPayload](docs/OAIUserInfoPayload.md)
  - [OAIWebhookPayload](docs/OAIWebhookPayload.md)
 
