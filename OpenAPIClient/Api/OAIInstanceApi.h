@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "OAIAPIResponse.h"
+#import "OAICreateInstancePayload.h"
 #import "OAIWebhookPayload.h"
 #import "OAIApi.h"
 
@@ -45,7 +46,7 @@ extern NSInteger kOAIInstanceApiMissingParamErrorCode;
 /// Creates a new instance key.
 /// This endpoint is used to create a new WhatsApp Web instance.
 ///
-/// @param instanceKey Insert instance key if you want to provide custom key (optional)
+/// @param data Instance data
 /// 
 ///  code:200 message:"Success",
 ///  code:400 message:"Bad Request",
@@ -54,7 +55,7 @@ extern NSInteger kOAIInstanceApiMissingParamErrorCode;
 ///  code:500 message:"Internal Server Error"
 ///
 /// @return OAIAPIResponse*
--(NSURLSessionTask*) createInstanceWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) createInstanceWithData: (OAICreateInstancePayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 
 

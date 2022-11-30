@@ -2,6 +2,7 @@
 #import "OAIQueryParamCollection.h"
 #import "OAIApiClient.h"
 #import "OAIAPIResponse.h"
+#import "OAICreateInstancePayload.h"
 #import "OAIWebhookPayload.h"
 
 
@@ -136,20 +137,28 @@ NSInteger kOAIInstanceApiMissingParamErrorCode = 234513;
 ///
 /// Creates a new instance key.
 /// This endpoint is used to create a new WhatsApp Web instance.
-///  @param instanceKey Insert instance key if you want to provide custom key (optional)
+///  @param data Instance data 
 ///
 ///  @returns OAIAPIResponse*
 ///
--(NSURLSessionTask*) createInstanceWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) createInstanceWithData: (OAICreateInstancePayload*) data
     completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler {
+    // verify the required parameter 'data' is set
+    if (data == nil) {
+        NSParameterAssert(data);
+        if(handler) {
+            NSDictionary * userInfo = @{NSLocalizedDescriptionKey : [NSString stringWithFormat:NSLocalizedString(@"Missing required parameter '%@'", nil),@"data"] };
+            NSError* error = [NSError errorWithDomain:kOAIInstanceApiErrorDomain code:kOAIInstanceApiMissingParamErrorCode userInfo:userInfo];
+            handler(nil, error);
+        }
+        return nil;
+    }
+
     NSMutableString* resourcePath = [NSMutableString stringWithFormat:@"/instances/create"];
 
     NSMutableDictionary *pathParams = [[NSMutableDictionary alloc] init];
 
     NSMutableDictionary* queryParams = [[NSMutableDictionary alloc] init];
-    if (instanceKey != nil) {
-        queryParams[@"instance_key"] = instanceKey;
-    }
     NSMutableDictionary* headerParams = [NSMutableDictionary dictionaryWithDictionary:self.apiClient.configuration.defaultHeaders];
     [headerParams addEntriesFromDictionary:self.defaultHeaders];
     // HTTP header `Accept`
@@ -162,7 +171,7 @@ NSInteger kOAIInstanceApiMissingParamErrorCode = 234513;
     NSString *responseContentType = [[acceptHeader componentsSeparatedByString:@", "] firstObject] ?: @"";
 
     // request content type
-    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[]];
+    NSString *requestContentType = [self.apiClient.sanitizer selectHeaderContentType:@[@"application/json"]];
 
     // Authentication setting
     NSArray *authSettings = @[@"ApiKeyAuth"];
@@ -170,9 +179,10 @@ NSInteger kOAIInstanceApiMissingParamErrorCode = 234513;
     id bodyParam = nil;
     NSMutableDictionary *formParams = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *localVarFiles = [[NSMutableDictionary alloc] init];
+    bodyParam = data;
 
     return [self.apiClient requestWithPath: resourcePath
-                                    method: @"GET"
+                                    method: @"POST"
                                 pathParams: pathParams
                                queryParams: queryParams
                                 formParams: formParams

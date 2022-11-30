@@ -46,6 +46,7 @@ Import the following:
 #import <OpenAPIClient/OAIButtonMessageWithMediaPayload.h>
 #import <OpenAPIClient/OAIContactMessagePayload.h>
 #import <OpenAPIClient/OAIContactMessagePayloadVcard.h>
+#import <OpenAPIClient/OAICreateInstancePayload.h>
 #import <OpenAPIClient/OAIFileUpload.h>
 #import <OpenAPIClient/OAIGroupCreatePayload.h>
 #import <OpenAPIClient/OAIGroupInviteMessagePayload.h>
@@ -145,7 +146,7 @@ Class | Method | HTTP request | Description
 *OAIGroupManagementApi* | [**setGroupName**](docs/OAIGroupManagementApi.md#setgroupname) | **PUT** /instances/{instance_key}/groups/{group_id}/name | Set group name.
 *OAIGroupManagementApi* | [**setGroupPicture**](docs/OAIGroupManagementApi.md#setgrouppicture) | **PUT** /instances/{instance_key}/groups/{group_id}/profile-pic | Set group picture.
 *OAIInstanceApi* | [**changeWebhookUrl**](docs/OAIInstanceApi.md#changewebhookurl) | **PUT** /instances/{instance_key}/webhook | Change Webhook url.
-*OAIInstanceApi* | [**createInstance**](docs/OAIInstanceApi.md#createinstance) | **GET** /instances/create | Creates a new instance key.
+*OAIInstanceApi* | [**createInstance**](docs/OAIInstanceApi.md#createinstance) | **POST** /instances/create | Creates a new instance key.
 *OAIInstanceApi* | [**deleteInstance**](docs/OAIInstanceApi.md#deleteinstance) | **DELETE** /instances/{instance_key}/delete | Delete Instance.
 *OAIInstanceApi* | [**getContacts**](docs/OAIInstanceApi.md#getcontacts) | **GET** /instances/{instance_key}/contacts | Get contacts.
 *OAIInstanceApi* | [**getInstance**](docs/OAIInstanceApi.md#getinstance) | **GET** /instances/{instance_key}/ | Get Instance.
@@ -183,6 +184,7 @@ Class | Method | HTTP request | Description
  - [OAIButtonMessageWithMediaPayload](docs/OAIButtonMessageWithMediaPayload.md)
  - [OAIContactMessagePayload](docs/OAIContactMessagePayload.md)
  - [OAIContactMessagePayloadVcard](docs/OAIContactMessagePayloadVcard.md)
+ - [OAICreateInstancePayload](docs/OAICreateInstancePayload.md)
  - [OAIFileUpload](docs/OAIFileUpload.md)
  - [OAIGroupCreatePayload](docs/OAIGroupCreatePayload.md)
  - [OAIGroupInviteMessagePayload](docs/OAIGroupInviteMessagePayload.md)

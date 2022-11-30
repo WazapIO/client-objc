@@ -42,6 +42,8 @@ OpenAPIClient/Model/OAIContactMessagePayload.h
 OpenAPIClient/Model/OAIContactMessagePayload.m
 OpenAPIClient/Model/OAIContactMessagePayloadVcard.h
 OpenAPIClient/Model/OAIContactMessagePayloadVcard.m
+OpenAPIClient/Model/OAICreateInstancePayload.h
+OpenAPIClient/Model/OAICreateInstancePayload.m
 OpenAPIClient/Model/OAIFileUpload.h
 OpenAPIClient/Model/OAIFileUpload.m
 OpenAPIClient/Model/OAIGroupCreatePayload.h
@@ -105,6 +107,7 @@ docs/OAIButtonMessagePayload.md
 docs/OAIButtonMessageWithMediaPayload.md
 docs/OAIContactMessagePayload.md
 docs/OAIContactMessagePayloadVcard.md
+docs/OAICreateInstancePayload.md
 docs/OAIFileUpload.md
 docs/OAIGroupCreatePayload.md
 docs/OAIGroupInviteMessagePayload.md

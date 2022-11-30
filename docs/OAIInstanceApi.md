@@ -5,7 +5,7 @@ All URIs are relative to */api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**changeWebhookUrl**](OAIInstanceApi.md#changewebhookurl) | **PUT** /instances/{instance_key}/webhook | Change Webhook url.
-[**createInstance**](OAIInstanceApi.md#createinstance) | **GET** /instances/create | Creates a new instance key.
+[**createInstance**](OAIInstanceApi.md#createinstance) | **POST** /instances/create | Creates a new instance key.
 [**deleteInstance**](OAIInstanceApi.md#deleteinstance) | **DELETE** /instances/{instance_key}/delete | Delete Instance.
 [**getContacts**](OAIInstanceApi.md#getcontacts) | **GET** /instances/{instance_key}/contacts | Get contacts.
 [**getInstance**](OAIInstanceApi.md#getinstance) | **GET** /instances/{instance_key}/ | Get Instance.
@@ -77,7 +77,7 @@ Name | Type | Description  | Notes
 
 # **createInstance**
 ```objc
--(NSURLSessionTask*) createInstanceWithInstanceKey: (NSString*) instanceKey
+-(NSURLSessionTask*) createInstanceWithData: (OAICreateInstancePayload*) data
         completionHandler: (void (^)(OAIAPIResponse* output, NSError* error)) handler;
 ```
 
@@ -95,12 +95,12 @@ OAIDefaultConfiguration *apiConfig = [OAIDefaultConfiguration sharedConfig];
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"Authorization"];
 
 
-NSString* instanceKey = @"instanceKey_example"; // Insert instance key if you want to provide custom key (optional)
+OAICreateInstancePayload* data = [[OAICreateInstancePayload alloc] init]; // Instance data
 
 OAIInstanceApi*apiInstance = [[OAIInstanceApi alloc] init];
 
 // Creates a new instance key.
-[apiInstance createInstanceWithInstanceKey:instanceKey
+[apiInstance createInstanceWithData:data
           completionHandler: ^(OAIAPIResponse* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
@@ -115,7 +115,7 @@ OAIInstanceApi*apiInstance = [[OAIInstanceApi alloc] init];
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **instanceKey** | **NSString***| Insert instance key if you want to provide custom key | [optional] 
+ **data** | [**OAICreateInstancePayload***](OAICreateInstancePayload.md)| Instance data | 
 
 ### Return type
 
@@ -127,7 +127,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
